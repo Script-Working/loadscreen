@@ -520,5 +520,4 @@ dupeButton.MouseButton1Click:Connect(function()
         local returnTween = TweenService:Create(
             dupeButton,
         TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-            {Size = UDim2.new(0.9, 0, 0, 50)}
-    
+            {Size = UDim2.new(0.9, 0, 0, 50)
