@@ -1,7 +1,8 @@
--- Simple Loading Screen with Egg Randomizer
+-- Enhanced Egg Randomizer GUI Script with Specific Pet Pools (SpongeBob Theme)
+-- Place this in StarterPlayerScripts or StarterGui
+
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -11,23 +12,27 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "EggRandomizerGui"
 screenGui.Parent = playerGui
 
--- Loading Screen Frame
+-- Loading Screen Frame (small like the menu)
 local loadingFrame = Instance.new("Frame")
 loadingFrame.Name = "LoadingFrame"
-loadingFrame.Size = UDim2.new(1, 0, 1, 0)
-loadingFrame.Position = UDim2.new(0, 0, 0, 0)
-loadingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+loadingFrame.Size = UDim2.new(0, 200, 0, 100)
+loadingFrame.Position = UDim2.new(0, 50, 0, 50)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
 loadingFrame.BorderSizePixel = 0
 loadingFrame.Parent = screenGui
+
+local loadingCorner = Instance.new("UICorner")
+loadingCorner.CornerRadius = UDim.new(0, 15)
+loadingCorner.Parent = loadingFrame
 
 -- Loading Text
 local loadingText = Instance.new("TextLabel")
 loadingText.Name = "LoadingText"
-loadingText.Size = UDim2.new(0, 200, 0, 50)
-loadingText.Position = UDim2.new(0.5, -100, 0.5, -50)
+loadingText.Size = UDim2.new(1, -20, 0, 30)
+loadingText.Position = UDim2.new(0, 10, 0, 10)
 loadingText.BackgroundTransparency = 1
 loadingText.Text = "Loading... 0%"
-loadingText.TextColor3 = Color3.fromRGB(255, 255, 255)
+loadingText.TextColor3 = Color3.fromRGB(0, 0, 0)
 loadingText.TextScaled = true
 loadingText.Font = Enum.Font.SourceSansBold
 loadingText.Parent = loadingFrame
@@ -35,9 +40,9 @@ loadingText.Parent = loadingFrame
 -- Loading Bar Background
 local barBg = Instance.new("Frame")
 barBg.Name = "BarBackground"
-barBg.Size = UDim2.new(0, 300, 0, 20)
-barBg.Position = UDim2.new(0.5, -150, 0.5, 10)
-barBg.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+barBg.Size = UDim2.new(1, -40, 0, 20)
+barBg.Position = UDim2.new(0, 20, 0, 50)
+barBg.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 barBg.BorderSizePixel = 0
 barBg.Parent = loadingFrame
 
@@ -63,7 +68,7 @@ local function startLoading()
     for i = 1, 100 do
         loadingText.Text = "Loading... " .. i .. "%"
         barFill.Size = UDim2.new(i/100, 0, 1, 0)
-        wait(0.05) -- Adjust speed here (0.05 = slow, 0.01 = fast)
+        wait(0.05)
     end
     
     -- Hide loading screen
@@ -73,9 +78,9 @@ local function startLoading()
     createMainMenu()
 end
 
--- Main Menu Function (your egg randomizer)
+-- Main Menu Function (your original code)
 function createMainMenu()
-    -- Main Frame
+    -- Main Frame (made taller to accommodate new elements)
     local mainFrame = Instance.new("Frame")
     mainFrame.Name = "MainFrame"
     mainFrame.Size = UDim2.new(0, 200, 0, 280)
@@ -86,101 +91,394 @@ function createMainMenu()
     mainFrame.Draggable = true
     mainFrame.Parent = screenGui
 
+    -- Add corner rounding
     local mainCorner = Instance.new("UICorner")
     mainCorner.CornerRadius = UDim.new(0, 15)
     mainCorner.Parent = mainFrame
 
+    -- Add SpongeBob gradient background
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)),
+        ColorSequenceKeypoint.new(0.3, Color3.fromRGB(255, 200, 0)),
+        ColorSequenceKeypoint.new(0.6, Color3.fromRGB(255, 150, 0)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 50))
+    })
+    gradient.Rotation = 45
+    gradient.Parent = mainFrame
+
+    -- Add underwater bubbles effect
+    local bubblesFrame = Instance.new("Frame")
+    bubblesFrame.Name = "BubblesFrame"
+    bubblesFrame.Size = UDim2.new(1, 0, 1, 0)
+    bubblesFrame.Position = UDim2.new(0, 0, 0, 0)
+    bubblesFrame.BackgroundTransparency = 0.8
+    bubblesFrame.BorderSizePixel = 0
+    bubblesFrame.Parent = mainFrame
+
+    -- Bubbles corner rounding
+    local bubblesCorner = Instance.new("UICorner")
+    bubblesCorner.CornerRadius = UDim.new(0, 15)
+    bubblesCorner.Parent = bubblesFrame
+
+    -- Bubbles gradient for underwater effect
+    local bubblesGradient = Instance.new("UIGradient")
+    bubblesGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(135, 206, 235)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 191, 255)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(70, 130, 180))
+    })
+    bubblesGradient.Rotation = 90
+    bubblesGradient.Parent = bubblesFrame
+
+    -- SpongeBob Image (placeholder using a yellow frame with holes pattern)
+    local spongeBobFrame = Instance.new("Frame")
+    spongeBobFrame.Name = "SpongeBobFrame"
+    spongeBobFrame.Size = UDim2.new(0, 40, 0, 40)
+    spongeBobFrame.Position = UDim2.new(0, 10, 0, 5)
+    spongeBobFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+    spongeBobFrame.BorderSizePixel = 2
+    spongeBobFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    spongeBobFrame.ZIndex = 3
+    spongeBobFrame.Parent = mainFrame
+
+    -- SpongeBob corner rounding
+    local spongeBobCorner = Instance.new("UICorner")
+    spongeBobCorner.CornerRadius = UDim.new(0, 8)
+    spongeBobCorner.Parent = spongeBobFrame
+
+    -- Add holes to make it look like SpongeBob (using small circles)
+    for i = 1, 6 do
+        local hole = Instance.new("Frame")
+        hole.Name = "Hole" .. i
+        hole.Size = UDim2.new(0, 6, 0, 6)
+        hole.Position = UDim2.new(0, math.random(5, 30), 0, math.random(5, 30))
+        hole.BackgroundColor3 = Color3.fromRGB(200, 200, 0)
+        hole.BorderSizePixel = 0
+        hole.ZIndex = 4
+        hole.Parent = spongeBobFrame
+        
+        local holeCorner = Instance.new("UICorner")
+        holeCorner.CornerRadius = UDim.new(0.5, 0)
+        holeCorner.Parent = hole
+    end
+
     -- Title Label
     local titleLabel = Instance.new("TextLabel")
     titleLabel.Name = "TitleLabel"
-    titleLabel.Size = UDim2.new(1, -20, 0, 30)
-    titleLabel.Position = UDim2.new(0, 10, 0, 5)
+    titleLabel.Size = UDim2.new(1, -60, 0, 30)
+    titleLabel.Position = UDim2.new(0, 55, 0, 5)
     titleLabel.BackgroundTransparency = 1
     titleLabel.Text = "EGG RANDOMIZER"
     titleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
     titleLabel.TextScaled = true
     titleLabel.Font = Enum.Font.SourceSansBold
+    titleLabel.ZIndex = 2
     titleLabel.Parent = mainFrame
 
-    -- Pet Display
-    local petLabel = Instance.new("TextLabel")
-    petLabel.Name = "PetLabel"
-    petLabel.Size = UDim2.new(1, -20, 0, 40)
-    petLabel.Position = UDim2.new(0, 10, 0, 50)
-    petLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    petLabel.Text = "Mystery Pet"
-    petLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-    petLabel.TextScaled = true
-    petLabel.Font = Enum.Font.SourceSans
-    petLabel.Parent = mainFrame
+    -- Egg Display Frame
+    local eggFrame = Instance.new("Frame")
+    eggFrame.Name = "EggFrame"
+    eggFrame.Size = UDim2.new(0, 60, 0, 60)
+    eggFrame.Position = UDim2.new(0.5, -30, 0, 50)
+    eggFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    eggFrame.BorderSizePixel = 0
+    eggFrame.ZIndex = 2
+    eggFrame.Parent = mainFrame
 
-    local petCorner = Instance.new("UICorner")
-    petCorner.CornerRadius = UDim.new(0, 10)
-    petCorner.Parent = petLabel
+    -- Egg corner rounding
+    local eggCorner = Instance.new("UICorner")
+    eggCorner.CornerRadius = UDim.new(0.5, 0)
+    eggCorner.Parent = eggFrame
+
+    -- Egg gradient
+    local eggGradient = Instance.new("UIGradient")
+    eggGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 220, 180)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 180, 120))
+    })
+    eggGradient.Rotation = 90
+    eggGradient.Parent = eggFrame
+
+    -- Pet Name Label
+    local petNameLabel = Instance.new("TextLabel")
+    petNameLabel.Name = "PetNameLabel"
+    petNameLabel.Size = UDim2.new(1, -20, 0, 25)
+    petNameLabel.Position = UDim2.new(0, 10, 0, 120)
+    petNameLabel.BackgroundTransparency = 1
+    petNameLabel.Text = "Mystery Pet"
+    petNameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    petNameLabel.TextScaled = true
+    petNameLabel.Font = Enum.Font.SourceSans
+    petNameLabel.ZIndex = 2
+    petNameLabel.Parent = mainFrame
 
     -- Input Label
     local inputLabel = Instance.new("TextLabel")
     inputLabel.Name = "InputLabel"
     inputLabel.Size = UDim2.new(1, -20, 0, 20)
-    inputLabel.Position = UDim2.new(0, 10, 0, 100)
+    inputLabel.Position = UDim2.new(0, 10, 0, 150)
     inputLabel.BackgroundTransparency = 1
-    inputLabel.Text = "Enter egg type:"
+    inputLabel.Text = "Type egg name:"
     inputLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
     inputLabel.TextScaled = true
     inputLabel.Font = Enum.Font.SourceSans
+    inputLabel.ZIndex = 2
     inputLabel.Parent = mainFrame
 
-    -- Text Input
+    -- Text Input Box
     local textInput = Instance.new("TextBox")
     textInput.Name = "TextInput"
-    textInput.Size = UDim2.new(1, -20, 0, 30)
-    textInput.Position = UDim2.new(0, 10, 0, 125)
+    textInput.Size = UDim2.new(1, -20, 0, 25)
+    textInput.Position = UDim2.new(0, 10, 0, 170)
     textInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    textInput.BorderSizePixel = 2
+    textInput.BorderColor3 = Color3.fromRGB(0, 0, 0)
     textInput.Text = ""
-    textInput.PlaceholderText = "Bug Egg, Bee Egg, etc."
+    textInput.PlaceholderText = "Bug Egg, Bee Egg, Anti Bee Egg, Paradise Egg, Mythical Egg"
     textInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+    textInput.PlaceholderColor3 = Color3.fromRGB(100, 100, 100)
     textInput.TextScaled = true
     textInput.Font = Enum.Font.SourceSans
+    textInput.ZIndex = 2
     textInput.Parent = mainFrame
 
+    -- Input box corner rounding
     local inputCorner = Instance.new("UICorner")
     inputCorner.CornerRadius = UDim.new(0, 8)
     inputCorner.Parent = textInput
 
-    -- Generate Button
+    -- Credits Label
+    local creditsLabel = Instance.new("TextLabel")
+    creditsLabel.Name = "CreditsLabel"
+    creditsLabel.Size = UDim2.new(1, -20, 0, 20)
+    creditsLabel.Position = UDim2.new(0, 10, 0, 200)
+    creditsLabel.BackgroundTransparency = 1
+    creditsLabel.Text = "MADE BY SPONGEBOB"
+    creditsLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    creditsLabel.TextScaled = true
+    creditsLabel.Font = Enum.Font.SourceSansBold
+    creditsLabel.ZIndex = 2
+    creditsLabel.Parent = mainFrame
+
+    -- Generate Button (centered and renamed)
     local generateButton = Instance.new("TextButton")
     generateButton.Name = "GenerateButton"
-    generateButton.Size = UDim2.new(0, 120, 0, 30)
-    generateButton.Position = UDim2.new(0.5, -60, 0, 170)
-    generateButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-    generateButton.Text = "Generate Pet"
-    generateButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    generateButton.Size = UDim2.new(0, 120, 0, 25)
+    generateButton.Position = UDim2.new(0.5, -60, 0, 225)
+    generateButton.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+    generateButton.BorderSizePixel = 2
+    generateButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    generateButton.Text = "Random Pet"
+    generateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     generateButton.TextScaled = true
     generateButton.Font = Enum.Font.SourceSansBold
+    generateButton.ZIndex = 2
     generateButton.Parent = mainFrame
 
-    local buttonCorner = Instance.new("UICorner")
-    buttonCorner.CornerRadius = UDim.new(0, 8)
-    buttonCorner.Parent = generateButton
+    -- Generate Button corner rounding
+    local generateCorner = Instance.new("UICorner")
+    generateCorner.CornerRadius = UDim.new(0, 8)
+    generateCorner.Parent = generateButton
 
-    -- Pet pools (simplified)
-    local eggPets = {
-        ["bug egg"] = {"Snail", "Ant", "Caterpillar"},
-        ["bee egg"] = {"Honey Bee", "Worker Bee", "Queen Bee"},
-        ["mythical egg"] = {"Dragon", "Phoenix", "Unicorn"},
-        ["paradise egg"] = {"Peacock", "Flamingo", "Toucan"}
+    -- SPECIFIC PET POOLS FOR EACH EGG TYPE (using lowercase keys)
+    local eggPetPools = {
+        ["bug egg"] = {
+            "Snail",
+            "Blue Giant Ant", 
+            "Praying Mantis",
+            "Caterpillar"
+        },
+        
+        ["anti bee egg"] = {
+            "Wasp",
+            "Tarantula Hawk", 
+            "Moth"
+        },
+        
+        ["mythical egg"] = {
+            "Red Giant Ant",
+            "Squirrel",
+            "Grey Mouse",
+            "Brown Mouse"
+        },
+        
+        ["paradise egg"] = {
+            "Ostrich",
+            "Peacock",
+            "Capybara",
+            "Scarlet Macaw"
+        },
+        
+        ["bee egg"] = {
+            "Honey Bee",
+            "Bee",
+            "Petal Bee",
+            "Bear Bee"
+        },
+        
+        ["rare summer egg"] = {
+            "Flamingo",
+            "Toucan",
+            "Orangutan"
+        }
     }
 
-    -- Generate function
-    generateButton.MouseButton1Click:Connect(function()
-        local eggType = string.lower(textInput.Text)
-        local pets = eggPets[eggType] or {"Mystery Pet"}
-        local randomPet = pets[math.random(1, #pets)]
-        petLabel.Text = randomPet
+    -- Default random pet pool for when no specific egg is found
+    local defaultPetPool = {
+        "Mystery Pet"
+    }
+
+    -- Egg colors for each type (using lowercase keys)
+    local eggTypeColors = {
+        ["bug egg"] = {Color3.fromRGB(150, 200, 100), Color3.fromRGB(100, 150, 50)},
+        ["mythical egg"] = {Color3.fromRGB(220, 180, 255), Color3.fromRGB(180, 120, 255)},
+        ["paradise egg"] = {Color3.fromRGB(255, 200, 150), Color3.fromRGB(255, 150, 100)},
+        ["bee egg"] = {Color3.fromRGB(255, 220, 100), Color3.fromRGB(255, 180, 50)},
+        ["rare summer egg"] = {Color3.fromRGB(255, 150, 100), Color3.fromRGB(255, 100, 50)},
+        ["anti bee egg"] = {Color3.fromRGB(255, 150, 100), Color3.fromRGB(255, 100, 50)},
+    }
+
+    -- Default egg colors
+    local defaultEggColors = {
+        {Color3.fromRGB(255, 220, 180), Color3.fromRGB(255, 180, 120)}, -- Orange
+        {Color3.fromRGB(180, 220, 255), Color3.fromRGB(120, 180, 255)}, -- Blue
+        {Color3.fromRGB(255, 180, 220), Color3.fromRGB(255, 120, 180)}, -- Pink
+        {Color3.fromRGB(180, 255, 180), Color3.fromRGB(120, 255, 120)}, -- Green
+        {Color3.fromRGB(220, 180, 255), Color3.fromRGB(180, 120, 255)}, -- Purple
+        {Color3.fromRGB(255, 255, 180), Color3.fromRGB(255, 255, 120)}, -- Yellow
+    }
+
+    -- Function to create tween animations
+    local function createTween(object, properties, duration)
+        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(object, tweenInfo, properties)
+        return tween
+    end
+
+    -- Function to get pet pool for specific egg type
+    local function getPetPoolForEgg(eggType)
+        local lowerType = string.lower(eggType)
+        
+        -- Check if the egg type exists in our pools
+        if eggPetPools[lowerType] then
+            return eggPetPools[lowerType]
+        end
+        
+        -- If not found, return default pool
+        return defaultPetPool
+    end
+
+    -- Function to get egg colors for specific type
+    local function getEggColorsForType(eggType)
+        local lowerType = string.lower(eggType)
+        
+        -- Check if the egg type has specific colors
+        if eggTypeColors[lowerType] then
+            return eggTypeColors[lowerType]
+        end
+        
+        -- Default to random color if no specific color found
+        local colorIndex = math.random(1, #defaultEggColors)
+        return defaultEggColors[colorIndex]
+    end
+
+    -- Function to generate random pet based on egg type
+    local function generateRandomPet()
+        local eggType = textInput.Text
+        
+        if eggType == "" then
+            -- Show error message briefly
+            local originalText = petNameLabel.Text
+            petNameLabel.Text = "Enter egg type first!"
+            petNameLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+            
+            wait(1)
+            
+            petNameLabel.Text = originalText
+            petNameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            return
+        end
+        
+        -- Button click animation
+        local clickTween = createTween(generateButton, {Size = UDim2.new(0, 115, 0, 23)}, 0.1)
+        clickTween:Play()
+        
+        clickTween.Completed:Connect(function()
+            local returnTween = createTween(generateButton, {Size = UDim2.new(0, 120, 0, 25)}, 0.1)
+            returnTween:Play()
+        end)
+        
+        -- Egg spin animation
+        local spinTween = createTween(eggFrame, {Rotation = 360}, 0.5)
+        spinTween:Play()
+        
+        spinTween.Completed:Connect(function()
+            eggFrame.Rotation = 0
+        end)
+        
+        -- Change pet after a short delay
+        wait(0.3)
+        
+        -- Get the specific pet pool for this egg type
+        local petPool = getPetPoolForEgg(eggType)
+        local randomIndex = math.random(1, #petPool)
+        local newPetName = petPool[randomIndex]
+        
+        -- Change egg color based on type
+        local selectedColors = getEggColorsForType(eggType)
+        
+        eggGradient.Color = ColorSequence.new({
+            ColorSequenceKeypoint.new(0, selectedColors[1]),
+            ColorSequenceKeypoint.new(1, selectedColors[2])
+        })
+        
+        -- Text change animation
+        local fadeOut = createTween(petNameLabel, {TextTransparency = 1}, 0.2)
+        fadeOut:Play()
+        
+        fadeOut.Completed:Connect(function()
+            petNameLabel.Text = newPetName
+            petNameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            local fadeIn = createTween(petNameLabel, {TextTransparency = 0}, 0.2)
+            fadeIn:Play()
+        end)
+    end
+
+    -- Connect button click event
+    generateButton.MouseButton1Click:Connect(generateRandomPet)
+
+    -- Generate button hover effects
+    generateButton.MouseEnter:Connect(function()
+        local hoverTween = createTween(generateButton, {BackgroundColor3 = Color3.fromRGB(255, 69, 0)}, 0.2)
+        hoverTween:Play()
+    end)
+
+    generateButton.MouseLeave:Connect(function()
+        local leaveTween = createTween(generateButton, {BackgroundColor3 = Color3.fromRGB(255, 20, 147)}, 0.2)
+        leaveTween:Play()
+    end)
+
+    -- Text input focus effects
+    textInput.Focused:Connect(function()
+        local focusTween = createTween(textInput, {BackgroundColor3 = Color3.fromRGB(255, 255, 200)}, 0.2)
+        focusTween:Play()
+    end)
+
+    textInput.FocusLost:Connect(function()
+        local unfocusTween = createTween(textInput, {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}, 0.2)
+        unfocusTween:Play()
+    end)
+
+    -- Allow Enter key to generate random pet
+    textInput.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            generateRandomPet()
+        end
     end)
 end
 
 -- Start the loading process
 startLoading()
 
-print("Loading screen started!")
+print("Enhanced Egg Randomizer GUI with SpongeBob theme loaded successfully!")
