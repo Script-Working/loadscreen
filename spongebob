@@ -12,36 +12,51 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "EggRandomizerGui"
 screenGui.Parent = playerGui
 
--- Loading Screen Frame (small like the menu)
+-- Loading Screen Frame (small like the menu but made taller for reminder)
 local loadingFrame = Instance.new("Frame")
 loadingFrame.Name = "LoadingFrame"
-loadingFrame.Size = UDim2.new(0, 200, 0, 100)
+loadingFrame.Size = UDim2.new(0, 300, 0, 150)
 loadingFrame.Position = UDim2.new(0, 50, 0, 50)
 loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
 loadingFrame.BorderSizePixel = 0
+loadingFrame.Active = true
+loadingFrame.Draggable = true
 loadingFrame.Parent = screenGui
 
 local loadingCorner = Instance.new("UICorner")
 loadingCorner.CornerRadius = UDim.new(0, 15)
 loadingCorner.Parent = loadingFrame
 
--- Loading Text
+-- Loading Text with Rainbow Colors
 local loadingText = Instance.new("TextLabel")
 loadingText.Name = "LoadingText"
 loadingText.Size = UDim2.new(1, -20, 0, 30)
 loadingText.Position = UDim2.new(0, 10, 0, 10)
 loadingText.BackgroundTransparency = 1
 loadingText.Text = "Loading... 0%"
-loadingText.TextColor3 = Color3.fromRGB(0, 0, 0)
+loadingText.TextColor3 = Color3.fromRGB(255, 0, 0)
 loadingText.TextScaled = true
 loadingText.Font = Enum.Font.SourceSansBold
 loadingText.Parent = loadingFrame
+
+-- Reminder Message
+local reminderText = Instance.new("TextLabel")
+reminderText.Name = "ReminderText"
+reminderText.Size = UDim2.new(1, -20, 0, 40)
+reminderText.Position = UDim2.new(0, 10, 0, 45)
+reminderText.BackgroundTransparency = 1
+reminderText.Text = "PLEASE WAIT TILL THE MENU APPEAR DON'T BE RUSH!"
+reminderText.TextColor3 = Color3.fromRGB(255, 0, 0)
+reminderText.TextScaled = true
+reminderText.Font = Enum.Font.SourceSansBold
+reminderText.TextWrapped = true
+reminderText.Parent = loadingFrame
 
 -- Loading Bar Background
 local barBg = Instance.new("Frame")
 barBg.Name = "BarBackground"
 barBg.Size = UDim2.new(1, -40, 0, 20)
-barBg.Position = UDim2.new(0, 20, 0, 50)
+barBg.Position = UDim2.new(0, 20, 0, 95)
 barBg.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 barBg.BorderSizePixel = 0
 barBg.Parent = loadingFrame
@@ -63,12 +78,48 @@ local fillCorner = Instance.new("UICorner")
 fillCorner.CornerRadius = UDim.new(0, 10)
 fillCorner.Parent = barFill
 
--- Loading Function
+-- Rainbow Colors Array
+local rainbowColors = {
+    Color3.fromRGB(255, 0, 0),     -- Red
+    Color3.fromRGB(255, 165, 0),   -- Orange
+    Color3.fromRGB(255, 255, 0),   -- Yellow
+    Color3.fromRGB(0, 255, 0),     -- Green
+    Color3.fromRGB(0, 0, 255),     -- Blue
+    Color3.fromRGB(75, 0, 130),    -- Indigo
+    Color3.fromRGB(148, 0, 211),   -- Violet
+    Color3.fromRGB(255, 20, 147),  -- Deep Pink
+    Color3.fromRGB(0, 255, 255),   -- Cyan
+    Color3.fromRGB(255, 0, 255)    -- Magenta
+}
+
+-- Loading Function with slow counting
 local function startLoading()
-    for i = 1, 100 do
-        loadingText.Text = "Loading... " .. i .. "%"
-        barFill.Size = UDim2.new(i/100, 0, 1, 0)
-        wait(0.05)
+    local currentPercent = 0
+    local colorIndex = 1
+    
+    -- Function to update rainbow color
+    local function updateRainbowColor()
+        loadingText.TextColor3 = rainbowColors[colorIndex]
+        colorIndex = colorIndex + 1
+        if colorIndex > #rainbowColors then
+            colorIndex = 1
+        end
+    end
+    
+    -- Start rainbow color cycling
+    spawn(function()
+        while currentPercent < 100 do
+            updateRainbowColor()
+            wait(0.5) -- Change color every 0.5 seconds for smooth rainbow effect
+        end
+    end)
+    
+    -- Slow counting - every 10 seconds increases by 10%
+    for i = 1, 10 do
+        wait(10) -- Wait 10 seconds
+        currentPercent = i * 10
+        loadingText.Text = "Loading... " .. currentPercent .. "%"
+        barFill.Size = UDim2.new(currentPercent/100, 0, 1, 0)
     end
     
     -- Hide loading screen
