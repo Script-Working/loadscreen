@@ -1,0 +1,541 @@
+-- Roblox GUI Menu with Loading Screen and Features
+-- Place this in StarterPlayerScripts or StarterGui
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MainMenuGui"
+screenGui.Parent = playerGui
+
+-- Loading Screen Frame
+local loadingFrame = Instance.new("Frame")
+loadingFrame.Name = "LoadingFrame"
+loadingFrame.Size = UDim2.new(0, 350, 0, 180)
+loadingFrame.Position = UDim2.new(0.5, -175, 0.5, -90)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+loadingFrame.BorderSizePixel = 0
+loadingFrame.Active = true
+loadingFrame.Draggable = true
+loadingFrame.Parent = screenGui
+
+local loadingCorner = Instance.new("UICorner")
+loadingCorner.CornerRadius = UDim.new(0, 15)
+loadingCorner.Parent = loadingFrame
+
+-- Loading gradient
+local loadingGradient = Instance.new("UIGradient")
+loadingGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 60, 60)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 30, 30))
+})
+loadingGradient.Rotation = 45
+loadingGradient.Parent = loadingFrame
+
+-- Loading Text
+local loadingText = Instance.new("TextLabel")
+loadingText.Name = "LoadingText"
+loadingText.Size = UDim2.new(1, -20, 0, 40)
+loadingText.Position = UDim2.new(0, 10, 0, 20)
+loadingText.BackgroundTransparency = 1
+loadingText.Text = "Loading... 0%"
+loadingText.TextColor3 = Color3.fromRGB(255, 255, 255)
+loadingText.TextScaled = true
+loadingText.Font = Enum.Font.SourceSansBold
+loadingText.Parent = loadingFrame
+
+-- Loading Bar Background
+local barBg = Instance.new("Frame")
+barBg.Name = "BarBackground"
+barBg.Size = UDim2.new(1, -40, 0, 25)
+barBg.Position = UDim2.new(0, 20, 0, 80)
+barBg.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+barBg.BorderSizePixel = 0
+barBg.Parent = loadingFrame
+
+local barCorner = Instance.new("UICorner")
+barCorner.CornerRadius = UDim.new(0, 12)
+barCorner.Parent = barBg
+
+-- Loading Bar Fill
+local barFill = Instance.new("Frame")
+barFill.Name = "BarFill"
+barFill.Size = UDim2.new(0, 0, 1, 0)
+barFill.Position = UDim2.new(0, 0, 0, 0)
+barFill.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
+barFill.BorderSizePixel = 0
+barFill.Parent = barBg
+
+local fillCorner = Instance.new("UICorner")
+fillCorner.CornerRadius = UDim.new(0, 12)
+fillCorner.Parent = barFill
+
+-- Status text
+local statusText = Instance.new("TextLabel")
+statusText.Name = "StatusText"
+statusText.Size = UDim2.new(1, -20, 0, 30)
+statusText.Position = UDim2.new(0, 10, 0, 125)
+statusText.BackgroundTransparency = 1
+statusText.Text = "Initializing..."
+statusText.TextColor3 = Color3.fromRGB(200, 200, 200)
+statusText.TextScaled = true
+statusText.Font = Enum.Font.SourceSans
+statusText.Parent = loadingFrame
+
+-- Loading Function (MODIFIED FOR SLOWER LOADING)
+local function startLoading()
+    local currentPercent = 0
+    local statusMessages = {
+        "Initializing...",
+        "Loading modules...",
+        "Connecting to server...",
+        "Loading assets...",
+        "Preparing GUI...",
+        "Setting up features...",
+        "Finalizing...",
+        "Almost ready...",
+        "Loading complete!"
+    }
+    
+    for i = 1, 100 do
+        wait(0.15) -- Changed from 0.05 to 0.15 (3x slower)
+        currentPercent = i
+        loadingText.Text = "Loading... " .. currentPercent .. "%"
+        barFill.Size = UDim2.new(currentPercent/100, 0, 1, 0)
+        
+        -- Update status message
+        local messageIndex = math.ceil(i / 12)
+        if messageIndex <= #statusMessages then
+            statusText.Text = statusMessages[messageIndex]
+        end
+        
+        -- Color transition for loading bar
+        local greenValue = math.min(255, currentPercent * 2.55)
+        barFill.BackgroundColor3 = Color3.fromRGB(255 - greenValue, greenValue, 0)
+    end
+    
+    wait(0.5)
+    loadingFrame.Visible = false
+    createMainMenu()
+end
+
+-- Create Main Menu
+function createMainMenu()
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Name = "MainMenuFrame"
+    mainFrame.Size = UDim2.new(0, 300, 0, 200)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Active = true
+    mainFrame.Draggable = true
+    mainFrame.Parent = screenGui
+
+    local mainCorner = Instance.new("UICorner")
+    mainCorner.CornerRadius = UDim.new(0, 15)
+    mainCorner.Parent = mainFrame
+
+    -- Main menu gradient
+    local mainGradient = Instance.new("UIGradient")
+    mainGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 70, 70)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 40, 40))
+    })
+    mainGradient.Rotation = 45
+    mainGradient.Parent = mainFrame
+
+    -- Title
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Name = "TitleLabel"
+    titleLabel.Size = UDim2.new(1, -20, 0, 40)
+    titleLabel.Position = UDim2.new(0, 10, 0, 10)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "MAIN MENU"
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.TextScaled = true
+    titleLabel.Font = Enum.Font.SourceSansBold
+    titleLabel.Parent = mainFrame
+
+    -- Dupe Items Button
+    local dupeButton = Instance.new("TextButton")
+    dupeButton.Name = "DupeButton"
+    dupeButton.Size = UDim2.new(1, -40, 0, 40)
+    dupeButton.Position = UDim2.new(0, 20, 0, 70)
+    dupeButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+    dupeButton.BorderSizePixel = 0
+    dupeButton.Text = "Dupe Items"
+    dupeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    dupeButton.TextScaled = true
+    dupeButton.Font = Enum.Font.SourceSansBold
+    dupeButton.Parent = mainFrame
+
+    local dupeCorner = Instance.new("UICorner")
+    dupeCorner.CornerRadius = UDim.new(0, 8)
+    dupeCorner.Parent = dupeButton
+
+    -- Egg Predictor Button
+    local eggButton = Instance.new("TextButton")
+    eggButton.Name = "EggButton"
+    eggButton.Size = UDim2.new(1, -40, 0, 40)
+    eggButton.Position = UDim2.new(0, 20, 0, 130)
+    eggButton.BackgroundColor3 = Color3.fromRGB(100, 255, 100)
+    eggButton.BorderSizePixel = 0
+    eggButton.Text = "Egg Predictor"
+    eggButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    eggButton.TextScaled = true
+    eggButton.Font = Enum.Font.SourceSansBold
+    eggButton.Parent = mainFrame
+
+    local eggCorner = Instance.new("UICorner")
+    eggCorner.CornerRadius = UDim.new(0, 8)
+    eggCorner.Parent = eggButton
+
+    -- Button hover effects
+    local function addHoverEffect(button, hoverColor, normalColor)
+        button.MouseEnter:Connect(function()
+            local hoverTween = TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = hoverColor})
+            hoverTween:Play()
+        end)
+        
+        button.MouseLeave:Connect(function()
+            local leaveTween = TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = normalColor})
+            leaveTween:Play()
+        end)
+    end
+
+    addHoverEffect(dupeButton, Color3.fromRGB(255, 150, 150), Color3.fromRGB(255, 100, 100))
+    addHoverEffect(eggButton, Color3.fromRGB(150, 255, 150), Color3.fromRGB(100, 255, 100))
+
+    -- Dupe Items functionality
+    dupeButton.MouseButton1Click:Connect(function()
+        createDupeMenu()
+    end)
+
+    -- Egg Predictor functionality
+    eggButton.MouseButton1Click:Connect(function()
+        createEggPredictor()
+    end)
+end
+
+-- Create Dupe Menu
+function createDupeMenu()
+    local dupeFrame = Instance.new("Frame")
+    dupeFrame.Name = "DupeFrame"
+    dupeFrame.Size = UDim2.new(0, 250, 0, 150)
+    dupeFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+    dupeFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    dupeFrame.BorderSizePixel = 0
+    dupeFrame.Active = true
+    dupeFrame.Draggable = true
+    dupeFrame.Parent = screenGui
+
+    local dupeCorner = Instance.new("UICorner")
+    dupeCorner.CornerRadius = UDim.new(0, 15)
+    dupeCorner.Parent = dupeFrame
+
+    -- Title
+    local dupeTitle = Instance.new("TextLabel")
+    dupeTitle.Name = "DupeTitle"
+    dupeTitle.Size = UDim2.new(1, -20, 0, 30)
+    dupeTitle.Position = UDim2.new(0, 10, 0, 10)
+    dupeTitle.BackgroundTransparency = 1
+    dupeTitle.Text = "Duper"
+    dupeTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    dupeTitle.TextScaled = true
+    dupeTitle.Font = Enum.Font.SourceSansBold
+    dupeTitle.Parent = dupeFrame
+
+    -- Dupe Button
+    local dupeActionButton = Instance.new("TextButton")
+    dupeActionButton.Name = "DupeActionButton"
+    dupeActionButton.Size = UDim2.new(1, -40, 0, 40)
+    dupeActionButton.Position = UDim2.new(0, 20, 0, 60)
+    dupeActionButton.BackgroundColor3 = Color3.fromRGB(255, 150, 50)
+    dupeActionButton.BorderSizePixel = 0
+    dupeActionButton.Text = "Dupe"
+    dupeActionButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    dupeActionButton.TextScaled = true
+    dupeActionButton.Font = Enum.Font.SourceSansBold
+    dupeActionButton.Parent = dupeFrame
+
+    local dupeActionCorner = Instance.new("UICorner")
+    dupeActionCorner.CornerRadius = UDim.new(0, 8)
+    dupeActionCorner.Parent = dupeActionButton
+
+    -- Close Button
+    local closeButton = Instance.new("TextButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Size = UDim2.new(0, 25, 0, 25)
+    closeButton.Position = UDim2.new(1, -30, 0, 5)
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+    closeButton.BorderSizePixel = 0
+    closeButton.Text = "X"
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.TextScaled = true
+    closeButton.Font = Enum.Font.SourceSansBold
+    closeButton.Parent = dupeFrame
+
+    local closeCorner = Instance.new("UICorner")
+    closeCorner.CornerRadius = UDim.new(0, 4)
+    closeCorner.Parent = closeButton
+
+    -- Status Label
+    local statusLabel = Instance.new("TextLabel")
+    statusLabel.Name = "StatusLabel"
+    statusLabel.Size = UDim2.new(1, -20, 0, 20)
+    statusLabel.Position = UDim2.new(0, 10, 0, 115)
+    statusLabel.BackgroundTransparency = 1
+    statusLabel.Text = "Ready to dupe!"
+    statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    statusLabel.TextScaled = true
+    statusLabel.Font = Enum.Font.SourceSans
+    statusLabel.Parent = dupeFrame
+
+    -- Dupe functionality with cooldown
+    local cooldownTime = 5 -- 5 second cooldown
+    local lastDupeTime = 0
+
+    dupeActionButton.MouseButton1Click:Connect(function()
+        local currentTime = tick()
+        
+        if currentTime - lastDupeTime < cooldownTime then
+            local remaining = cooldownTime - (currentTime - lastDupeTime)
+            statusLabel.Text = "Cooldown: " .. math.ceil(remaining) .. "s"
+            statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            return
+        end
+        
+        -- Check if player is holding an item
+        local character = player.Character
+        if not character then
+            statusLabel.Text = "Character not found!"
+            statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            return
+        end
+        
+        -- Find the currently equipped tool
+        local equippedTool = character:FindFirstChildOfClass("Tool")
+        if not equippedTool then
+            statusLabel.Text = "No item equipped!"
+            statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            wait(2)
+            statusLabel.Text = "Ready to dupe!"
+            statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+            return
+        end
+        
+        -- Start duplication process
+        statusLabel.Text = "Duplicating " .. equippedTool.Name .. "..."
+        statusLabel.TextColor3 = Color3.fromRGB(255, 255, 100)
+        dupeActionButton.Text = "Duping..."
+        dupeActionButton.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+        
+        wait(2) -- Simulate processing time
+        
+        -- Clone the tool and put it in backpack
+        local clonedTool = equippedTool:Clone()
+        clonedTool.Parent = player.Backpack
+        
+        -- Success message
+        statusLabel.Text = equippedTool.Name .. " duplicated!"
+        statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+        dupeActionButton.Text = "Dupe"
+        dupeActionButton.BackgroundColor3 = Color3.fromRGB(255, 150, 50)
+        
+        lastDupeTime = currentTime
+        
+        -- Reset status after 3 seconds
+        wait(3)
+        statusLabel.Text = "Ready to dupe!"
+        statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    end)
+
+    -- Close button functionality
+    closeButton.MouseButton1Click:Connect(function()
+        dupeFrame:Destroy()
+    end)
+end
+
+-- Optimized Egg Predictor (shortened version)
+function createEggPredictor()
+    local eggFrame = Instance.new("Frame")
+    eggFrame.Name = "EggPredictorFrame"
+    eggFrame.Size = UDim2.new(0, 280, 0, 320)
+    eggFrame.Position = UDim2.new(0.5, -140, 0.5, -160)
+    eggFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+    eggFrame.BorderSizePixel = 0
+    eggFrame.Active = true
+    eggFrame.Draggable = true
+    eggFrame.Parent = screenGui
+
+    local eggCorner = Instance.new("UICorner")
+    eggCorner.CornerRadius = UDim.new(0, 15)
+    eggCorner.Parent = eggFrame
+
+    -- Gradient
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 200, 0))
+    })
+    gradient.Rotation = 45
+    gradient.Parent = eggFrame
+
+    -- Title
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, -20, 0, 30)
+    title.Position = UDim2.new(0, 10, 0, 10)
+    title.BackgroundTransparency = 1
+    title.Text = "EGG PREDICTOR"
+    title.TextColor3 = Color3.fromRGB(0, 0, 0)
+    title.TextScaled = true
+    title.Font = Enum.Font.SourceSansBold
+    title.Parent = eggFrame
+
+    -- Egg Display
+    local eggDisplay = Instance.new("Frame")
+    eggDisplay.Size = UDim2.new(0, 60, 0, 60)
+    eggDisplay.Position = UDim2.new(0.5, -30, 0, 50)
+    eggDisplay.BackgroundColor3 = Color3.fromRGB(255, 220, 180)
+    eggDisplay.BorderSizePixel = 0
+    eggDisplay.Parent = eggFrame
+
+    local eggDisplayCorner = Instance.new("UICorner")
+    eggDisplayCorner.CornerRadius = UDim.new(0.5, 0)
+    eggDisplayCorner.Parent = eggDisplay
+
+    -- Pet Name
+    local petName = Instance.new("TextLabel")
+    petName.Size = UDim2.new(1, -20, 0, 25)
+    petName.Position = UDim2.new(0, 10, 0, 120)
+    petName.BackgroundTransparency = 1
+    petName.Text = "Mystery Pet"
+    petName.TextColor3 = Color3.fromRGB(0, 0, 0)
+    petName.TextScaled = true
+    petName.Font = Enum.Font.SourceSans
+    petName.Parent = eggFrame
+
+    -- Input
+    local textInput = Instance.new("TextBox")
+    textInput.Size = UDim2.new(1, -20, 0, 25)
+    textInput.Position = UDim2.new(0, 10, 0, 170)
+    textInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    textInput.BorderSizePixel = 2
+    textInput.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    textInput.PlaceholderText = "Enter egg name..."
+    textInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+    textInput.TextScaled = true
+    textInput.Font = Enum.Font.SourceSans
+    textInput.Parent = eggFrame
+
+    local inputCorner = Instance.new("UICorner")
+    inputCorner.CornerRadius = UDim.new(0, 8)
+    inputCorner.Parent = textInput
+
+    -- Generate Button
+    local generateButton = Instance.new("TextButton")
+    generateButton.Size = UDim2.new(0, 120, 0, 30)
+    generateButton.Position = UDim2.new(0.5, -60, 0, 210)
+    generateButton.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+    generateButton.BorderSizePixel = 0
+    generateButton.Text = "Predict Pet"
+    generateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    generateButton.TextScaled = true
+    generateButton.Font = Enum.Font.SourceSansBold
+    generateButton.Parent = eggFrame
+
+    local generateCorner = Instance.new("UICorner")
+    generateCorner.CornerRadius = UDim.new(0, 8)
+    generateCorner.Parent = generateButton
+
+    -- Close Button
+    local closeButton = Instance.new("TextButton")
+    closeButton.Size = UDim2.new(0, 25, 0, 25)
+    closeButton.Position = UDim2.new(1, -30, 0, 5)
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+    closeButton.BorderSizePixel = 0
+    closeButton.Text = "X"
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.TextScaled = true
+    closeButton.Font = Enum.Font.SourceSansBold
+    closeButton.Parent = eggFrame
+
+    local closeCorner2 = Instance.new("UICorner")
+    closeCorner2.CornerRadius = UDim.new(0, 4)
+    closeCorner2.Parent = closeButton
+
+    -- Credits
+    local credits = Instance.new("TextLabel")
+    credits.Size = UDim2.new(1, -20, 0, 20)
+    credits.Position = UDim2.new(0, 10, 0, 250)
+    credits.BackgroundTransparency = 1
+    credits.Text = "MADE BY SPONGEBOB"
+    credits.TextColor3 = Color3.fromRGB(0, 0, 0)
+    credits.TextScaled = true
+    credits.Font = Enum.Font.SourceSansBold
+    credits.Parent = eggFrame
+
+    -- Pet pools (consolidated)
+    local eggPools = {
+        ["bug egg"] = {"Snail", "Blue Giant Ant", "Praying Mantis", "Caterpillar"},
+        ["anti bee egg"] = {"Wasp", "Tarantula Hawk", "Moth"},
+        ["mythical egg"] = {"Red Giant Ant", "Squirrel", "Grey Mouse", "Brown Mouse"},
+        ["paradise egg"] = {"Ostrich", "Peacock", "Capybara", "Scarlet Macaw"},
+        ["bee egg"] = {"Honey Bee", "Bee", "Petal Bee", "Bear Bee"},
+        ["rare summer egg"] = {"Flamingo", "Toucan", "Orangutan"}
+    }
+
+    local eggColors = {
+        ["bug egg"] = {Color3.fromRGB(150, 200, 100), Color3.fromRGB(100, 150, 50)},
+        ["mythical egg"] = {Color3.fromRGB(220, 180, 255), Color3.fromRGB(180, 120, 255)},
+        ["paradise egg"] = {Color3.fromRGB(255, 200, 150), Color3.fromRGB(255, 150, 100)},
+        ["bee egg"] = {Color3.fromRGB(255, 220, 100), Color3.fromRGB(255, 180, 50)},
+        ["rare summer egg"] = {Color3.fromRGB(255, 150, 100), Color3.fromRGB(255, 100, 50)},
+        ["anti bee egg"] = {Color3.fromRGB(255, 150, 100), Color3.fromRGB(255, 100, 50)}
+    }
+
+    -- Generate function
+    generateButton.MouseButton1Click:Connect(function()
+        local eggType = string.lower(textInput.Text)
+        if eggType == "" then
+            petName.Text = "Enter egg type first!"
+            petName.TextColor3 = Color3.fromRGB(255, 0, 0)
+            wait(1)
+            petName.Text = "Mystery Pet"
+            petName.TextColor3 = Color3.fromRGB(0, 0, 0)
+            return
+        end
+
+        -- Animation
+        local spinTween = TweenService:Create(eggDisplay, TweenInfo.new(0.5), {Rotation = 360})
+        spinTween:Play()
+        spinTween.Completed:Connect(function() eggDisplay.Rotation = 0 end)
+
+        wait(0.3)
+
+        -- Get pet and colors
+        local pets = eggPools[eggType] or {"Mystery Pet"}
+        local newPet = pets[math.random(1, #pets)]
+        local colors = eggColors[eggType] or {Color3.fromRGB(255, 220, 180), Color3.fromRGB(255, 180, 120)}
+
+        -- Update display
+        petName.Text = newPet
+        local displayGradient = eggDisplay:FindFirstChild("UIGradient") or Instance.new("UIGradient")
+        displayGradient.Color = ColorSequence.new(colors)
+        displayGradient.Parent = eggDisplay
+    end)
+
+    -- Close functionality
+    closeButton.MouseButton1Click:Connect(function()
+        eggFrame:Destroy()
+    end)
+end
+
+-- Start the application
+startLoading()
+print("Main Menu GUI loaded successfully!")
