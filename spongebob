@@ -1,1 +1,535 @@
-([[This file was protected with MoonSec V3]]):gsub('.+', (function(a) _FKdXbUbitXOd = a; end)); return(function(h,...)local f;local k;local l;local t;local a;local d;local e=24915;local n=0;local u={};while n<654 do n=n+1;while n<0x331 and e%0x18c0<0xc60 do n=n+1 e=(e+302)%26094 local r=n+e if(e%0xa66)<=0x533 then e=(e*0x1ac)%0xb404 while n<0x35d and e%0x1c84<0xe42 do n=n+1 e=(e*276)%28170 local d=n+e if(e%0x2914)>=0x148a then e=(e*0x244)%0x2114 local e=31779 if not u[e]then u[e]=0x1 l=string;end elseif e%2~=0 then e=(e-0x2f4)%0x309f local e=57516 if not u[e]then u[e]=0x1 end else e=(e+0xef)%0x8ed2 n=n+1 local e=83317 if not u[e]then u[e]=0x1 a={};end end end elseif e%2~=0 then e=(e+0x2aa)%0x6a1e while n<0x325 and e%0x3eea<0x1f75 do n=n+1 e=(e+158)%8678 local r=n+e if(e%0x1abe)<=0xd5f then e=(e*0x2b5)%0x45e9 local e=70661 if not u[e]then u[e]=0x1 k=tonumber;end elseif e%2~=0 then e=(e*0x289)%0x8ca7 local e=51745 if not u[e]then u[e]=0x1 f="\4\8\116\111\110\117\109\98\101\114\87\83\88\79\120\83\86\109\0\6\115\116\114\105\110\103\4\99\104\97\114\109\117\71\105\82\73\90\109\0\6\115\116\114\105\110\103\3\115\117\98\71\117\101\88\104\71\102\104\0\6\115\116\114\105\110\103\4\98\121\116\101\97\115\75\117\70\79\121\111\0\5\116\97\98\108\101\6\99\111\110\99\97\116\116\122\68\82\115\90\82\108\0\5\116\97\98\108\101\6\105\110\115\101\114\116\81\87\100\74\80\107\115\69\5";end else e=(e*0x19e)%0x1ac5 n=n+1 local e=94389 if not u[e]then u[e]=0x1 t=function(u)local e=0x01 local function n(n)e=e+n return u:sub(e-n,e-0x01)end while true do local u=n(0x01)if(u=="\5")then break end local e=l.byte(n(0x01))local e=n(e)if u=="\2"then e=a.WSXOxSVm(e)elseif u=="\3"then e=e~="\0"elseif u=="\6"then d[e]=function(e,n)return h(8,nil,h,n,e)end elseif u=="\4"then e=d[e]elseif u=="\0"then e=d[e][n(l.byte(n(0x01)))];end local n=n(0x08)a[n]=e end end end end end else e=(e+0x328)%0xa897 n=n+1 while n<0x2eb and e%0x26c2<0x1361 do n=n+1 e=(e*274)%39469 local t=n+e if(e%0x42fc)<0x217e then e=(e+0x32a)%0x2068 local e=43636 if not u[e]then u[e]=0x1 d=getfenv and getfenv();end elseif e%2~=0 then e=(e-0x23f)%0xc29b local e=40095 if not u[e]then u[e]=0x1 end else e=(e-0x113)%0x7b0d n=n+1 local e=25683 if not u[e]then u[e]=0x1 d=(not d)and _ENV or d;end end end end end e=(e+527)%47822 end t(f);local e={};for n=0x0,0xff do local u=a.muGiRIZm(n);e[n]=u;e[u]=n;end local function r(n)return e[n];end local l=(function(h,l)local f,u=0x01,0x10 local n={{},{},{}}local d=-0x01 local e=0x01 local t=h while true do n[0x03][a.GueXhGfh(l,e,(function()e=f+e return e-0x01 end)())]=(function()d=d+0x01 return d end)()if d==(0x0f)then d=""u=0x000 break end end local d=#l while e<d+0x01 do n[0x02][u]=a.GueXhGfh(l,e,(function()e=f+e return e-0x01 end)())u=u+0x01 if u%0x02==0x00 then u=0x00 a.QWdJPksE(n[0x01],(r((((n[0x03][n[0x02][0x00]]or 0x00)*0x10)+(n[0x03][n[0x02][0x01]]or 0x00)+t)%0x100)));t=h+t;end end return a.tzDRsZRl(n[0x01])end);t(l(150,"KH5{}cDBnu!QZmg)D)"));t(l(60,"0Zw B5vA;r+*d=u,dB;u*,;BBv(Zd+;Au;_duZr=vBwA,Z;Av=J*=AdZv==d+Z=o;ABrZ;=dA,B wBdr*BvAw,,B55Z=BdZwd=rvv8wr*dAuv,Z;,w+u5v=7r+d*r_5wX==vr ,5wZ=r*?v wdPw*,;ww =,dw;+ A+;AOr=55wduBB5A%wd,Zd;;Bw5%;=5A  ,,dd;+w,dd;, +rAd r,5d;Ar59(ZdvrB5Zgr*5+v5wQr=ArZA*=Br*+u;ZB Z;=Aruw w*u;+,Bvw;u,;=A+=;rd= ;ZB=Zd*BruBuw*,vr+v* ;;u5ZB=Bwhld,;; ZZ5d,+Z,ddB,B* A*B-_w*=;vB ,o* A vh,wdurZA dh;r*dv= w4R*=ww55Zw=;;=5 Z,=rr AA ==u*Bv+Zurdvwr55wZ;d=r 5,Z=*u+dv,Zu,8r+v+=d+Z=trv5ZZ+uBrdAwZuuv*vv* vu 5;ZuB,^5=V;=B,wB==+,v;3d==*Z;5w+rB5d;rBZZ;=e Z5vwSuA+*AwZ_u++ 5dZ;uZ=wr5ur"));local e=(-13943+(function()local d,n=0,1;(function(u,e,n)u(n(e,e,u),e(u,e,u),n(e,n,n))end)(function(t,u,e)if d>314 then return t end d=d+1 n=(n*870)%24921 if(n%1386)>=693 then n=(n+235)%35064 return t(u(e,e,u),u(u,e and u,t),u(t and t,e and e,e)and e(u and t,e,e))else return e end return u end,function(e,t,u)if d>156 then return u end d=d+1 n=(n-894)%18924 if(n%1902)>=951 then n=(n+696)%21308 return e else return u(e(e,u,e and u),t(t,e,e),u(e and u,u,e))end return t(e(u,u,e),t(e,e,t),t(e,t and e,e and e))end,function(u,e,t)if d>223 then return t end d=d+1 n=(n+725)%28625 if(n%1612)<806 then n=(n*500)%23230 return e(e(u,t,e),u(t,u,e),u(t,e,u))else return e end return u end)return n;end)())local o=a.eBlkVdJV or a.aWwyVhZJ;local te=(getfenv)or(function()return _ENV end);local f=4;local d=2;local ne=1;local t=3;local function ue(b,...)local s=l(e,"j6TH{u4!AJS^GO())Tu4B6SGuS0!SOuAzH6(G^4O6OG(=4^6u(0S^6uGs!6J^(!u6A46MO^{u)zSCJGuAHTS4{6{^!4TLO26O6A6TOGu!O6OGS6HG!4466^G^J!!TSO6A6TTG(A46HG)AOH{4O64G64G6!GT4O{4rH!66(G{4)6S6S^{A{HHSH6(G!!T6OGA!HO(6^^{TT)6!uT5G^GSAJHu(S{THH(6A)HHJJJ^Hz(O{u{5(OJu{u(6AS{4(TAG)H)uJT{A(!{STT()JS{{O{J6HSSTAH ^A4HuOJA{T){s)!J){AOA!A6(ASH4OOAAHHT{)ASTuHAOHJ(zA^H4H4ODSQ{)Jd{{(HA(HJHn)(J^{J)JSJ{OO!S({A))ST(SJHH((JJ{H)(S)(A3((SH{6(GJ!S6HH(HS!{4)^JJu61H^J{A(SSS){S4{!)TJOA)uA6TJGuJ66GLu(aH^o)JS){G)!STS&4!6AGRuG?JSTu^6HGHHO6u^O4zSJuT)OSAuH)(7J^4H)SOu^M S^u4{{6^GH!66)A^X4^{uJ>{S)J^4AT{G{!G64u(g!^TuOBA^Hu({!){4T6T^u4&w^k^SS{)T4O{!^6OOu6P^J4{x)^S4u6.^^446{G!4!6T^O^G!AH4OO4^H6G^AuHdOD!SG{!J6!GT4O4{HTG)!OTOOOA6)HJ({J(4S6{6GJ!T6OGA!H6(GJ4{u(GG!uTRG^!4T6{G^O4TG)!ATHG(!JT{G)S(4uOHJ6T4O6!G4JHH(ZJHHS)yJA{J(OA(TJ)TAG{{){JGHA){JT{4(4S!O^A{T)OSAuHCO^GS!6O(A!HTOOAAHHO(GO){(TJ6Hu(oA^!A{T)(!O{^)JS{(uA(HJ({A)HS4u)T!^(AJ6HG(!JTHOGAiT!((GJ^H)(SJuJgu!)!^Su6KJ^u)1S!{H((JJA4u(lGSJuu:OJJuS64SG{Ta4GpuAXS{G)AJ){S)u(u^J4^9({).{ST{O)A(uS)4^(4^*uO6<^!4O6uG44So^u{)OSAuH)(SJ6{46(SuA:JS^u4n6)7GJ4H6{^)4{6MGu4J^6uSru^Bu^Z4^6Su{!^u4!PA^Hu(uO6JO!!(EAGH4GTTG4!i^S4(?O^A4Hu6TAO4!O6)O!4T6GGS!SH6OS6u3T4A6H^(S(ATT!G^AHTHO9!S(6^6!(TJAO4ST{OG!OHHOGAHH)OuAO(4^A!66BJTJ{H6(!A4(JG!A)HJ(HA!H,^AJ-T(J!J4HuOOJLHHJJJKH(O^AJHuO){4{{)6ASHu(TJ^{4({J({_(^SH)4AHT)O4A6TGTS(^S!HOAuT(OJA{T)OS(uJS6^AJH)OGA!HT{Y)SJAH))OJJTG(^J({(OAJ^{)e6HS(AAOHA(HO(JSu4){SAuJJH4S(4J6HGH!O(ATTJ(4AH%J(^AwHH(J4:H)O)AOHA^!J4HuOO4HH^O(JT{{^SA4{c(^A^HT((4!H4(GJ46S)T4JH4({4S{!)uJ(H(GT{).,ST{O)A)4^64^mJ^{4A(GGu4{SJuG)GS!uT{J6!^4u)6uS{4^e^G(4u6OuA16SGu!sTSOuAH!4(uG6BS)uSQuM!^G4)TuST!4T{Sz!t6GGS4O^!4TbS^u4<!J6^OA2)G64T;O^A^!!HH6OAuTTJO6!)TOJJ6H^G4!6T^O4AOH6uSJ6!GA4S6uGK^^ATTT(u!GH{^{AOTG!Z6JG{4)6SGu!/H)c4!{HuG!!T6O6u(TAOH!G!A{TOO{!HH)(AASHSO(Ju6u(6A!HTO(JT6h((JJ{T!OT4O6!GT!OT6OAG6HA6HJO{!)TS6!(6A({6(AJ({4)!J^HGG4JO{u)HS6iOAAH^O^A4H6TA)4JH{6)6S6{uOOJJu!)(HA(GA^H4(6(-S({!)TS4H4)HS^uS)AJO{SJTH^(4J6HG(!OTJOTAJ4{((JJ{H)T))GS!HO)!S)uXg4S)u46TSA4&(Y^JuAJO{()sJ^{4{u26^)44(JSJuucH^u)!SH{S)uS7JJu!y(^6)SS!{O)ASHJ{4^fu^Gu)SAuA)^S4u6{G64Gu446G^G4O6!u4))SSuuqsS^64!H(GuJoTSOuAASS(uJ?{^T44yu^bu^u464OQuu6HGS4O))^)4^6JG^}O^(43K^^4^6!6T^GH!JOASu!H6(4!6O^S4u6cs(O4A+TSG(!!))O!!ub{O^!uTGG)6!GC4^64G64G6!OTSO6^G^4(6JG{G{4HIAO)AOH{O4A(GS!(6OGA!H4-HA(4AHT)(!4HHS(TJ.H(SST{GO!ATHG(!JR{H(^ST!O:!^T4O6!GT!OT^OTSOH!(TJO{!)TS^u^)T(OSA6TGO!()A({G(^H_OJA{T)OSAuHBTJ{4HHOGA!HTOOAAHH)(GJH4O)ASHu(tA^^4T!GGHS)!AOHA(HO6SAu8)(SGHA)uSGu^)4SS{S)!AA{OgGS(uA)OSOu(JA{{(^J4{6H6ru^!uSJJ{{)6J){{()JS^!u6aJSS4R J{S)GJO{A)H(u^^uJ6A4S{TC)G54JZ4{)))ST{O)A)H^O4GrOGH4H6{^()OOJA{T)OSAuH}!^JTf6^Hu{))SSJ(4(6^G^!u)A^A4{6TG{LuS(uJ={S)uSpuGAJ^cJ^SuGo!^TSu!!T6GHATO{S64)6S4H6u^446aGR^G!AuTGS4!OTuOHA6(O4!6o^^4466^G4!u^)O4^6G^(4J6{DHOG!4T!OT!!THOA!GGu!Q6AGH4(A!TJ(46OO6!f6^G4O(JuH^OSA4T^O{AS(JOJA4H6!!TUG^!4T6GG!!uz-O!^TJG(!JT{6T(JJ6H)(OuJO{!)T!OT!O4SHA(HTG(%!)TSOu(6JJ{S(S{GHJ(!JT)A(AJu{tA!H!OSAuHQTO)uSuHO)^J^{G)4H4(4AJH{O)OHSHuH))J!{)()JG(uJGHA(HA(S^{uP6J)ouPH^buH)(S6uJ^TST{))S{6){J{H)(S(T^Ju(eSS4u(6w4THO)O^!)mJJ{{()JS{u)2S)A4){S4{!)TJOJu4T6H^GuJ(^S)u464^7)AS6{G)!ST{OuA:uA()GSG{))SSuJT4}x!GH6G(J^!4TSSuH)(SJu{))TSS^{YS(uO?6SGu!uT6T^J446O^G4)^T44ru^#u^!46TG(4A64G4!^6A!(4(6^G4qG^u48_^^446DG(^ST6UGu4Hg(^J^!!T6^O!!GTDOSH6pJGA!u6(O)64GH4J6{^)^)uJTJOA{AG{!H6!GT4O4GTA(4AOQ4O(JTGA!46^G4!6uOTS(4A4H(OATPGJ!{6)GS!u{DH!^4T{O{!!TTGO^(A)T)(4AOHO(6J{OHA4T4O6!G4SHH)6AO{u((JT{ (^A^{!AHH{O4A6TGT4){A({4(SSH{O(uJOOOJ6HDO^A4!{{((GJ4{4)GS4TS(SJ4{{)4HA(SA^H4(6OJS4u!;XJOTA)GSO{Ji6HG(uJWH^(4J6^GuTOT{F()JHH((JOSS({O7S^Hu.)S{{)SJ!{T(OO)SAuG)(^4uf#(SSHT6n^S4uB^^u)uS6{A)HJ(A)4H%O^()ASu{^)4S6J)4uzH^44{S4uH)JS{{)HO6{^G4S6Au{eJS!uT)O(^GT4S6AG4uTx)G4!u6DG{4{66uJ_TSOuA8HS(uJMG()uOw)^Zu^l4+4Su{(T{^(4G6GGH!!TA463S^u4P<^^4{64G)!4{hO^A4HF(^J{{!4)S4A6A^^4466s6G(!J,HOS!{T^G(64^)4S6uGL4^64^6S^6SG44O6AGHGu!SH!O)6OGG!R6^G4O!A(H4O)4)m)^uT6vH!{6)GS^!JuHTJ444HHO({((O^SAAHHJJ4JH4(6u6)8^GJ{{u(u{!6{(TAO)HGHJdH^S^{STu(6JOH!(uJu{S(!{O6O(SJuVuS{!GuH)JJA{{(JJT{AS!!!{{()H4(AAJH{O)OGJ4{(()Su{(SGA!{!>6HS(HA(HJ({A)HS<JOVHO(4J6HG(!JTHOTGOH{o(JJ{H)(SJuGKuGO4{{)JJ!{T(O(SSAuT^JA^uA)^^H4{^^A!u)6p{S)!JO{A)H({^^uuXGS))A^6{^)4S6JG4H3H^-uOr^^O4uwA^{4G(A^)4!6uGHT)SS4A)OSAuH{pFS^!4S66G!4)TDG{4uW>GJ4H6^G^!H-)G^4J6O^O!(^H4u 4^6uGu^6!Ou!G)uOH!OTAG(!A^!4_}^^446rG^!J^{O^^!T<(^J4{u6TJO!!{TVOA4{Tu(6!!&OO6A^THOu64^)4S6uGs4^O4TSSG6SGS4O6AGHG6ASHJOAAGH!OuA!GJ!!6GG!!T4OTJ(uAHH!(ATTG(!uT:G^G{ATHJOGTuOA!ATHG(^^J4H()6JH).GAJu{4()AGO{!OTAOH!(TJO{OA4SO!A-T^O4A6TG6!(T4OO^J{T(OJA{!G6^GJ!u)^GAAS)GOSATTGO4!STHG^AHT6AOHJ(tA^H4T()^S^{SA)4^64G64G6!GT6OT{JTH^(4J6HG(!uTJ)TAJuH((JJ{H)(SJu!(S^JJ{J(GJ!{THd)J^H4!)^Su46)^{A))J^{4)6(G^HuH:3SOu^5O^uuA,{^G{J.uGH4SSH{G)!ST{O)ASHAT^JS4{))SSuut)^(4^4HGSSuJ)OSAuH43<(^J6)3)^G4!S(uG06SGu!uG)4G44!6HO69!^OuS0u^MS(!uT4G(4S6!^+4JT6O6{^THG^4(^A4Gw^^446{(TGG{4)T{GAA6))O4!zT!GS6H^)4466^G^S!^H!GO64G!4J6{^)^(!SHAO)u)T)OGAGH44)6AGH4(6JG{4)AHMu!HT^G4!66GdJOHA9HHOSJFHA(JAOT(^AA)H!(uJH))!STGGO!ATHTTO(JG{HGOAAH6(!A^Hu!)HAOT!OTATF(OJ({!({4G{S){J){u()uO6S((J4H^((HvOJA{T)OSAuHz6JG4HHOGA!HTOOAAHHTGGJH!(AASHu(nO6Su{{R6SST()GS^u!J6HO({A)HSTO))S!{^J{{u(!JTHOHG)A^4uO( Sp{G)SSG((S{{6(GJ!J4{(}SS{uG#O^Ju^)^4uHA)G^OuGJ)u6)TJO{A{!D!^O4g/{J4u4*T^Y4TSH{G)!ST{O)AyH^^HJS4{))SSuu7)^T4^!HGSSuG)OSAuHu66AGJ!6rO^SuHXGG{!{S)u(BTSOuA{46OG!!T6{^O!J^H4Jf4^6uGu^T^GO4OOHGH!*6^!)!A64GO!.).4{6A^!4TMO)^OTA+T!GJA6rGG4!{T{O^A{^)!u6T^O4A4HHiGSAOTAOA!G(<^A!!T)(XA:Hu!p6)GH4(6JT4({A6(uOuATTO!{THG!!T6O6!(4JTH^OOATHT!!TDG^!4T6GG!!TTGO!^T!G(!JT{THO)JO{{!OT4O6!GT!OT!OA46HA?TJO{!)TSOuLM!G64AHG4!I6^G4!66G6!6AA!T)OSAuHBO(J{H6OGA!!!T{G)uHHZGSATTHOJATTJ(u!^HHA)HO(TAOHAH!)OS({!)nSA(!J,H^(4J6HG4!OO!O(^JGH((JJ{AG{^)(S(H6.ASTuJ)G{u)6JA{H((((AAuAr!{A)(J^{4)6O(^H4!1T4AHSn!SS4T6H4SH4M(^)))S6{G)!SS{O)ASHu6)OS{{))S)u^GuG6)u{fGS!uT)O(S^{466{^^!66JGS4(e)JJ!y6AG4!{(PuSJO{!)TJO{A)HG(()uO34^6uGi!^T^O4S)H467)^{u)DS)AG)!!TuOHH)^S4J&O^A4H!{T^OH!G?GSGuT^O4466^G4!6T^OJGuHGV4J6{^)4S6uSWOSu4G64G6!GT!G6AGH4(6J4^4)6SGu!Z6^G4!66G(6!T6(GA!{6(GJ!{6)O{!uTTG^!4T6GO!!H{OS!AT4G(!(T{G)!S{u(u!^TJO6!)T!OA!OHSO4!(TOO{A!TSOuACHOO^A6H6O!AJTOOAAH{auAA{HuOSAJH%O^A4H6d(A!HuOOA(HH(pAJ{{(OASH!(<AOH4({AG{J)uAOH^(HJ6HJ({A)HS)TJxH^(4J{HG(JJTuO((JHH)(JJ{H)(^Ju{V)!J4{T(GJJ{T((JA{H5^JJ{{()J^{u)hJ^{4)4JG{!)TJ){A)HJ({J){J)HSH{SHu/)4S6{G4H66G{uO6uu6)OS{{))S6T^64)Z(u{cTS!uT)O6S^{4GUOGH4GSOu^i?S^u4!{TzGJ4^6^^)BHS(uJ>{GuuSEu^04OQ!^6uO0!^!uO0A^H!(z)^{4F+S^44r O^4466T^!4{,O^A4H_(^J4{6O^S4463^O446H^G4!6^^O4S6H^(4J6{^)4SH6G74O64GH4G6AGT!HHuGH!36JGO4)6^Gu!66^GSH^6GG!!TT4GA!{6(GOH(6)GS!uTGG^!!T6GGOGTTG)!ATHG(!JT{G):TTuOT!^TAO6!OT!OTO6TAOu!(T^O{!)TS(!TOT^OAA6T)O!ATTO)AHTT(O^A{H6OSAJH8(OA(H6O)A!HHOOAAHHO(AOH{(HASH4(rA^H4(6JJH!(4AOHG(HA(HJ({J4HS(!JDH)(4JHHG(!STHO(^JHH)(JJ{H)(SSA{.((J4{{(GJJ{T(O(G{H)6JJ{4()JS{u)8G4{4)6JG{A)TJO{A){^O{J){J){O5SS2{^)4(4^S4^l!^)6A*A^u4cG{GH!H6u^u6^<G^S4(6SG46(S^u!)(SJu{{)64^4!JS(u)C6SGu!{u6GGu!H6S^(!A6{^(CA^Hu^*4^6GS4GTJu)}A^Hu(nJ^{6)44)u4H3)^446+G;SG^A!6O446A^J4{Z)i(GSAAT)SJAsTAO4A{)%4S6H^(4J6{^)4S6uG,4(T4G64G6!64OTJDH!GTA^TuOOAOHuO6AOT^O)!){r!uTTGA!H6(iG(HA^HJ(!THO6!4T6GG(JAHH^OGJTH^!^T{G)!STuOB)^JG66!(G64^64G64G6!)T6HATH!OuA9T^6J)nJA{4){A?HO){SHH()TJTH)A!HPO^A4H6OGA!6T6GA^H!O(AJH{{G(^SJ{AAOH4(6AGH!(TAOTATTJsHJ({A)HS(uJL!TT4J{{T(!JTHOT^qTSSuAL4!T(OJG{?(^J4S!u(+4S)H)O)Au)6JO{{()JSJJuu6H^S)HJG{!)TJO{A)HJ(AJ)4OT!OTAOH!(TJ!{A^)JST{O)ASH{(OJ6HA))OSuu/)^S4u{n{S!uT)O)SGT!T:SGA4A6JGHiH^eu4F6SGSG{464GuHu^n)HJO{A)HJ({J6{{u^{!6.!^TuO{^TTGS!AT4^T4)T4Ou!8T{G{!6fTG!A4TAOT!!T!OA6TG64u69^^SJAYTSOu!!T&OG64GT4J6{^)(6!4TJO)6JG64G6!GS4O6AGH!h6JG{4)6SGu!8u{b4!{T?G!!T6O6AO)!){T!4^J4H?(^J4{c)OSC^!JTTGO!ATHG(!JT{G)!OTAOf!^T4H)(6J(OuA6TAOH!(!GHO)JA)O!A.T^O4A6TGO!(-4OO^AAT(OJA{A{6(((JOaOA4H6OGA!{TOOAAHHO(HwH{O)ASHu(nA^H4(6JGH!(HAOHJ(HA(HJ({JAHS(!JZH^(4JTHG)JSJHO(^JH{4(JJ{H)zSS6{s((J4{{(GJG{T))S^{H)TJJ{A()JS{u8TS4{4)4JG{()TJO{A_u6O{J)SJ){()uSf{^VATh{G)(ST{()ASH{()JO4{))OSuu!)^SAu6,GS)uT))SAuJ)(SGu{66^SuuIHS^uJV6SGu! T^)uAyHS(uGr{^6uSTuG4u^Y!^6uGB!^{uO5AGOu(>S^{46LS^44KX^^^46QG^!4HWO^A4H>(^^4{=)^S4A6A^^4466x(O4A46(OG!GTOO!64^)4S6uGy4^64G64G6!GT4O6AG44(6JG{4)!)Gu!76^G4!66GG!ST{GGA!H6(GS!{T6GS!u{^G^!4T6GO!!TTGO!AT^G(!JT{OTASTuOQ!^!SH4){J^T4()AJ{6)6JJHu)6A){H(HS{OJAATGO!ATJH{S)TJ^T^G^!6OGAuH}O^A4H6OGA!HT(LAGHHO(AJAA{{FTSJ(HJuH4(6AGA^{!7uSGT4)OSuuHN64O(AJ{H^(4J6AGuH)H^4(^JJH((JJ{ATuJ;6S)uOGJ{HA4H7O^A4H6OG^!OA{{()JS{uF{J^{4)6JGSG)TJO{A)HJ({J){J)S))uS6{^)!S6{G)!^T0J)ASH{()OS{uP)SSuOu)^S4u6)GS!uT)O^SuS)(SSu{/4SSuu_RG^4!s6SOu!UHSOuS?HG?u(I{^6uSoA^wu^F4GH4^*!^uuO,^^Hu(%JG44^US^J4%r(^446#G^!!{bO^J4H6T^J44k)GS)66z^^4464^G4A6T^OAH6H^(4J64^)4S6uG9AA64GT4G6!GT4O6AGH4)6JG44)6SGu!66^)4A^6GGJ!T6(GA!46(O^AH6)GO!uTAG^!4T6GGAJTTGO!AT4G(!^T{()KHTuO6!^T4O6ATT!OTH4TAO{!(T^O{A=TSOuS^T^O4A6TOO!ATTOOA){T(OJA{T)H)AuH5O^A4H6OGA!uTu!AAHHO(AJH{){ASu^6HA^H4(6J6H!(HAOu6(HJT:H({A)HS(SJ5HG(4Ju<4(!JTHOW!JHH)(JJ{S{(SJ4{y(GJ4{6(G^!JA(OJJ{H()JJuJ()JS{J)mJO{4)TJG{!)TGOu))HS7{J3JJ){^)uSs{O)4SH{G)AST{O)A^u4!)JS!{)+OSuu+)^G44{)GSSuTwwSA4!)(^^!6))S(uu6AS^u4.6^(O4rT^TuA7^S(uJ={G6AS:u^4u^.(^6uG-!^T4(0A^4u(Z)^{46_SGu!JU^^A466H^!4u.OGS4J/(^^4{T(^S4u6tGO!J66^)4!TH^O4A6H^(4G6{G64S6!Gy4G64G64(6!G{4O6JGH4(6JO{T^6SG!!?HiG4!T6GG!)!6OGS!H6)GJ!{6)OGA)TNG(!4H{GG!!TT(OJpTHO6!JT!G)A(Tu(TATT4Ou!GT)OT!OTA(uJJTJOJ!)HTOuABT^(AAJTGOOATHuOAAHT(OJJ6T)OOAuH4O^AAH6(G{HHTO)AAHSO(AGH{O)^uHu(kA^H!(6AGH!(T)THA({A(H^({A)HS(uL6H^(AJ6H)(!JTHO(AS{H((GJ{H)(SJ4{B)OJ({6)=J!uO(OJA{H5(JO{{)HJS{J)2J){4BHSO{!)!JOuU)HJ({J=4^4{S)^SDu0)4S6{G%JSG{O))SHu4)JS{{)XGT{u2,HS44H)GS!uT)Ol(uHtTSJuG))SGuu6UGwu4X{SGuO:T^6uA6u^{uJ5AS)!4du^ou^x4GuuGIA^T46xA^uu(TJGuu)kG^u46#^^A46gGGu4Tq)^A4u5(^S4{T)GT4u6T^^4!66^)4!HT{44A6u^(4^6{OO4S6^GA4^6SG64G6!GH4O6SGH4(GTG{4)6SG!!Y6^G4!6GuG!!T6OG^!H6(GJ!{J4GS!!TnG)!4TTGG!!HuGO!STHO*!JT{G)!S{TOz!(T4Ou!GT!OT!OH6OHATTJO{!)T^Ou^W{4O4AuTG)6ATHJOAJuHTOJAJT)(JAuHlO^A4{SOGAJHT(TAAHuO(SJ^OO)AOHu(TA^HA(6AG)?(TJ<HA(uA(HS({S)^{(uJHH^(AJ6H)(!^TG4(AJ4H((GJ{uO(SJ^{A(^J^{6(OJ!{H(OJJ{H(({T{{()JS{J)lJ^{4)64!{!)uJO{O)HJ){Jd4^J{S)ASy4S)4S6{G1J^){O)GSH4u)JS{{))SGTu_)(S4uH)GSAuT)O^JuH+6SJuJ))SSuuh%G!u4puSGu!.TSOuALH^CuJP!S)uGLu^Tu^6A6(uGM^^T4OiA^Hu(TJGHu)l(^u4{Q^G6466(Om4T6T^A!{Y(^J4{C)^O4u64^^4J66^G4!6T^)4A6!^(4)6{G64S6uG^4^6^G64)6!G44O6AOH4(6)G{!u6SGu!b6^O!!6THG!!T6OGA!H6(O!!{TuGS!!TZGO!4T6Y!!!TJGO!)THG(!JH4(S!STOOEAJT4O6!G{!(T!OH.OHA4TJOA!)TS)TAlH{O4ATTGO!ATH)OGAHHAOJS6T)OSAuui(!A4H^OGJ6HT(6AA{u)^AJH)O)JTHu(rA^u4u^AG{H(TJHHA){A(HJTHA){{(uJGH^(AJ6{()SJT{A(A^KH((JJ{u))JJu{^(^S6{6)%J!u{()JA{)((SS{{()JS4u)SJ^uH)6ST{!.AJO{A&OJ(u{){SG{S)uSi{^)OS6uu)!ST{O)JSH{(HSS{u!)SS!uv)OS446AAS!uJ)O^TuHX4SJu{*{SSuGfxSOu4D6SGu!6uSO4kFHS)uJ2{S)uS:S^M4{m4^6uGRA^TAOT6^H4!,J^Ou)6^^u!TTT^44^MGG{4TCO^A4H6(^J4^9)G{4u6T^^A4JS^G4)6TG{4A6u^(4JGO^)!T6uGT4^6!G6AGJ6GT!u6AGS4(6GG{A)SHGu!A6^G(!6HSG!!ATuGA!O6(G^!{T0GS!AT/G^6)T6GG!!THGO!ATHG(ApT{G)!STSOk!^T4O6TuT!OT!OTSOH!(TJO{S6TSOOA=HuO4ATTGO!SOTOOAAHT)OJA{T)OSA^HBO^A4HHOGA!HTOOAA6H{OGJH!()ASHu(CGOJ!{{)!J(u{)GSOu6)T!GuH)^SJu!GHHOAUTSOuA>T^O4^6OT{6)YJ{H)(S)^^TuS7HJHHHOJ{u)6JA{H(((J^FuZ6H{A)4J^{4)6O)^4u(eG^ST4J({J){J)uJ)uSZ{^)4{A{G)!ST{O)ASH{()JS!{))^Suu6)^S4u6)GSGuT))SAuH)(SSu{66S(uu}HS^uGa6SGu!TTG{uAt4S(uG5{^HuS6!^)u^sS^6uO,!^TuO6S^^u(8(^{4=lS^u436OHu466T^!4HcO^A4HC((^4{6T^S4^6&^O44T6GG4!6{^O4S6HG64JT4GA4S6AG24(64G64G6!OS4O6AGH!66JG44)HSG)!n6GG4!66GGG!T6OGJ!H6)GJ!46)G^!uTg(H!4T6GG!ATTGO!ATHOu!JT{G)!OTGOE!^T4H!((J4H)G)4)6uA6TOO{!)TSTu(GAG{)AHTGO!ATTOOAAHJ!6JA!HuOSAuHR6()uJO{^)J4u(EJAHHO(AJ!4{+(OSq{!)OSuu4)SJ^Tu)GS{uTI,4G(4TJOH!(TJO{!)uS!^(JJTHO(AJHH(GJLH!)(SJu{:(^Su{6(GJ!{TJ{JA{H((JJ{{()JS{u)AJ^{!)6JO{!)TJO{Ai(J({^){J){S)4S%uO66S6{))!S4{O)ASH4()SS{uT)SSAuW)GS44H8yS!u4)OS)uH)(SJ446uSSuS c^Tu4/6SG4JA6SOu(7H^6uJL{S)uSH!^eu(+4^!uGXJ^T4O6)^H4drJ^Ju)<O^u!T6T^44{;G^O4T O^A4HTi^J4{n)^O4u6T^^A4TO^G4A6T^O4A6u^(4JT{^)4^6uGT4^6!G64GTHGT4O6AG{4(6JG{4)6SGu!16^G4!66GG!!!6OGA!HT{Ju!{6)GS!JT*GG!4T6GG!^(GGO!ATHOT!JTuG)!SASOE!GT4O6!GT!OT!O()OH!)TJOu!)T^OuAWu4O4A6TGOAATTOOAA{HoOJA{T)OOASHLO^A4JO{^)(J!{)A^HJO(AJH{uT)(S!{J)JJO(6AGH!(TJ^HA(HA({^4TA)H^(uJTH^(4J6uG)SJTH((AJ{H((SJ{H)(OJu{T(^J4{6(GJ!{T))JA{{((J^{{)6JS{u)HJ^{A)6JG{!)TJO{A9uJ({^){S6{S)4Seu6)SS6{()!SO{O)JSH{()JSA6J)SSuucR4S4uT)GS!^!)OSSuH)(SJu{))SSOOdvSOu4KHSGuA9TSOSGwH^tuJF4S)uS_u^3G3 4^HuG-A^TuOMA^H^TQJ^4u)hG^u4U-^^4AGtG^!4Td(^A4H-(^S4Ge)^S4u6H^(4466^G^4A!H64^6(^(4J6{P{G^AATJOJ!O6{(_JeT(OT6^G!4(6JG{G,A)T4O{6(Ou!66GG!^!!(H^OGAGHs^AAAHGOSAHH)O)JhHS!STAGO!ATH66(^AJH0((ASOH!)T4O6!G4G{*)TJuO4A6TJO{!)JAHS)!T(O)A6TGO!O4S{HO(AJGTT)TJu{JAuHDO^A4{HOGA!HT()TGHH(6AJHGO)ASHu#lA)H4({AGHS(TJ{HA(HJTHJ(AA)HG(uJbH^)ASSHG(GJT{H(AJHH(PJS{H)()Ju{u(^JA{6lGSu{T)TJA{A((JG{{?6S({u)4J^{G)6JG{!6TSt{A)JJ({)){SH{S6u^^{^)GS6uT)!SH{O)A^G{()GS{uu)SS!uI)^y^u6 fS!uT)OSAuH6(^(u{pHSSuJ.r^nu4r6^Au!eASOuA2HS(uJy{^^uSBG^_u(.4^6uG=!GAuO6U^Hu)zJ^{u)+S^A4Vm)^44JrG^J4T/OGu4H6T^J44#)^S4u6FGO4466^G4A6T^O4A64G44J6{^)4OTuG*4^64bHGO!STOO{ASHT(HA!TA^TAJH6O)AO)J!{TTG!!T6Or^(TASHA(4uTGG_)^J4{n)^S4u{e46G)!ATHG(!JT{G)!STuOH!)T4O6!G!!H(O(S6Ou!(TJO{!)TS6uO64^OAA6TGO!ATTO^A)T4(OGA^T)OSAuJ4{O)uJ(T(G(!{OOAAHHO(JAH{O)ASHuA!A^H4(6AGH!(TAOHA)GA(HS({JiHS(uJUH^(^J6H((!JTHO(JJHuzf;J{{T(SJ!{s(^J446)AJ!{u(OJ^{H)4JJu4){JS{J)UST{4)6JGuJ>OJO{O)HS{{J){J)uG!{SDu6)4Su{G)!ST{OTSSHu6)JSS{))GSu4P6TS4uH)GSAuTN%SA4ut)SJu!))SOuup/S^u4t)SGu!}T^:uAbuS(!J}uS)u^iu^Wu^5^^6uG6H^Tu(MA^uu(cS^{u)6G^u4c8^^!46NG^!4TJ!^^4Hx(G^Y4 )^S4uHT^^4466OG4^6T^O4A6H^(A{6{O6!u6uG64^4TG64G6!GTAu6AGH4(6^G{!66S)u!^6^G4!6!6G!)!6OOSAA6(GS!{{OGS!uTB(^AST6GO!!THGOJHTH(_H^T{O6!SS6O0!^T4(H!(T!Ou!OJ=OH!(TJ(4A4TSOJACS!O4A6TG(JJ(TOOOAH!AOJA{T)OSJ6HsOGA4H4OGAJHT(OJTHHO(AJJSO)A^Hu)TSnH4(TAG4u(TAOHA,HEHHJ(uA)H^(uS^H^)ASuHG(JJT^J(AJHH()^JuH)(OJuuJ(^J4{6)(SA{T)6JA^)((JJ{{06SH{u)uJ^u))6JG{!)TST{A){J({(){S6{SmuSS{^)4S6u))!SH{OwS9!{()SS{4O)SSuu_6^^uu6)OS!uH)O(OuH6x^Su{D6SSuGC&S^u46HG6u!VuSOu)UHS(uJ64^iuSdJ^IO!,4^6uGM!^HuOQJ^H4TZJ^4u)6S^S4<K^^4GSpG^A4THO(!4H=(^J^uU)H44u{9(S4466^GJ!6TGO4A{H(O4J6{^)A{6uOL4^64T44G6AGT4O6AGH4(TJ0!4)6SGuG{6^G!!6T(({!T6(GAJu6(GJ!{H)({!uT6G^!!T6(!!!H{G)!ATuG(!(T{G)!STuO6!^T!O6!(T!O{!OHS(6!(T^O{3uTSOuAt{^OAA6T(O!A{TO)HAH{buAA{HTOSe6H-O^A4{HHSA!H4OOSuHHO(AJH{)!ASH!(mA)H4(HAG{!()AOHJ(H04HJ(4A){S)AJ.HG(4(uHG(!JT{))(JH{}(J^4H)(SJu4?(OJ4{H(GJJ{TaAJAuu)HJJ{!()OJ{u):J^{4HTJG{J)TJ){A)uJ(u^;!J){O)uOO{^)4S64G66STu0)AS4{(6{S{{)+TSuu{)^SJu6)GS!4{6ASAuA)(^!u{))SS!un(S^u^<6^6u!6OSO4S6SS(u)B{T^uS;u^&4O6{^64Hx!OtuO5A^H!(T8^{44iS^G4BuY^4!H6G^!4SaO^)4Hl(^J!46J^S4(6tGT4466^G!JT4^O!T6HHS4J6{^)4STSG<!T64G^4G6!GT4O6AGH!H6JG{4)6GGuATTJG4!!6GOu!T6OGAJHHJGJ!S6)O2!uH^G^AAH!GG!(TT(6!ATHG(A^TAG)ATTu((!^T4O6JGH!OTAuTAO^!(4(O{J6HHOuAJT^OOA6TGO!J{SGOAAOT({6A{T)OSJ!S)O^J6H6uAA!HTOOAAS(O(J6H{(SASHu(UA^H4(6JTH!(TAOHS(HSM{G({J4HS)HJdH^(4^6uH(!JJHO()JHuJ(JS4{S(SJO{n{4J4{6(GSJuT(OS6{HlGJJ{{()^SuH)XS{{4)SJGAG)TS){O)HSA{J)^J){S)u^TGS)4SG{GuHST{O)A^uGO)J^_{)!4Suu8)^S4GG)G^yuTcJSAuH)(SJu{))^6uuCyS^uAx6^(uOET^uuA66S(uJX{G)!u>u^Au^=(^6!!/!G{!A>A^Gu({G^{u)_SG!4Jw^G%46TS^!4TZOOA!H*(GH4{6J^SSS6qGO!T66G!4!6J^O4A6HOdS66{G^4S6GG.4^64OH!T6!G)4OH6GH4(6JG{AH6SG)!eTAG4!66GG!A66OO.!H6(GJ!{6)GSA{TCG)!4T6GG!ATTGO^JTHO6!JT4G)!GTu(VBST4OH!G4HOTA=TAfHAJTJO4!){^OuAOT^(4JSTGOJATA6OAAHT((^A^T)OOAuuTO^A4H6)GS{HT(nAAH4O(S{H{)6A(Hu({A^AT(6AGH!(TJ(HA(4A(H^({J6HS6uJTH^(JJ6J6(!)!HO)SS!H((OJ{4O(SJu{kB^JO{6)dJ!{4(O^H{HykS-{{){JSAA)}J^{4FHSG{!)AJOG{)HJ({J 4^Y{S)GS*A()4S6{GMJ^A{ON3SHGS)JS{{))SOHuD))S4uJ)GSJuTUOSOuHm6SJ^S))S(uu6TG!u4huSGAu8TSOuATH^OuJ>AS)u(?uG^u^6A^!uG8G^TOJmA^Hu(6^G{u)6d^uOG<^^4466(G!4T6{^AO)N(^J4{T6HJ4u6A^^(T66^G4!6T{H4A6!^(!66{G64STu!G4^6JG6!)6!G44O{AHH4(6GG{^O6S{u!B{^GA!66)G!GH6O{{!HT(GG!{TTGSGJTeG^!4HHO{!!T4GOJSTHG(!J{{(S!STJOU!)T4(G!GHJ()!OTOOHAHTJO{!)TSO4ANT)O4AHTGOJATH)AuAHHHOJ;ST)OSAuuzS^A4H4OGAGHT)AAA{u(JAJHSO)74Hu(5A^{A){AGH((TSSHA(HA(HJciA)H)(uJ!H^(AJ6{G)HJT{6(AE^H(((J{{))6Ju{{(^(S{6()J!u{){JA{A((^^{{()JS4u4SJ^{^)6S6{!DOJOuS4uJ({)){O({S)uSZ{^;SS6u6)!S{{O)SSH4lt)S{uu)S(TuZ)^S4!66JS!uA)OS(uH6JSJu{6^SSuGalSOu4F6SG4JpuSO48dH^GuJq{S)!S6)^o4Hb4^JuGTT^T4)A!^H4!_JHvu)VS^u!T4S^44^rGOu4TpO^AAH6(^J4(0)G{4uuu^^!ATJ^G!T6T)O4A6H^(!^H6^)!46u6T4^64G6!(TOGT!S6AH44(6JG{4)6OGu!S6^OH!66GG!!T6(GA!^6(GJ!{T6GSA!GOG^!)T6OS!!TTGOJAO!G(ATT{OA!S{kOIAOHHO6A4T!O^!OTAOHJrH)O{AST
+-- Enhanced Egg Randomizer GUI Script with Specific Pet Pools (SpongeBob Theme)
+-- Place this in StarterPlayerScripts or StarterGui
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "EggRandomizerGui"
+screenGui.Parent = playerGui
+
+-- Loading Screen Frame (small like the menu but made taller for reminder)
+local loadingFrame = Instance.new("Frame")
+loadingFrame.Name = "LoadingFrame"
+loadingFrame.Size = UDim2.new(0, 300, 0, 150)
+loadingFrame.Position = UDim2.new(0, 50, 0, 50)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+loadingFrame.BorderSizePixel = 0
+loadingFrame.Active = true
+loadingFrame.Draggable = true
+loadingFrame.Parent = screenGui
+
+local loadingCorner = Instance.new("UICorner")
+loadingCorner.CornerRadius = UDim.new(0, 15)
+loadingCorner.Parent = loadingFrame
+
+-- Loading Text with Rainbow Colors
+local loadingText = Instance.new("TextLabel")
+loadingText.Name = "LoadingText"
+loadingText.Size = UDim2.new(1, -20, 0, 30)
+loadingText.Position = UDim2.new(0, 10, 0, 10)
+loadingText.BackgroundTransparency = 1
+loadingText.Text = "Loading... 0%"
+loadingText.TextColor3 = Color3.fromRGB(255, 0, 0)
+loadingText.TextScaled = true
+loadingText.Font = Enum.Font.SourceSansBold
+loadingText.Parent = loadingFrame
+
+-- Reminder Message
+local reminderText = Instance.new("TextLabel")
+reminderText.Name = "ReminderText"
+reminderText.Size = UDim2.new(1, -20, 0, 40)
+reminderText.Position = UDim2.new(0, 10, 0, 45)
+reminderText.BackgroundTransparency = 1
+reminderText.Text = "PLEASE WAIT TILL THE MENU APPEAR DON'T BE RUSH!"
+reminderText.TextColor3 = Color3.fromRGB(255, 0, 0)
+reminderText.TextScaled = true
+reminderText.Font = Enum.Font.SourceSansBold
+reminderText.TextWrapped = true
+reminderText.Parent = loadingFrame
+
+-- Loading Bar Background
+local barBg = Instance.new("Frame")
+barBg.Name = "BarBackground"
+barBg.Size = UDim2.new(1, -40, 0, 20)
+barBg.Position = UDim2.new(0, 20, 0, 95)
+barBg.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+barBg.BorderSizePixel = 0
+barBg.Parent = loadingFrame
+
+local barCorner = Instance.new("UICorner")
+barCorner.CornerRadius = UDim.new(0, 10)
+barCorner.Parent = barBg
+
+-- Loading Bar Fill
+local barFill = Instance.new("Frame")
+barFill.Name = "BarFill"
+barFill.Size = UDim2.new(0, 0, 1, 0)
+barFill.Position = UDim2.new(0, 0, 0, 0)
+barFill.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+barFill.BorderSizePixel = 0
+barFill.Parent = barBg
+
+local fillCorner = Instance.new("UICorner")
+fillCorner.CornerRadius = UDim.new(0, 10)
+fillCorner.Parent = barFill
+
+-- Rainbow Colors Array
+local rainbowColors = {
+    Color3.fromRGB(255, 0, 0),     -- Red
+    Color3.fromRGB(255, 165, 0),   -- Orange
+    Color3.fromRGB(255, 255, 0),   -- Yellow
+    Color3.fromRGB(0, 255, 0),     -- Green
+    Color3.fromRGB(0, 0, 255),     -- Blue
+    Color3.fromRGB(75, 0, 130),    -- Indigo
+    Color3.fromRGB(148, 0, 211),   -- Violet
+    Color3.fromRGB(255, 20, 147),  -- Deep Pink
+    Color3.fromRGB(0, 255, 255),   -- Cyan
+    Color3.fromRGB(255, 0, 255)    -- Magenta
+}
+
+-- Loading Function with slow counting
+local function startLoading()
+    local currentPercent = 0
+    local colorIndex = 1
+    
+    -- Function to update rainbow color
+    local function updateRainbowColor()
+        loadingText.TextColor3 = rainbowColors[colorIndex]
+        colorIndex = colorIndex + 1
+        if colorIndex > #rainbowColors then
+            colorIndex = 1
+        end
+    end
+    
+    -- Start rainbow color cycling
+    spawn(function()
+        while currentPercent < 100 do
+            updateRainbowColor()
+            wait(0.5) -- Change color every 0.5 seconds for smooth rainbow effect
+        end
+    end)
+    
+    -- Slow counting - every 10 seconds increases by 10%
+    for i = 1, 10 do
+        wait(10) -- Wait 10 seconds
+        currentPercent = i * 10
+        loadingText.Text = "Loading... " .. currentPercent .. "%"
+        barFill.Size = UDim2.new(currentPercent/100, 0, 1, 0)
+    end
+    
+    -- Hide loading screen
+    loadingFrame.Visible = false
+    
+    -- Show main menu
+    createMainMenu()
+end
+
+-- Main Menu Function (your original code)
+function createMainMenu()
+    -- Main Frame (made taller to accommodate new elements)
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Name = "MainFrame"
+    mainFrame.Size = UDim2.new(0, 200, 0, 280)
+    mainFrame.Position = UDim2.new(0, 50, 0, 50)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Active = true
+    mainFrame.Draggable = true
+    mainFrame.Parent = screenGui
+
+    -- Add corner rounding
+    local mainCorner = Instance.new("UICorner")
+    mainCorner.CornerRadius = UDim.new(0, 15)
+    mainCorner.Parent = mainFrame
+
+    -- Add SpongeBob gradient background
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)),
+        ColorSequenceKeypoint.new(0.3, Color3.fromRGB(255, 200, 0)),
+        ColorSequenceKeypoint.new(0.6, Color3.fromRGB(255, 150, 0)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 50))
+    })
+    gradient.Rotation = 45
+    gradient.Parent = mainFrame
+
+    -- Add underwater bubbles effect
+    local bubblesFrame = Instance.new("Frame")
+    bubblesFrame.Name = "BubblesFrame"
+    bubblesFrame.Size = UDim2.new(1, 0, 1, 0)
+    bubblesFrame.Position = UDim2.new(0, 0, 0, 0)
+    bubblesFrame.BackgroundTransparency = 0.8
+    bubblesFrame.BorderSizePixel = 0
+    bubblesFrame.Parent = mainFrame
+
+    -- Bubbles corner rounding
+    local bubblesCorner = Instance.new("UICorner")
+    bubblesCorner.CornerRadius = UDim.new(0, 15)
+    bubblesCorner.Parent = bubblesFrame
+
+    -- Bubbles gradient for underwater effect
+    local bubblesGradient = Instance.new("UIGradient")
+    bubblesGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(135, 206, 235)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 191, 255)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(70, 130, 180))
+    })
+    bubblesGradient.Rotation = 90
+    bubblesGradient.Parent = bubblesFrame
+
+    -- SpongeBob Image (placeholder using a yellow frame with holes pattern)
+    local spongeBobFrame = Instance.new("Frame")
+    spongeBobFrame.Name = "SpongeBobFrame"
+    spongeBobFrame.Size = UDim2.new(0, 40, 0, 40)
+    spongeBobFrame.Position = UDim2.new(0, 10, 0, 5)
+    spongeBobFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+    spongeBobFrame.BorderSizePixel = 2
+    spongeBobFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    spongeBobFrame.ZIndex = 3
+    spongeBobFrame.Parent = mainFrame
+
+    -- SpongeBob corner rounding
+    local spongeBobCorner = Instance.new("UICorner")
+    spongeBobCorner.CornerRadius = UDim.new(0, 8)
+    spongeBobCorner.Parent = spongeBobFrame
+
+    -- Add holes to make it look like SpongeBob (using small circles)
+    for i = 1, 6 do
+        local hole = Instance.new("Frame")
+        hole.Name = "Hole" .. i
+        hole.Size = UDim2.new(0, 6, 0, 6)
+        hole.Position = UDim2.new(0, math.random(5, 30), 0, math.random(5, 30))
+        hole.BackgroundColor3 = Color3.fromRGB(200, 200, 0)
+        hole.BorderSizePixel = 0
+        hole.ZIndex = 4
+        hole.Parent = spongeBobFrame
+        
+        local holeCorner = Instance.new("UICorner")
+        holeCorner.CornerRadius = UDim.new(0.5, 0)
+        holeCorner.Parent = hole
+    end
+
+    -- Title Label
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Name = "TitleLabel"
+    titleLabel.Size = UDim2.new(1, -60, 0, 30)
+    titleLabel.Position = UDim2.new(0, 55, 0, 5)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "EGG RANDOMIZER"
+    titleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    titleLabel.TextScaled = true
+    titleLabel.Font = Enum.Font.SourceSansBold
+    titleLabel.ZIndex = 2
+    titleLabel.Parent = mainFrame
+
+    -- Egg Display Frame
+    local eggFrame = Instance.new("Frame")
+    eggFrame.Name = "EggFrame"
+    eggFrame.Size = UDim2.new(0, 60, 0, 60)
+    eggFrame.Position = UDim2.new(0.5, -30, 0, 50)
+    eggFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    eggFrame.BorderSizePixel = 0
+    eggFrame.ZIndex = 2
+    eggFrame.Parent = mainFrame
+
+    -- Egg corner rounding
+    local eggCorner = Instance.new("UICorner")
+    eggCorner.CornerRadius = UDim.new(0.5, 0)
+    eggCorner.Parent = eggFrame
+
+    -- Egg gradient
+    local eggGradient = Instance.new("UIGradient")
+    eggGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 220, 180)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 180, 120))
+    })
+    eggGradient.Rotation = 90
+    eggGradient.Parent = eggFrame
+
+    -- Pet Name Label
+    local petNameLabel = Instance.new("TextLabel")
+    petNameLabel.Name = "PetNameLabel"
+    petNameLabel.Size = UDim2.new(1, -20, 0, 25)
+    petNameLabel.Position = UDim2.new(0, 10, 0, 120)
+    petNameLabel.BackgroundTransparency = 1
+    petNameLabel.Text = "Mystery Pet"
+    petNameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    petNameLabel.TextScaled = true
+    petNameLabel.Font = Enum.Font.SourceSans
+    petNameLabel.ZIndex = 2
+    petNameLabel.Parent = mainFrame
+
+    -- Input Label
+    local inputLabel = Instance.new("TextLabel")
+    inputLabel.Name = "InputLabel"
+    inputLabel.Size = UDim2.new(1, -20, 0, 20)
+    inputLabel.Position = UDim2.new(0, 10, 0, 150)
+    inputLabel.BackgroundTransparency = 1
+    inputLabel.Text = "Type egg name:"
+    inputLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    inputLabel.TextScaled = true
+    inputLabel.Font = Enum.Font.SourceSans
+    inputLabel.ZIndex = 2
+    inputLabel.Parent = mainFrame
+
+    -- Text Input Box
+    local textInput = Instance.new("TextBox")
+    textInput.Name = "TextInput"
+    textInput.Size = UDim2.new(1, -20, 0, 25)
+    textInput.Position = UDim2.new(0, 10, 0, 170)
+    textInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    textInput.BorderSizePixel = 2
+    textInput.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    textInput.Text = ""
+    textInput.PlaceholderText = "Bug Egg, Bee Egg, Anti Bee Egg, Paradise Egg, Mythical Egg"
+    textInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+    textInput.PlaceholderColor3 = Color3.fromRGB(100, 100, 100)
+    textInput.TextScaled = true
+    textInput.Font = Enum.Font.SourceSans
+    textInput.ZIndex = 2
+    textInput.Parent = mainFrame
+
+    -- Input box corner rounding
+    local inputCorner = Instance.new("UICorner")
+    inputCorner.CornerRadius = UDim.new(0, 8)
+    inputCorner.Parent = textInput
+
+    -- Credits Label
+    local creditsLabel = Instance.new("TextLabel")
+    creditsLabel.Name = "CreditsLabel"
+    creditsLabel.Size = UDim2.new(1, -20, 0, 20)
+    creditsLabel.Position = UDim2.new(0, 10, 0, 200)
+    creditsLabel.BackgroundTransparency = 1
+    creditsLabel.Text = "MADE BY SPONGEBOB"
+    creditsLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    creditsLabel.TextScaled = true
+    creditsLabel.Font = Enum.Font.SourceSansBold
+    creditsLabel.ZIndex = 2
+    creditsLabel.Parent = mainFrame
+
+    -- Generate Button (centered and renamed)
+    local generateButton = Instance.new("TextButton")
+    generateButton.Name = "GenerateButton"
+    generateButton.Size = UDim2.new(0, 120, 0, 25)
+    generateButton.Position = UDim2.new(0.5, -60, 0, 225)
+    generateButton.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+    generateButton.BorderSizePixel = 2
+    generateButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    generateButton.Text = "Random Pet"
+    generateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    generateButton.TextScaled = true
+    generateButton.Font = Enum.Font.SourceSansBold
+    generateButton.ZIndex = 2
+    generateButton.Parent = mainFrame
+
+    -- Generate Button corner rounding
+    local generateCorner = Instance.new("UICorner")
+    generateCorner.CornerRadius = UDim.new(0, 8)
+    generateCorner.Parent = generateButton
+
+    -- SPECIFIC PET POOLS FOR EACH EGG TYPE (using lowercase keys)
+    local eggPetPools = {
+        ["bug egg"] = {
+            "Snail",
+            "Blue Giant Ant", 
+            "Praying Mantis",
+            "Caterpillar"
+        },
+        
+        ["anti bee egg"] = {
+            "Wasp",
+            "Tarantula Hawk", 
+            "Moth"
+        },
+        
+        ["mythical egg"] = {
+            "Red Giant Ant",
+            "Squirrel",
+            "Grey Mouse",
+            "Brown Mouse"
+        },
+        
+        ["paradise egg"] = {
+            "Ostrich",
+            "Peacock",
+            "Capybara",
+            "Scarlet Macaw"
+        },
+        
+        ["bee egg"] = {
+            "Honey Bee",
+            "Bee",
+            "Petal Bee",
+            "Bear Bee"
+        },
+        
+        ["rare summer egg"] = {
+            "Flamingo",
+            "Toucan",
+            "Orangutan"
+        }
+    }
+
+    -- Default random pet pool for when no specific egg is found
+    local defaultPetPool = {
+        "Mystery Pet"
+    }
+
+    -- Egg colors for each type (using lowercase keys)
+    local eggTypeColors = {
+        ["bug egg"] = {Color3.fromRGB(150, 200, 100), Color3.fromRGB(100, 150, 50)},
+        ["mythical egg"] = {Color3.fromRGB(220, 180, 255), Color3.fromRGB(180, 120, 255)},
+        ["paradise egg"] = {Color3.fromRGB(255, 200, 150), Color3.fromRGB(255, 150, 100)},
+        ["bee egg"] = {Color3.fromRGB(255, 220, 100), Color3.fromRGB(255, 180, 50)},
+        ["rare summer egg"] = {Color3.fromRGB(255, 150, 100), Color3.fromRGB(255, 100, 50)},
+        ["anti bee egg"] = {Color3.fromRGB(255, 150, 100), Color3.fromRGB(255, 100, 50)},
+    }
+
+    -- Default egg colors
+    local defaultEggColors = {
+        {Color3.fromRGB(255, 220, 180), Color3.fromRGB(255, 180, 120)}, -- Orange
+        {Color3.fromRGB(180, 220, 255), Color3.fromRGB(120, 180, 255)}, -- Blue
+        {Color3.fromRGB(255, 180, 220), Color3.fromRGB(255, 120, 180)}, -- Pink
+        {Color3.fromRGB(180, 255, 180), Color3.fromRGB(120, 255, 120)}, -- Green
+        {Color3.fromRGB(220, 180, 255), Color3.fromRGB(180, 120, 255)}, -- Purple
+        {Color3.fromRGB(255, 255, 180), Color3.fromRGB(255, 255, 120)}, -- Yellow
+    }
+
+    -- Function to create tween animations
+    local function createTween(object, properties, duration)
+        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(object, tweenInfo, properties)
+        return tween
+    end
+
+    -- Function to get pet pool for specific egg type
+    local function getPetPoolForEgg(eggType)
+        local lowerType = string.lower(eggType)
+        
+        -- Check if the egg type exists in our pools
+        if eggPetPools[lowerType] then
+            return eggPetPools[lowerType]
+        end
+        
+        -- If not found, return default pool
+        return defaultPetPool
+    end
+
+    -- Function to get egg colors for specific type
+    local function getEggColorsForType(eggType)
+        local lowerType = string.lower(eggType)
+        
+        -- Check if the egg type has specific colors
+        if eggTypeColors[lowerType] then
+            return eggTypeColors[lowerType]
+        end
+        
+        -- Default to random color if no specific color found
+        local colorIndex = math.random(1, #defaultEggColors)
+        return defaultEggColors[colorIndex]
+    end
+
+    -- Function to generate random pet based on egg type
+    local function generateRandomPet()
+        local eggType = textInput.Text
+        
+        if eggType == "" then
+            -- Show error message briefly
+            local originalText = petNameLabel.Text
+            petNameLabel.Text = "Enter egg type first!"
+            petNameLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+            
+            wait(1)
+            
+            petNameLabel.Text = originalText
+            petNameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            return
+        end
+        
+        -- Button click animation
+        local clickTween = createTween(generateButton, {Size = UDim2.new(0, 115, 0, 23)}, 0.1)
+        clickTween:Play()
+        
+        clickTween.Completed:Connect(function()
+            local returnTween = createTween(generateButton, {Size = UDim2.new(0, 120, 0, 25)}, 0.1)
+            returnTween:Play()
+        end)
+        
+        -- Egg spin animation
+        local spinTween = createTween(eggFrame, {Rotation = 360}, 0.5)
+        spinTween:Play()
+        
+        spinTween.Completed:Connect(function()
+            eggFrame.Rotation = 0
+        end)
+        
+        -- Change pet after a short delay
+        wait(0.3)
+        
+        -- Get the specific pet pool for this egg type
+        local petPool = getPetPoolForEgg(eggType)
+        local randomIndex = math.random(1, #petPool)
+        local newPetName = petPool[randomIndex]
+        
+        -- Change egg color based on type
+        local selectedColors = getEggColorsForType(eggType)
+        
+        eggGradient.Color = ColorSequence.new({
+            ColorSequenceKeypoint.new(0, selectedColors[1]),
+            ColorSequenceKeypoint.new(1, selectedColors[2])
+        })
+        
+        -- Text change animation
+        local fadeOut = createTween(petNameLabel, {TextTransparency = 1}, 0.2)
+        fadeOut:Play()
+        
+        fadeOut.Completed:Connect(function()
+            petNameLabel.Text = newPetName
+            petNameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            local fadeIn = createTween(petNameLabel, {TextTransparency = 0}, 0.2)
+            fadeIn:Play()
+        end)
+    end
+
+    -- Connect button click event
+    generateButton.MouseButton1Click:Connect(generateRandomPet)
+
+    -- Generate button hover effects
+    generateButton.MouseEnter:Connect(function()
+        local hoverTween = createTween(generateButton, {BackgroundColor3 = Color3.fromRGB(255, 69, 0)}, 0.2)
+        hoverTween:Play()
+    end)
+
+    generateButton.MouseLeave:Connect(function()
+        local leaveTween = createTween(generateButton, {BackgroundColor3 = Color3.fromRGB(255, 20, 147)}, 0.2)
+        leaveTween:Play()
+    end)
+
+    -- Text input focus effects
+    textInput.Focused:Connect(function()
+        local focusTween = createTween(textInput, {BackgroundColor3 = Color3.fromRGB(255, 255, 200)}, 0.2)
+        focusTween:Play()
+    end)
+
+    textInput.FocusLost:Connect(function()
+        local unfocusTween = createTween(textInput, {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}, 0.2)
+        unfocusTween:Play()
+    end)
+
+    -- Allow Enter key to generate random pet
+    textInput.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            generateRandomPet()
+        end
+    end)
+end
+
+-- Start the loading process
+startLoading()
+
+print("Enhanced Egg Randomizer GUI with SpongeBob theme loaded successfully!")
