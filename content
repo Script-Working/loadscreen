@@ -1,17 +1,12 @@
 local CoreGui = game:GetService("CoreGui")
-local Lighting = game:GetService("Lighting")
 
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
 ScreenGui.Name = "CooldownChangerGUI"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
 
-local blur = Instance.new("BlurEffect")
-blur.Size = 10
-blur.Parent = Lighting
-
 local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 350, 0, 290)
+Frame.Size = UDim2.new(0, 280, 0, 240)
 Frame.Position = UDim2.new(0, 100, 0, 100)
 Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Frame.BackgroundTransparency = 0.3
@@ -36,25 +31,25 @@ Shadow.ZIndex = 4
 Shadow.Parent = Frame
 
 local Header = Instance.new("TextLabel")
-Header.Size = UDim2.new(1, -60, 0, 40)
+Header.Size = UDim2.new(1, -60, 0, 35)
 Header.Position = UDim2.new(0, 10, 0, 0)
 Header.BackgroundTransparency = 1
-Header.Text = "Passive Cooldown Editor"
+Header.Text = "Cooldown Editor"
 Header.TextColor3 = Color3.fromRGB(255, 255, 255)
 Header.Font = Enum.Font.GothamBold
-Header.TextSize = 20
+Header.TextSize = 16
 Header.TextXAlignment = Enum.TextXAlignment.Left
 Header.ZIndex = 6
 Header.Parent = Frame
 
 local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 30, 0, 30)
-CloseBtn.Position = UDim2.new(1, -35, 0, 5)
+CloseBtn.Size = UDim2.new(0, 25, 0, 25)
+CloseBtn.Position = UDim2.new(1, -30, 0, 5)
 CloseBtn.Text = "X"
 CloseBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
 CloseBtn.TextColor3 = Color3.new(1, 1, 1)
 CloseBtn.Font = Enum.Font.GothamBold
-CloseBtn.TextSize = 14
+CloseBtn.TextSize = 12
 CloseBtn.BorderSizePixel = 0
 CloseBtn.ZIndex = 6
 CloseBtn.Parent = Frame
@@ -63,13 +58,13 @@ local CloseCorner = Instance.new("UICorner", CloseBtn)
 CloseCorner.CornerRadius = UDim.new(1, 0)
 
 local MinBtn = Instance.new("TextButton")
-MinBtn.Size = UDim2.new(0, 30, 0, 30)
-MinBtn.Position = UDim2.new(1, -70, 0, 5)
+MinBtn.Size = UDim2.new(0, 25, 0, 25)
+MinBtn.Position = UDim2.new(1, -60, 0, 5)
 MinBtn.Text = "_"
 MinBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
 MinBtn.TextColor3 = Color3.new(1, 1, 1)
 MinBtn.Font = Enum.Font.GothamBold
-MinBtn.TextSize = 18
+MinBtn.TextSize = 14
 MinBtn.BorderSizePixel = 0
 MinBtn.ZIndex = 6
 MinBtn.Parent = Frame
@@ -77,49 +72,95 @@ MinBtn.Parent = Frame
 local MinCorner = Instance.new("UICorner", MinBtn)
 MinCorner.CornerRadius = UDim.new(1, 0)
 
-local function createLabeledInput(labelText, yPosition)
-	local Label = Instance.new("TextLabel")
-	Label.Size = UDim2.new(1, -40, 0, 20)
-	Label.Position = UDim2.new(0, 20, 0, yPosition)
-	Label.BackgroundTransparency = 1
-	Label.Text = labelText
-	Label.TextColor3 = Color3.fromRGB(200, 200, 200)
-	Label.Font = Enum.Font.Gotham
-	Label.TextSize = 14
-	Label.TextXAlignment = Enum.TextXAlignment.Left
-	Label.ZIndex = 6
-	Label.Parent = Frame
+local PetNameLabel = Instance.new("TextLabel")
+PetNameLabel.Size = UDim2.new(1, -30, 0, 15)
+PetNameLabel.Position = UDim2.new(0, 15, 0, 40)
+PetNameLabel.BackgroundTransparency = 1
+PetNameLabel.Text = "Pet Name"
+PetNameLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+PetNameLabel.Font = Enum.Font.Gotham
+PetNameLabel.TextSize = 11
+PetNameLabel.TextXAlignment = Enum.TextXAlignment.Left
+PetNameLabel.ZIndex = 6
+PetNameLabel.Parent = Frame
 
-	local TextBox = Instance.new("TextBox")
-	TextBox.Size = UDim2.new(1, -40, 0, 30)
-	TextBox.Position = UDim2.new(0, 20, 0, yPosition + 22)
-	TextBox.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-	TextBox.BackgroundTransparency = 0.1
-	TextBox.TextColor3 = Color3.new(0, 0, 0)
-	TextBox.Font = Enum.Font.Gotham
-	TextBox.TextSize = 14
-	TextBox.BorderSizePixel = 0
-	TextBox.ZIndex = 6
-	TextBox.Parent = Frame
+local PetNameBox = Instance.new("TextBox")
+PetNameBox.Size = UDim2.new(1, -30, 0, 22)
+PetNameBox.Position = UDim2.new(0, 15, 0, 57)
+PetNameBox.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+PetNameBox.BackgroundTransparency = 0.1
+PetNameBox.TextColor3 = Color3.new(0, 0, 0)
+PetNameBox.Font = Enum.Font.Gotham
+PetNameBox.TextSize = 11
+PetNameBox.BorderSizePixel = 0
+PetNameBox.ZIndex = 6
+PetNameBox.Parent = Frame
 
-	local Corner = Instance.new("UICorner", TextBox)
-	Corner.CornerRadius = UDim.new(0, 6)
+local PetNameCorner = Instance.new("UICorner", PetNameBox)
+PetNameCorner.CornerRadius = UDim.new(0, 6)
 
-	return TextBox
-end
+local PetAgeLabel = Instance.new("TextLabel")
+PetAgeLabel.Size = UDim2.new(1, -30, 0, 15)
+PetAgeLabel.Position = UDim2.new(0, 15, 0, 85)
+PetAgeLabel.BackgroundTransparency = 1
+PetAgeLabel.Text = "Pet Age"
+PetAgeLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+PetAgeLabel.Font = Enum.Font.Gotham
+PetAgeLabel.TextSize = 11
+PetAgeLabel.TextXAlignment = Enum.TextXAlignment.Left
+PetAgeLabel.ZIndex = 6
+PetAgeLabel.Parent = Frame
 
-local PetNameBox = createLabeledInput("Pet Name", 50)
-local PetAgeBox = createLabeledInput("Pet Age", 100)
-local CooldownBox = createLabeledInput("Cooldown (e.g. 14:50)", 150)
+local PetAgeBox = Instance.new("TextBox")
+PetAgeBox.Size = UDim2.new(1, -30, 0, 22)
+PetAgeBox.Position = UDim2.new(0, 15, 0, 102)
+PetAgeBox.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+PetAgeBox.BackgroundTransparency = 0.1
+PetAgeBox.TextColor3 = Color3.new(0, 0, 0)
+PetAgeBox.Font = Enum.Font.Gotham
+PetAgeBox.TextSize = 11
+PetAgeBox.BorderSizePixel = 0
+PetAgeBox.ZIndex = 6
+PetAgeBox.Parent = Frame
+
+local PetAgeCorner = Instance.new("UICorner", PetAgeBox)
+PetAgeCorner.CornerRadius = UDim.new(0, 6)
+
+local CooldownLabel = Instance.new("TextLabel")
+CooldownLabel.Size = UDim2.new(1, -30, 0, 15)
+CooldownLabel.Position = UDim2.new(0, 15, 0, 130)
+CooldownLabel.BackgroundTransparency = 1
+CooldownLabel.Text = "Cooldown (e.g. 14:50)"
+CooldownLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+CooldownLabel.Font = Enum.Font.Gotham
+CooldownLabel.TextSize = 11
+CooldownLabel.TextXAlignment = Enum.TextXAlignment.Left
+CooldownLabel.ZIndex = 6
+CooldownLabel.Parent = Frame
+
+local CooldownBox = Instance.new("TextBox")
+CooldownBox.Size = UDim2.new(1, -30, 0, 22)
+CooldownBox.Position = UDim2.new(0, 15, 0, 147)
+CooldownBox.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+CooldownBox.BackgroundTransparency = 0.1
+CooldownBox.TextColor3 = Color3.new(0, 0, 0)
+CooldownBox.Font = Enum.Font.Gotham
+CooldownBox.TextSize = 11
+CooldownBox.BorderSizePixel = 0
+CooldownBox.ZIndex = 6
+CooldownBox.Parent = Frame
+
+local CooldownCorner = Instance.new("UICorner", CooldownBox)
+CooldownCorner.CornerRadius = UDim.new(0, 6)
 
 local Button = Instance.new("TextButton")
-Button.Size = UDim2.new(0.48, -5, 0, 35)
-Button.Position = UDim2.new(0, 20, 0, 215)
-Button.Text = "Apply Cooldown"
+Button.Size = UDim2.new(1, -30, 0, 25)
+Button.Position = UDim2.new(0, 15, 0, 175)
+Button.Text = "Apply & Freeze Cooldown"
 Button.BackgroundColor3 = Color3.fromRGB(50, 150, 100)
 Button.BackgroundTransparency = 0.1
 Button.TextColor3 = Color3.new(1, 1, 1)
-Button.TextSize = 14
+Button.TextSize = 11
 Button.Font = Enum.Font.GothamBold
 Button.BorderSizePixel = 0
 Button.ZIndex = 6
@@ -128,25 +169,9 @@ Button.Parent = Frame
 local ButtonCorner = Instance.new("UICorner", Button)
 ButtonCorner.CornerRadius = UDim.new(0, 6)
 
-local FreezeBtn = Instance.new("TextButton")
-FreezeBtn.Size = UDim2.new(0.48, -5, 0, 35)
-FreezeBtn.Position = UDim2.new(0.52, 5, 0, 215)
-FreezeBtn.Text = "🧊 Freeze Time"
-FreezeBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
-FreezeBtn.BackgroundTransparency = 0.1
-FreezeBtn.TextColor3 = Color3.new(1, 1, 1)
-FreezeBtn.TextSize = 14
-FreezeBtn.Font = Enum.Font.GothamBold
-FreezeBtn.BorderSizePixel = 0
-FreezeBtn.ZIndex = 6
-FreezeBtn.Parent = Frame
-
-local FreezeBtnCorner = Instance.new("UICorner", FreezeBtn)
-FreezeBtnCorner.CornerRadius = UDim.new(0, 6)
-
 local ProgressBarBG = Instance.new("Frame")
-ProgressBarBG.Size = UDim2.new(1, -40, 0, 20)
-ProgressBarBG.Position = UDim2.new(0, 20, 0, 255)
+ProgressBarBG.Size = UDim2.new(1, -30, 0, 12)
+ProgressBarBG.Position = UDim2.new(0, 15, 0, 207)
 ProgressBarBG.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 ProgressBarBG.BackgroundTransparency = 0.2
 ProgressBarBG.BorderSizePixel = 0
@@ -173,19 +198,19 @@ PercentLabel.BackgroundTransparency = 1
 PercentLabel.Text = "0%"
 PercentLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 PercentLabel.Font = Enum.Font.Gotham
-PercentLabel.TextSize = 13
+PercentLabel.TextSize = 10
 PercentLabel.TextXAlignment = Enum.TextXAlignment.Center
 PercentLabel.ZIndex = 7
 PercentLabel.Parent = ProgressBarBG
 
 local Credit = Instance.new("TextLabel")
-Credit.Size = UDim2.new(1, -20, 0, 20)
-Credit.Position = UDim2.new(0, 10, 1, -25)
+Credit.Size = UDim2.new(1, -15, 0, 12)
+Credit.Position = UDim2.new(0, 10, 1, -17)
 Credit.BackgroundTransparency = 1
 Credit.Text = "by @bam-i"
 Credit.TextColor3 = Color3.fromRGB(180, 180, 180)
 Credit.Font = Enum.Font.Gotham
-Credit.TextSize = 13
+Credit.TextSize = 10
 Credit.TextXAlignment = Enum.TextXAlignment.Right
 Credit.ZIndex = 6
 Credit.Parent = Frame
@@ -197,14 +222,7 @@ Button.MouseLeave:Connect(function()
 	Button.BackgroundColor3 = Color3.fromRGB(50, 150, 100)
 end)
 
-FreezeBtn.MouseEnter:Connect(function()
-	FreezeBtn.BackgroundColor3 = Color3.fromRGB(60, 110, 160)
-end)
-FreezeBtn.MouseLeave:Connect(function()
-	FreezeBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
-end)
-
--- Cooldown Logic - FREEZE TIME VERSION
+-- Cooldown Logic - AUTO FREEZE VERSION
 local userCooldown = nil
 local frozenLabels = {}
 local connections = {}
@@ -276,11 +294,11 @@ task.spawn(function()
 	end
 end)
 
--- Apply Cooldown with Progress
+-- Apply Cooldown with Progress and Auto Freeze
 Button.MouseButton1Click:Connect(function()
 	local text = CooldownBox.Text
 	if text and #text > 0 then
-		local duration = 5
+		local duration = 3
 		local startTime = tick()
 		
 		-- Reset progress bar
@@ -301,13 +319,10 @@ Button.MouseButton1Click:Connect(function()
 
 				if percent >= 100 then
 					userCooldown = text
-					Button.Text = "Cooldown Applied!"
-					Button.TextColor3 = Color3.fromRGB(100, 255, 150)
-					
-					-- Reset button after 2 seconds
-					task.wait(2)
-					Button.Text = "Apply Cooldown"
-					Button.TextColor3 = Color3.new(1, 1, 1)
+					freezeEnabled = true -- Auto enable freeze
+					Button.Text = "🧊 FROZEN"
+					Button.TextColor3 = Color3.fromRGB(100, 200, 255)
+					Button.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
 					break
 				end
 				task.wait(0.1)
@@ -316,46 +331,22 @@ Button.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Freeze Toggle Button Click
-FreezeBtn.MouseButton1Click:Connect(function()
-	freezeEnabled = not freezeEnabled
-	
-	if freezeEnabled then
-		FreezeBtn.Text = "🧊 FROZEN"
-		FreezeBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
-	else
-		FreezeBtn.Text = "🧊 Freeze Time"
-		FreezeBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
-		
-		-- Clear all frozen labels to allow normal countdown
-		for label, _ in pairs(frozenLabels) do
-			frozenLabels[label] = nil
-		end
-		for label, connection in pairs(connections) do
-			connection:Disconnect()
-		end
-		connections = {}
-	end
-end)
-
 -- Close + Minimize
 CloseBtn.MouseButton1Click:Connect(function()
-	blur:Destroy()
 	ScreenGui:Destroy()
 end)
 
 MinBtn.MouseButton1Click:Connect(function()
 	Frame.Visible = false
-	blur.Enabled = false
 
 	local ReopenBtn = Instance.new("TextButton")
-	ReopenBtn.Size = UDim2.new(0, 160, 0, 30)
+	ReopenBtn.Size = UDim2.new(0, 120, 0, 25)
 	ReopenBtn.Position = UDim2.new(0, 20, 0, 80)
-	ReopenBtn.Text = "Open Cooldown Editor"
+	ReopenBtn.Text = "Open Cooldown"
 	ReopenBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 	ReopenBtn.TextColor3 = Color3.new(1, 1, 1)
 	ReopenBtn.Font = Enum.Font.Gotham
-	ReopenBtn.TextSize = 14
+	ReopenBtn.TextSize = 12
 	ReopenBtn.ZIndex = 10
 	ReopenBtn.Parent = ScreenGui
 
@@ -364,7 +355,6 @@ MinBtn.MouseButton1Click:Connect(function()
 
 	ReopenBtn.MouseButton1Click:Connect(function()
 		Frame.Visible = true
-		blur.Enabled = true
 		ReopenBtn:Destroy()
 	end)
 end)
