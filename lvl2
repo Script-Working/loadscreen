@@ -8,6 +8,93 @@ local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "AgeChanger"
 screenGui.ResetOnSpawn = false
 
+-- Loading screen descriptions
+local loadingDescriptions = {
+	"The Instant Age is Now Loading",
+	"The instant age only works at divine pets",
+	"Credits to Kaneki&Skids"
+}
+
+-- Loading Screen GUI
+local loadingFrame = Instance.new("Frame", screenGui)
+loadingFrame.Size = UDim2.new(0, 300, 0, 200)
+loadingFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(75, 0, 130) -- Violet
+loadingFrame.BackgroundTransparency = 0.1
+loadingFrame.BorderSizePixel = 0
+Instance.new("UICorner", loadingFrame).CornerRadius = UDim.new(0, 12)
+
+local loadingTitle = Instance.new("TextLabel", loadingFrame)
+loadingTitle.Text = "🕒 Pet Age Changer 🕜"
+loadingTitle.Font = Enum.Font.FredokaOne
+loadingTitle.TextSize = 20
+loadingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+loadingTitle.BackgroundTransparency = 1
+loadingTitle.Size = UDim2.new(1, 0, 0, 40)
+loadingTitle.Position = UDim2.new(0, 0, 0, 10)
+
+local loadingCounter = Instance.new("TextLabel", loadingFrame)
+loadingCounter.Text = "0%"
+loadingCounter.Font = Enum.Font.GothamBold
+loadingCounter.TextSize = 24
+loadingCounter.TextColor3 = Color3.fromRGB(138, 43, 226)
+loadingCounter.BackgroundTransparency = 1
+loadingCounter.Size = UDim2.new(1, 0, 0, 40)
+loadingCounter.Position = UDim2.new(0, 0, 0, 60)
+
+local loadingDescription = Instance.new("TextLabel", loadingFrame)
+loadingDescription.Text = loadingDescriptions[1]
+loadingDescription.Font = Enum.Font.Gotham
+loadingDescription.TextSize = 14
+loadingDescription.TextColor3 = Color3.fromRGB(230, 230, 255)
+loadingDescription.BackgroundTransparency = 1
+loadingDescription.Size = UDim2.new(1, 0, 0, 60)
+loadingDescription.Position = UDim2.new(0, 0, 0, 110)
+loadingDescription.TextScaled = true
+loadingDescription.TextWrapped = true
+
+-- Loading progress bar
+local progressBarBG = Instance.new("Frame", loadingFrame)
+progressBarBG.Size = UDim2.new(0.8, 0, 0, 8)
+progressBarBG.Position = UDim2.new(0.1, 0, 0, 175)
+progressBarBG.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Instance.new("UICorner", progressBarBG).CornerRadius = UDim.new(0, 4)
+
+local progressBar = Instance.new("Frame", progressBarBG)
+progressBar.Size = UDim2.new(0, 0, 1, 0)
+progressBar.Position = UDim2.new(0, 0, 0, 0)
+progressBar.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+Instance.new("UICorner", progressBar).CornerRadius = UDim.new(0, 4)
+
+-- Function to update loading screen
+local function updateLoading()
+	local descIndex = 1
+	for i = 0, 100, 1 do
+		loadingCounter.Text = i .. "%"
+		progressBar.Size = UDim2.new(i/100, 0, 1, 0)
+		
+		-- Change description every ~33%
+		if i >= 33 and descIndex == 1 then
+			descIndex = 2
+			loadingDescription.Text = loadingDescriptions[2]
+		elseif i >= 66 and descIndex == 2 then
+			descIndex = 3
+			loadingDescription.Text = loadingDescriptions[3]
+		end
+		
+		wait(1.8) -- Super slow count (3 minutes total)
+	end
+	
+	wait(1)
+	loadingFrame:Destroy()
+end
+
+-- Start loading
+spawn(updateLoading)
+
+-- Wait for loading to complete before showing main GUI
+wait(182) -- Wait for loading to finish (3 minutes + 2 seconds)
+
 -- GUI setup with violet theme
 local frame = Instance.new("Frame", screenGui)
 frame.Size = UDim2.new(0, 250, 0, 160) -- Increased size for text box
