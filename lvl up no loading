@@ -1,0 +1,167 @@
+-- LocalScript (put in StarterPlayerScripts or StarterGui)
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+screenGui.Name = "AgeChanger"
+screenGui.ResetOnSpawn = false
+
+-- GUI setup with violet theme
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(0, 250, 0, 160) -- Increased size for text box
+frame.Position = UDim2.new(0.4, 0, 0.35, 0)
+frame.BackgroundColor3 = Color3.fromRGB(75, 0, 130) -- Violet
+frame.BackgroundTransparency = 0.1
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+
+local title = Instance.new("TextLabel", frame)
+title.Text = "🕒 Pet Age Changer 🕜"
+title.Font = Enum.Font.FredokaOne
+title.TextSize = 18
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1
+title.Size = UDim2.new(1, 0, 0, 25)
+title.Position = UDim2.new(0, 0, 0, 0)
+
+local petInfo = Instance.new("TextLabel", frame)
+petInfo.Text = "Equipped Pet: [None]"
+petInfo.Font = Enum.Font.Gotham
+petInfo.TextSize = 14
+petInfo.TextColor3 = Color3.fromRGB(230, 230, 255)
+petInfo.BackgroundTransparency = 1
+petInfo.Position = UDim2.new(0, 0, 0, 25)
+petInfo.Size = UDim2.new(1, 0, 0, 20)
+petInfo.TextScaled = true
+petInfo.TextWrapped = true
+
+-- Age input text box
+local ageInput = Instance.new("TextBox", frame)
+ageInput.Size = UDim2.new(0.9, 0, 0, 30)
+ageInput.Position = UDim2.new(0.05, 0, 0, 50)
+ageInput.BackgroundColor3 = Color3.fromRGB(138, 43, 226) -- BlueViolet
+ageInput.Text = "50"
+ageInput.PlaceholderText = "Enter age (e.g., 50)"
+ageInput.Font = Enum.Font.Gotham
+ageInput.TextSize = 16
+ageInput.TextColor3 = Color3.new(1, 1, 1)
+ageInput.ClearTextOnFocus = false
+Instance.new("UICorner", ageInput).CornerRadius = UDim.new(0, 6)
+local inputStroke = Instance.new("UIStroke", ageInput)
+inputStroke.Color = Color3.fromRGB(186, 85, 211) -- MediumOrchid
+inputStroke.Thickness = 2
+
+local function createStyledButton(text, yPos, color)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0.9, 0, 0, 35)
+	btn.Position = UDim2.new(0.05, 0, 0, yPos)
+	btn.BackgroundColor3 = Color3.fromRGB(72, 61, 139) -- DarkSlateBlue
+	btn.Text = text
+	btn.Font = Enum.Font.FredokaOne
+	btn.TextSize = 16
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.AutoButtonColor = false
+
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	local stroke = Instance.new("UIStroke", btn)
+	stroke.Color = Color3.fromRGB(123, 104, 238) -- MediumSlateBlue
+	stroke.Thickness = 1.5
+
+	btn.MouseEnter:Connect(function()
+		btn.BackgroundColor3 = color:lerp(Color3.new(1,1,1), 0.2)
+	end)
+	btn.MouseLeave:Connect(function()
+		btn.BackgroundColor3 = color
+	end)
+
+	btn.Parent = frame
+	return btn
+end
+
+local button = createStyledButton("Set Custom Age", 90, Color3.fromRGB(138, 43, 226))
+
+-- Credits label
+local credits = Instance.new("TextLabel", frame)
+credits.Text = "Made by DragonScripter🐉"
+credits.Font = Enum.Font.GothamSemibold
+credits.TextSize = 12
+credits.TextColor3 = Color3.fromRGB(200, 162, 255)
+credits.BackgroundTransparency = 1
+credits.Position = UDim2.new(0, 0, 0, 130)
+credits.Size = UDim2.new(1, 0, 0, 20)
+credits.TextScaled = true
+
+-- Function to find the equipped pet Tool
+local function getEquippedPetTool()
+	character = player.Character or player.CharacterAdded:Wait()
+	for _, child in pairs(character:GetChildren()) do
+		if child:IsA("Tool") and child.Name:find("Age") then
+			return child
+		end
+	end
+	return nil
+end
+
+-- Update the GUI with the currently equipped pet
+local function updateGUI()
+	local pet = getEquippedPetTool()
+	if pet then
+		petInfo.Text = "Equipped Pet: " .. pet.Name
+	else
+		petInfo.Text = "Equipped Pet: [None]"
+	end
+end
+
+-- Click to visually update the name with custom age after countdown
+button.MouseButton1Click:Connect(function()
+	local tool = getEquippedPetTool()
+	local customAge = tonumber(ageInput.Text)
+	
+	if not customAge then
+		button.Text = "Invalid Age!"
+		task.wait(2)
+		button.Text = "Set Custom Age"
+		return
+	end
+	
+	if tool then
+		-- Countdown before changing age
+		for i = 20, 1, -1 do
+			button.Text = "Changing Age in " .. i .. "..."
+			task.wait(1)
+		end
+
+		-- Change name visually with custom age
+		local newName = tool.Name:gsub("%[Age%s%d+%]", "[Age " .. customAge .. "]")
+		tool.Name = newName
+		petInfo.Text = "Equipped Pet: " .. tool.Name
+		button.Text = "Set Custom Age"
+	else
+		button.Text = "No Pet Equipped!"
+		task.wait(2)
+		button.Text = "Set Custom Age"
+	end
+end)
+
+-- Only allow numbers in the text box
+ageInput.Changed:Connect(function(property)
+	if property == "Text" then
+		local text = ageInput.Text
+		local filteredText = text:gsub("[^%d]", "")
+		if text ~= filteredText then
+			ageInput.Text = filteredText
+		end
+	end
+end)
+
+-- Periodically update GUI
+spawn(function()
+	while true do
+		task.wait(1)
+		updateGUI()
+	end
+end)
