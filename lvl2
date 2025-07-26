@@ -8,245 +8,400 @@ local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "AgeChanger"
 screenGui.ResetOnSpawn = false
 
--- Loading screen descriptions
-local loadingDescriptions = {
-	"The Instant Age is Now Loading",
-	"The instant age only works at divine pets",
-	"Credits to Kaneki&Skids"
-}
+-- Warning Screen GUI (appears first)
+local warningFrame = Instance.new("Frame", screenGui)
+warningFrame.Size = UDim2.new(0, 400, 0, 300)
+warningFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+warningFrame.BackgroundColor3 = Color3.fromRGB(139, 0, 0) -- Dark red
+warningFrame.BackgroundTransparency = 0.1
+warningFrame.BorderSizePixel = 0
+warningFrame.Active = true
+warningFrame.Draggable = true
+Instance.new("UICorner", warningFrame).CornerRadius = UDim.new(0, 12)
 
--- Loading Screen GUI
-local loadingFrame = Instance.new("Frame", screenGui)
-loadingFrame.Size = UDim2.new(0, 300, 0, 200)
-loadingFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
-loadingFrame.BackgroundColor3 = Color3.fromRGB(75, 0, 130) -- Violet
-loadingFrame.BackgroundTransparency = 0.1
-loadingFrame.BorderSizePixel = 0
-Instance.new("UICorner", loadingFrame).CornerRadius = UDim.new(0, 12)
+-- Warning frame stroke
+local warningStroke = Instance.new("UIStroke", warningFrame)
+warningStroke.Color = Color3.fromRGB(255, 69, 0) -- Red orange
+warningStroke.Thickness = 3
 
-local loadingTitle = Instance.new("TextLabel", loadingFrame)
-loadingTitle.Text = "🕒 Pet Age Changer 🕜"
-loadingTitle.Font = Enum.Font.FredokaOne
-loadingTitle.TextSize = 20
-loadingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-loadingTitle.BackgroundTransparency = 1
-loadingTitle.Size = UDim2.new(1, 0, 0, 40)
-loadingTitle.Position = UDim2.new(0, 0, 0, 10)
+-- Close button for warning
+local warningCloseBtn = Instance.new("TextButton", warningFrame)
+warningCloseBtn.Size = UDim2.new(0, 30, 0, 30)
+warningCloseBtn.Position = UDim2.new(1, -35, 0, 5)
+warningCloseBtn.BackgroundColor3 = Color3.fromRGB(220, 20, 60) -- Crimson
+warningCloseBtn.Text = "×"
+warningCloseBtn.Font = Enum.Font.GothamBold
+warningCloseBtn.TextSize = 20
+warningCloseBtn.TextColor3 = Color3.new(1, 1, 1)
+warningCloseBtn.AutoButtonColor = false
+Instance.new("UICorner", warningCloseBtn).CornerRadius = UDim.new(0, 15)
 
-local loadingCounter = Instance.new("TextLabel", loadingFrame)
-loadingCounter.Text = "0%"
-loadingCounter.Font = Enum.Font.GothamBold
-loadingCounter.TextSize = 24
-loadingCounter.TextColor3 = Color3.fromRGB(138, 43, 226)
-loadingCounter.BackgroundTransparency = 1
-loadingCounter.Size = UDim2.new(1, 0, 0, 40)
-loadingCounter.Position = UDim2.new(0, 0, 0, 60)
+-- Warning title
+local warningTitle = Instance.new("TextLabel", warningFrame)
+warningTitle.Text = "⚠️ IMPORTANT WARNING ⚠️"
+warningTitle.Font = Enum.Font.FredokaOne
+warningTitle.TextSize = 24
+warningTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningTitle.BackgroundTransparency = 1
+warningTitle.Size = UDim2.new(1, -40, 0, 40)
+warningTitle.Position = UDim2.new(0, 0, 0, 10)
+warningTitle.TextScaled = true
 
-local loadingDescription = Instance.new("TextLabel", loadingFrame)
-loadingDescription.Text = loadingDescriptions[1]
-loadingDescription.Font = Enum.Font.Gotham
-loadingDescription.TextSize = 14
-loadingDescription.TextColor3 = Color3.fromRGB(230, 230, 255)
-loadingDescription.BackgroundTransparency = 1
-loadingDescription.Size = UDim2.new(1, 0, 0, 60)
-loadingDescription.Position = UDim2.new(0, 0, 0, 110)
-loadingDescription.TextScaled = true
-loadingDescription.TextWrapped = true
+-- Warning message
+local warningMessage = Instance.new("TextLabel", warningFrame)
+warningMessage.Text = "This auto age 50 only works at divine pets, because it's only waste of time if your gonna do this with your common pets"
+warningMessage.Font = Enum.Font.Gotham
+warningMessage.TextSize = 16
+warningMessage.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningMessage.BackgroundTransparency = 1
+warningMessage.Size = UDim2.new(1, -40, 0, 120)
+warningMessage.Position = UDim2.new(0, 20, 0, 60)
+warningMessage.TextScaled = true
+warningMessage.TextWrapped = true
 
--- Loading progress bar
-local progressBarBG = Instance.new("Frame", loadingFrame)
-progressBarBG.Size = UDim2.new(0.8, 0, 0, 8)
-progressBarBG.Position = UDim2.new(0.1, 0, 0, 175)
-progressBarBG.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Instance.new("UICorner", progressBarBG).CornerRadius = UDim.new(0, 4)
+-- Continue button
+local continueBtn = Instance.new("TextButton", warningFrame)
+continueBtn.Size = UDim2.new(0.8, 0, 0, 40)
+continueBtn.Position = UDim2.new(0.1, 0, 0, 200)
+continueBtn.BackgroundColor3 = Color3.fromRGB(34, 139, 34) -- Forest green
+continueBtn.Text = "I UNDERSTAND - CONTINUE"
+continueBtn.Font = Enum.Font.FredokaOne
+continueBtn.TextSize = 16
+continueBtn.TextColor3 = Color3.new(1, 1, 1)
+continueBtn.AutoButtonColor = false
+Instance.new("UICorner", continueBtn).CornerRadius = UDim.new(0, 8)
 
-local progressBar = Instance.new("Frame", progressBarBG)
-progressBar.Size = UDim2.new(0, 0, 1, 0)
-progressBar.Position = UDim2.new(0, 0, 0, 0)
-progressBar.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-Instance.new("UICorner", progressBar).CornerRadius = UDim.new(0, 4)
+-- Cancel button
+local cancelBtn = Instance.new("TextButton", warningFrame)
+cancelBtn.Size = UDim2.new(0.8, 0, 0, 40)
+cancelBtn.Position = UDim2.new(0.1, 0, 0, 250)
+cancelBtn.BackgroundColor3 = Color3.fromRGB(105, 105, 105) -- Dim gray
+cancelBtn.Text = "CANCEL"
+cancelBtn.Font = Enum.Font.FredokaOne
+cancelBtn.TextSize = 16
+cancelBtn.TextColor3 = Color3.new(1, 1, 1)
+cancelBtn.AutoButtonColor = false
+Instance.new("UICorner", cancelBtn).CornerRadius = UDim.new(0, 8)
 
--- Function to update loading screen
-local function updateLoading()
-	local descIndex = 1
-	for i = 0, 100, 1 do
-		loadingCounter.Text = i .. "%"
-		progressBar.Size = UDim2.new(i/100, 0, 1, 0)
-		
-		-- Change description every ~33%
-		if i >= 33 and descIndex == 1 then
-			descIndex = 2
-			loadingDescription.Text = loadingDescriptions[2]
-		elseif i >= 66 and descIndex == 2 then
-			descIndex = 3
-			loadingDescription.Text = loadingDescriptions[3]
-		end
-		
-		wait(1.8) -- Super slow count (3 minutes total)
-	end
-	
-	wait(1)
-	loadingFrame:Destroy()
+-- Button hover effects
+continueBtn.MouseEnter:Connect(function()
+	continueBtn.BackgroundColor3 = Color3.fromRGB(50, 205, 50) -- Lime green
+end)
+continueBtn.MouseLeave:Connect(function()
+	continueBtn.BackgroundColor3 = Color3.fromRGB(34, 139, 34) -- Forest green
+end)
+
+cancelBtn.MouseEnter:Connect(function()
+	cancelBtn.BackgroundColor3 = Color3.fromRGB(169, 169, 169) -- Dark gray
+end)
+cancelBtn.MouseLeave:Connect(function()
+	cancelBtn.BackgroundColor3 = Color3.fromRGB(105, 105, 105) -- Dim gray
+end)
+
+warningCloseBtn.MouseEnter:Connect(function()
+	warningCloseBtn.BackgroundColor3 = Color3.fromRGB(255, 69, 0) -- Red orange
+end)
+warningCloseBtn.MouseLeave:Connect(function()
+	warningCloseBtn.BackgroundColor3 = Color3.fromRGB(220, 20, 60) -- Crimson
+end)
+
+-- Warning screen event handlers
+local function closeWarning()
+	warningFrame:Destroy()
 end
 
--- Start loading
-spawn(updateLoading)
+local function startAgeChanger()
+	warningFrame:Destroy()
+	-- Start the loading screen and age changer
+	startMainScript()
+end
 
--- Wait for loading to complete before showing main GUI
-wait(182) -- Wait for loading to finish (3 minutes + 2 seconds)
+warningCloseBtn.MouseButton1Click:Connect(closeWarning)
+cancelBtn.MouseButton1Click:Connect(closeWarning)
+continueBtn.MouseButton1Click:Connect(startAgeChanger)
 
--- GUI setup with violet theme
-local frame = Instance.new("Frame", screenGui)
-frame.Size = UDim2.new(0, 250, 0, 160) -- Increased size for text box
-frame.Position = UDim2.new(0.4, 0, 0.35, 0)
-frame.BackgroundColor3 = Color3.fromRGB(75, 0, 130) -- Violet
-frame.BackgroundTransparency = 0.1
-frame.BorderSizePixel = 0
-frame.Active = true
-frame.Draggable = true
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+-- Main script function (only runs after warning is accepted)
+function startMainScript()
+	-- Loading screen descriptions
+	local loadingDescriptions = {
+		"The Instant Age is Now Loading",
+		"The instant age only works at divine pets",
+		"Credits to Kaneki&Skids"
+	}
 
-local title = Instance.new("TextLabel", frame)
-title.Text = "🕒 Pet Age Changer 🕜"
-title.Font = Enum.Font.FredokaOne
-title.TextSize = 18
-title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.BackgroundTransparency = 1
-title.Size = UDim2.new(1, 0, 0, 25)
-title.Position = UDim2.new(0, 0, 0, 0)
+	-- Loading Screen GUI
+	local loadingFrame = Instance.new("Frame", screenGui)
+	loadingFrame.Size = UDim2.new(0, 300, 0, 200)
+	loadingFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+	loadingFrame.BackgroundColor3 = Color3.fromRGB(75, 0, 130) -- Violet
+	loadingFrame.BackgroundTransparency = 0.1
+	loadingFrame.BorderSizePixel = 0
+	loadingFrame.Active = true
+	loadingFrame.Draggable = true
+	Instance.new("UICorner", loadingFrame).CornerRadius = UDim.new(0, 12)
 
-local petInfo = Instance.new("TextLabel", frame)
-petInfo.Text = "Equipped Pet: [None]"
-petInfo.Font = Enum.Font.Gotham
-petInfo.TextSize = 14
-petInfo.TextColor3 = Color3.fromRGB(230, 230, 255)
-petInfo.BackgroundTransparency = 1
-petInfo.Position = UDim2.new(0, 0, 0, 25)
-petInfo.Size = UDim2.new(1, 0, 0, 20)
-petInfo.TextScaled = true
-petInfo.TextWrapped = true
-
--- Age input text box
-local ageInput = Instance.new("TextBox", frame)
-ageInput.Size = UDim2.new(0.9, 0, 0, 30)
-ageInput.Position = UDim2.new(0.05, 0, 0, 50)
-ageInput.BackgroundColor3 = Color3.fromRGB(138, 43, 226) -- BlueViolet
-ageInput.Text = "50"
-ageInput.PlaceholderText = "Enter age (e.g., 50)"
-ageInput.Font = Enum.Font.Gotham
-ageInput.TextSize = 16
-ageInput.TextColor3 = Color3.new(1, 1, 1)
-ageInput.ClearTextOnFocus = false
-Instance.new("UICorner", ageInput).CornerRadius = UDim.new(0, 6)
-local inputStroke = Instance.new("UIStroke", ageInput)
-inputStroke.Color = Color3.fromRGB(186, 85, 211) -- MediumOrchid
-inputStroke.Thickness = 2
-
-local function createStyledButton(text, yPos, color)
-	local btn = Instance.new("TextButton")
-	btn.Size = UDim2.new(0.9, 0, 0, 35)
-	btn.Position = UDim2.new(0.05, 0, 0, yPos)
-	btn.BackgroundColor3 = Color3.fromRGB(72, 61, 139) -- DarkSlateBlue
-	btn.Text = text
-	btn.Font = Enum.Font.FredokaOne
-	btn.TextSize = 16
-	btn.TextColor3 = Color3.new(1, 1, 1)
-	btn.AutoButtonColor = false
-
-	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
-	local stroke = Instance.new("UIStroke", btn)
-	stroke.Color = Color3.fromRGB(123, 104, 238) -- MediumSlateBlue
-	stroke.Thickness = 1.5
-
-	btn.MouseEnter:Connect(function()
-		btn.BackgroundColor3 = color:lerp(Color3.new(1,1,1), 0.2)
-	end)
-	btn.MouseLeave:Connect(function()
-		btn.BackgroundColor3 = color
+	-- Close button for loading screen
+	local loadingCloseBtn = Instance.new("TextButton", loadingFrame)
+	loadingCloseBtn.Size = UDim2.new(0, 25, 0, 25)
+	loadingCloseBtn.Position = UDim2.new(1, -30, 0, 5)
+	loadingCloseBtn.BackgroundColor3 = Color3.fromRGB(220, 20, 60)
+	loadingCloseBtn.Text = "×"
+	loadingCloseBtn.Font = Enum.Font.GothamBold
+	loadingCloseBtn.TextSize = 16
+	loadingCloseBtn.TextColor3 = Color3.new(1, 1, 1)
+	loadingCloseBtn.AutoButtonColor = false
+	Instance.new("UICorner", loadingCloseBtn).CornerRadius = UDim.new(0, 12)
+	
+	loadingCloseBtn.MouseButton1Click:Connect(function()
+		loadingFrame:Destroy()
 	end)
 
-	btn.Parent = frame
-	return btn
-end
+	local loadingTitle = Instance.new("TextLabel", loadingFrame)
+	loadingTitle.Text = "🕒 Pet Age Changer 🕜"
+	loadingTitle.Font = Enum.Font.FredokaOne
+	loadingTitle.TextSize = 20
+	loadingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+	loadingTitle.BackgroundTransparency = 1
+	loadingTitle.Size = UDim2.new(1, -30, 0, 40)
+	loadingTitle.Position = UDim2.new(0, 0, 0, 10)
 
-local button = createStyledButton("Set Custom Age", 90, Color3.fromRGB(138, 43, 226))
+	local loadingCounter = Instance.new("TextLabel", loadingFrame)
+	loadingCounter.Text = "0%"
+	loadingCounter.Font = Enum.Font.GothamBold
+	loadingCounter.TextSize = 24
+	loadingCounter.TextColor3 = Color3.fromRGB(138, 43, 226)
+	loadingCounter.BackgroundTransparency = 1
+	loadingCounter.Size = UDim2.new(1, 0, 0, 40)
+	loadingCounter.Position = UDim2.new(0, 0, 0, 60)
 
--- Credits label
-local credits = Instance.new("TextLabel", frame)
-credits.Text = "Made by DragonScripter🐉"
-credits.Font = Enum.Font.GothamSemibold
-credits.TextSize = 12
-credits.TextColor3 = Color3.fromRGB(200, 162, 255)
-credits.BackgroundTransparency = 1
-credits.Position = UDim2.new(0, 0, 0, 130)
-credits.Size = UDim2.new(1, 0, 0, 20)
-credits.TextScaled = true
+	local loadingDescription = Instance.new("TextLabel", loadingFrame)
+	loadingDescription.Text = loadingDescriptions[1]
+	loadingDescription.Font = Enum.Font.Gotham
+	loadingDescription.TextSize = 14
+	loadingDescription.TextColor3 = Color3.fromRGB(230, 230, 255)
+	loadingDescription.BackgroundTransparency = 1
+	loadingDescription.Size = UDim2.new(1, 0, 0, 60)
+	loadingDescription.Position = UDim2.new(0, 0, 0, 110)
+	loadingDescription.TextScaled = true
+	loadingDescription.TextWrapped = true
 
--- Function to find the equipped pet Tool
-local function getEquippedPetTool()
-	character = player.Character or player.CharacterAdded:Wait()
-	for _, child in pairs(character:GetChildren()) do
-		if child:IsA("Tool") and child.Name:find("Age") then
-			return child
+	-- Loading progress bar
+	local progressBarBG = Instance.new("Frame", loadingFrame)
+	progressBarBG.Size = UDim2.new(0.8, 0, 0, 8)
+	progressBarBG.Position = UDim2.new(0.1, 0, 0, 175)
+	progressBarBG.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Instance.new("UICorner", progressBarBG).CornerRadius = UDim.new(0, 4)
+
+	local progressBar = Instance.new("Frame", progressBarBG)
+	progressBar.Size = UDim2.new(0, 0, 1, 0)
+	progressBar.Position = UDim2.new(0, 0, 0, 0)
+	progressBar.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+	Instance.new("UICorner", progressBar).CornerRadius = UDim.new(0, 4)
+
+	-- Function to update loading screen
+	local function updateLoading()
+		local descIndex = 1
+		for i = 0, 100, 1 do
+			if not loadingFrame.Parent then break end -- Stop if closed
+			loadingCounter.Text = i .. "%"
+			progressBar.Size = UDim2.new(i/100, 0, 1, 0)
+			
+			-- Change description every ~33%
+			if i >= 33 and descIndex == 1 then
+				descIndex = 2
+				loadingDescription.Text = loadingDescriptions[2]
+			elseif i >= 66 and descIndex == 2 then
+				descIndex = 3
+				loadingDescription.Text = loadingDescriptions[3]
+			end
+			
+			wait(1.8) -- Super slow count (3 minutes total)
 		end
-	end
-	return nil
-end
-
--- Update the GUI with the currently equipped pet
-local function updateGUI()
-	local pet = getEquippedPetTool()
-	if pet then
-		petInfo.Text = "Equipped Pet: " .. pet.Name
-	else
-		petInfo.Text = "Equipped Pet: [None]"
-	end
-end
-
--- Click to visually update the name with custom age after countdown
-button.MouseButton1Click:Connect(function()
-	local tool = getEquippedPetTool()
-	local customAge = tonumber(ageInput.Text)
-	
-	if not customAge then
-		button.Text = "Invalid Age!"
-		wait(2)
-		button.Text = "Set Custom Age"
-		return
-	end
-	
-	if tool then
-		-- Countdown before changing age
-		for i = 20, 1, -1 do
-			button.Text = "Changing Age in " .. i .. "..."
+		
+		if loadingFrame.Parent then
 			wait(1)
-		end
-
-		-- Change name visually with custom age
-		local newName = tool.Name:gsub("%[Age%s%d+%]", "[Age " .. customAge .. "]")
-		tool.Name = newName
-		petInfo.Text = "Equipped Pet: " .. tool.Name
-		button.Text = "Set Custom Age"
-	else
-		button.Text = "No Pet Equipped!"
-		wait(2)
-		button.Text = "Set Custom Age"
-	end
-end)
-
--- Only allow numbers in the text box
-ageInput.Changed:Connect(function(property)
-	if property == "Text" then
-		local text = ageInput.Text
-		local filteredText = text:gsub("[^%d]", "")
-		if text ~= filteredText then
-			ageInput.Text = filteredText
+			loadingFrame:Destroy()
+			showMainGUI()
 		end
 	end
-end)
 
--- Periodically update GUI
-while true do
-	task.wait(1)
-	updateGUI()
+	-- Start loading
+	spawn(updateLoading)
+end
+
+-- Main GUI function
+function showMainGUI()
+	-- GUI setup with violet theme
+	local frame = Instance.new("Frame", screenGui)
+	frame.Size = UDim2.new(0, 250, 0, 160)
+	frame.Position = UDim2.new(0.4, 0, 0.35, 0)
+	frame.BackgroundColor3 = Color3.fromRGB(75, 0, 130) -- Violet
+	frame.BackgroundTransparency = 0.1
+	frame.BorderSizePixel = 0
+	frame.Active = true
+	frame.Draggable = true
+	Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+
+	-- Close button for main GUI
+	local mainCloseBtn = Instance.new("TextButton", frame)
+	mainCloseBtn.Size = UDim2.new(0, 25, 0, 25)
+	mainCloseBtn.Position = UDim2.new(1, -30, 0, 5)
+	mainCloseBtn.BackgroundColor3 = Color3.fromRGB(220, 20, 60)
+	mainCloseBtn.Text = "×"
+	mainCloseBtn.Font = Enum.Font.GothamBold
+	mainCloseBtn.TextSize = 16
+	mainCloseBtn.TextColor3 = Color3.new(1, 1, 1)
+	mainCloseBtn.AutoButtonColor = false
+	Instance.new("UICorner", mainCloseBtn).CornerRadius = UDim.new(0, 12)
+	
+	mainCloseBtn.MouseButton1Click:Connect(function()
+		frame:Destroy()
+	end)
+
+	local title = Instance.new("TextLabel", frame)
+	title.Text = "🕒 Pet Age Changer 🕜"
+	title.Font = Enum.Font.FredokaOne
+	title.TextSize = 18
+	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.BackgroundTransparency = 1
+	title.Size = UDim2.new(1, -30, 0, 25)
+	title.Position = UDim2.new(0, 0, 0, 0)
+
+	local petInfo = Instance.new("TextLabel", frame)
+	petInfo.Text = "Equipped Pet: [None]"
+	petInfo.Font = Enum.Font.Gotham
+	petInfo.TextSize = 14
+	petInfo.TextColor3 = Color3.fromRGB(230, 230, 255)
+	petInfo.BackgroundTransparency = 1
+	petInfo.Position = UDim2.new(0, 0, 0, 25)
+	petInfo.Size = UDim2.new(1, 0, 0, 20)
+	petInfo.TextScaled = true
+	petInfo.TextWrapped = true
+
+	-- Age input text box
+	local ageInput = Instance.new("TextBox", frame)
+	ageInput.Size = UDim2.new(0.9, 0, 0, 30)
+	ageInput.Position = UDim2.new(0.05, 0, 0, 50)
+	ageInput.BackgroundColor3 = Color3.fromRGB(138, 43, 226) -- BlueViolet
+	ageInput.Text = "50"
+	ageInput.PlaceholderText = "Enter age (e.g., 50)"
+	ageInput.Font = Enum.Font.Gotham
+	ageInput.TextSize = 16
+	ageInput.TextColor3 = Color3.new(1, 1, 1)
+	ageInput.ClearTextOnFocus = false
+	Instance.new("UICorner", ageInput).CornerRadius = UDim.new(0, 6)
+	local inputStroke = Instance.new("UIStroke", ageInput)
+	inputStroke.Color = Color3.fromRGB(186, 85, 211) -- MediumOrchid
+	inputStroke.Thickness = 2
+
+	local function createStyledButton(text, yPos, color)
+		local btn = Instance.new("TextButton")
+		btn.Size = UDim2.new(0.9, 0, 0, 35)
+		btn.Position = UDim2.new(0.05, 0, 0, yPos)
+		btn.BackgroundColor3 = Color3.fromRGB(72, 61, 139) -- DarkSlateBlue
+		btn.Text = text
+		btn.Font = Enum.Font.FredokaOne
+		btn.TextSize = 16
+		btn.TextColor3 = Color3.new(1, 1, 1)
+		btn.AutoButtonColor = false
+
+		Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+		local stroke = Instance.new("UIStroke", btn)
+		stroke.Color = Color3.fromRGB(123, 104, 238) -- MediumSlateBlue
+		stroke.Thickness = 1.5
+
+		btn.MouseEnter:Connect(function()
+			btn.BackgroundColor3 = color:lerp(Color3.new(1,1,1), 0.2)
+		end)
+		btn.MouseLeave:Connect(function()
+			btn.BackgroundColor3 = color
+		end)
+
+		btn.Parent = frame
+		return btn
+	end
+
+	local button = createStyledButton("Set Custom Age", 90, Color3.fromRGB(138, 43, 226))
+
+	-- Credits label
+	local credits = Instance.new("TextLabel", frame)
+	credits.Text = "Made by DragonScripter🐉"
+	credits.Font = Enum.Font.GothamSemibold
+	credits.TextSize = 12
+	credits.TextColor3 = Color3.fromRGB(200, 162, 255)
+	credits.BackgroundTransparency = 1
+	credits.Position = UDim2.new(0, 0, 0, 130)
+	credits.Size = UDim2.new(1, 0, 0, 20)
+	credits.TextScaled = true
+
+	-- Function to find the equipped pet Tool
+	local function getEquippedPetTool()
+		character = player.Character or player.CharacterAdded:Wait()
+		for _, child in pairs(character:GetChildren()) do
+			if child:IsA("Tool") and child.Name:find("Age") then
+				return child
+			end
+		end
+		return nil
+	end
+
+	-- Update the GUI with the currently equipped pet
+	local function updateGUI()
+		local pet = getEquippedPetTool()
+		if pet then
+			petInfo.Text = "Equipped Pet: " .. pet.Name
+		else
+			petInfo.Text = "Equipped Pet: [None]"
+		end
+	end
+
+	-- Click to visually update the name with custom age after countdown
+	button.MouseButton1Click:Connect(function()
+		local tool = getEquippedPetTool()
+		local customAge = tonumber(ageInput.Text)
+		
+		if not customAge then
+			button.Text = "Invalid Age!"
+			wait(2)
+			button.Text = "Set Custom Age"
+			return
+		end
+		
+		if tool then
+			-- Countdown before changing age
+			for i = 20, 1, -1 do
+				button.Text = "Changing Age in " .. i .. "..."
+				wait(1)
+			end
+
+			-- Change name visually with custom age
+			local newName = tool.Name:gsub("%[Age%s%d+%]", "[Age " .. customAge .. "]")
+			tool.Name = newName
+			petInfo.Text = "Equipped Pet: " .. tool.Name
+			button.Text = "Set Custom Age"
+		else
+			button.Text = "No Pet Equipped!"
+			wait(2)
+			button.Text = "Set Custom Age"
+		end
+	end)
+
+	-- Only allow numbers in the text box
+	ageInput.Changed:Connect(function(property)
+		if property == "Text" then
+			local text = ageInput.Text
+			local filteredText = text:gsub("[^%d]", "")
+			if text ~= filteredText then
+				ageInput.Text = filteredText
+			end
+		end
+	end)
+
+	-- Periodically update GUI
+	spawn(function()
+		while frame.Parent do
+			task.wait(1)
+			updateGUI()
+		end
+	end)
 end
