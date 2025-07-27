@@ -1,0 +1,395 @@
+-- Roblox GitHub Links GUI (Auto-Execute Version)
+-- Place this script in StarterPlayerScripts (LocalScript)
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "GitHubLinksGui"
+screenGui.Parent = playerGui
+
+-- Main Frame (Smaller size)
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 280, 0, 220)
+mainFrame.Position = UDim2.new(0.5, -140, 0.5, -110)
+mainFrame.BackgroundColor3 = Color3.fromRGB(15, 25, 45)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
+
+-- Add corner radius
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 12)
+mainCorner.Parent = mainFrame
+
+-- Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Size = UDim2.new(1, 0, 0, 35)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.fromRGB(10, 20, 40)
+titleLabel.BorderSizePixel = 0
+titleLabel.Text = "Multi Hub Enjoy!"
+titleLabel.TextColor3 = Color3.fromRGB(100, 150, 255)
+titleLabel.TextScaled = true
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Parent = mainFrame
+
+-- Title corner
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.Parent = titleLabel
+
+-- Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Name = "CloseButton"
+closeButton.Size = UDim2.new(0, 25, 0, 25)
+closeButton.Position = UDim2.new(1, -30, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeButton.BorderSizePixel = 0
+closeButton.Text = "×"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.TextScaled = true
+closeButton.Font = Enum.Font.GothamBold
+closeButton.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.Parent = closeButton
+
+-- Status Label
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Name = "StatusLabel"
+statusLabel.Size = UDim2.new(1, -20, 0, 20)
+statusLabel.Position = UDim2.new(0, 10, 0, 45)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = "Select a script to execute..."
+statusLabel.TextColor3 = Color3.fromRGB(150, 170, 220)
+statusLabel.TextScaled = true
+statusLabel.Font = Enum.Font.Gotham
+statusLabel.Parent = mainFrame
+
+-- Scripts Frame
+local scriptsFrame = Instance.new("Frame")
+scriptsFrame.Name = "ScriptsFrame"
+scriptsFrame.Size = UDim2.new(1, -20, 0, 120)
+scriptsFrame.Position = UDim2.new(0, 10, 0, 75)
+scriptsFrame.BackgroundTransparency = 1
+scriptsFrame.Parent = mainFrame
+
+-- Script URLs
+local scriptUrls = {
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/cooldown",
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/level",
+    "https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/GaG/Main.lua", -- Replace with your third script
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/lvl2."  -- Replace with your fourth script
+}
+
+local scriptNames = {
+    "Instant Cooldown",
+    "Egg Randomizer", 
+    "Auto Middle Cat",
+    "Instant Level 50"
+}
+
+-- Create script buttons
+local scriptButtons = {}
+for i = 1, 4 do
+    local button = Instance.new("TextButton")
+    button.Name = "ScriptButton" .. i
+    button.Size = UDim2.new(0.48, 0, 0, 25)
+    
+    -- Position buttons in 2x2 grid
+    if i <= 2 then
+        button.Position = UDim2.new((i-1) * 0.52, 0, 0, 0)
+    else
+        button.Position = UDim2.new((i-3) * 0.52, 0, 0, 35)
+    end
+    
+    button.BackgroundColor3 = Color3.fromRGB(20, 40, 80)
+    button.BorderSizePixel = 0
+    button.Text = scriptNames[i]
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextScaled = true
+    button.Font = Enum.Font.Gotham
+    button.Parent = scriptsFrame
+    
+    -- Add corner radius
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 6)
+    buttonCorner.Parent = button
+    
+    scriptButtons[i] = button
+end
+
+-- Credits Label
+local creditsLabel = Instance.new("TextLabel")
+creditsLabel.Name = "CreditsLabel"
+creditsLabel.Size = UDim2.new(1, -20, 0, 15)
+creditsLabel.Position = UDim2.new(0, 10, 1, -20)
+creditsLabel.BackgroundTransparency = 1
+creditsLabel.Text = "Made by DragonScripter, KanekiScript, Skids"
+creditsLabel.TextColor3 = Color3.fromRGB(80, 100, 150)
+creditsLabel.TextScaled = true
+creditsLabel.Font = Enum.Font.Gotham
+creditsLabel.Parent = mainFrame
+
+-- Animation function
+local function animateButton(button)
+    local originalSize = button.Size
+    local originalColor = button.BackgroundColor3
+    
+    -- Create hover effect
+    local colorTween = TweenService:Create(
+        button,
+        TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+        {BackgroundColor3 = Color3.fromRGB(30, 60, 120)}
+    )
+    
+    local sizeTween = TweenService:Create(
+        button,
+        TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+        {Size = originalSize - UDim2.new(0, 2, 0, 2)}
+    )
+    
+    local colorTweenBack = TweenService:Create(
+        button,
+        TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+        {BackgroundColor3 = originalColor}
+    )
+    
+    local sizeTweenBack = TweenService:Create(
+        button,
+        TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+        {Size = originalSize}
+    )
+    
+    colorTween:Play()
+    sizeTween:Play()
+    
+    wait(0.1)
+    colorTweenBack:Play()
+    sizeTweenBack:Play()
+end
+
+-- Function to execute script from URL
+local function executeScript(url, scriptName)
+    if not url or url == "" then
+        statusLabel.Text = "Error: No URL provided"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+        return
+    end
+    
+    statusLabel.Text = "Executing " .. scriptName .. "..."
+    statusLabel.TextColor3 = Color3.fromRGB(255, 200, 100)
+    
+    -- Use coroutine.wrap for async execution
+    coroutine.wrap(function()
+        local success, result = false, nil
+        
+        -- Try multiple HTTP methods
+        local methods = {
+            function()
+                HttpService.HttpEnabled = true
+                return HttpService:GetAsync(url)
+            end,
+            
+            function()
+                local response = HttpService:RequestAsync({
+                    Url = url,
+                    Method = "GET",
+                    Headers = {
+                        ["User-Agent"] = "Roblox/WinInet"
+                    }
+                })
+                if response.Success then
+                    return response.Body
+                else
+                    error("HTTP " .. response.StatusCode .. ": " .. response.StatusMessage)
+                end
+            end,
+            
+            function()
+                if game.HttpGet then
+                    return game:HttpGet(url, true)
+                else
+                    error("game:HttpGet not available")
+                end
+            end
+        }
+        
+        -- Try each method
+        for i, method in pairs(methods) do
+            success, result = pcall(method)
+            if success and result and result ~= "" then
+                break
+            else
+                wait(0.1)
+            end
+        end
+        
+        if success and result and result ~= "" then
+            -- Execute the script with better error handling
+            local executeSuccess, executeError = pcall(function()
+                if not result:match("%S") then
+                    error("Empty response")
+                end
+                
+                local compiledFunction, compileError = loadstring(result)
+                if not compiledFunction then
+                    error("Compilation failed: " .. (compileError or "Unknown error"))
+                end
+                
+                compiledFunction()
+            end)
+            
+            if executeSuccess then
+                statusLabel.Text = scriptName .. " executed successfully!"
+                statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+                
+                -- Auto-hide success message after 3 seconds
+                wait(3)
+                if statusLabel and statusLabel.Parent then
+                    statusLabel.Text = "Select a script to execute..."
+                    statusLabel.TextColor3 = Color3.fromRGB(150, 170, 220)
+                end
+            else
+                local shortError = tostring(executeError):sub(1, 30)
+                statusLabel.Text = "Error: " .. shortError .. "..."
+                statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+                warn("Full execution error:", executeError)
+            end
+        else
+            statusLabel.Text = "Failed to fetch " .. scriptName
+            statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            warn("HTTP Error for", scriptName, ":", result)
+        end
+    end)()
+end
+
+-- Connect script buttons
+for i = 1, 4 do
+    scriptButtons[i].MouseButton1Click:Connect(function()
+        spawn(function()
+            animateButton(scriptButtons[i])
+        end)
+        executeScript(scriptUrls[i], scriptNames[i])
+    end)
+    
+    -- Add hover effects
+    scriptButtons[i].MouseEnter:Connect(function()
+        TweenService:Create(
+            scriptButtons[i],
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+            {BackgroundColor3 = Color3.fromRGB(25, 50, 100)}
+        ):Play()
+    end)
+    
+    scriptButtons[i].MouseLeave:Connect(function()
+        TweenService:Create(
+            scriptButtons[i],
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+            {BackgroundColor3 = Color3.fromRGB(20, 40, 80)}
+        ):Play()
+    end)
+end
+
+-- Close button connection
+closeButton.MouseButton1Click:Connect(function()
+    animateButton(closeButton)
+    screenGui:Destroy()
+end)
+
+-- Enhanced dragging functionality
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+-- Make the entire title bar draggable
+local function startDrag(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        
+        -- Change cursor to indicate dragging
+        titleLabel.TextColor3 = Color3.fromRGB(150, 200, 255)
+    end
+end
+
+local function updateDrag(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end
+
+local function endDrag(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = false
+        -- Reset title color
+        titleLabel.TextColor3 = Color3.fromRGB(100, 150, 255)
+    end
+end
+
+-- Connect dragging events to title label
+titleLabel.InputBegan:Connect(startDrag)
+titleLabel.InputChanged:Connect(updateDrag)
+titleLabel.InputEnded:Connect(endDrag)
+
+-- Also connect to UserInputService for better mobile support
+UserInputService.InputChanged:Connect(updateDrag)
+UserInputService.InputEnded:Connect(endDrag)
+
+-- Add visual feedback for draggable area
+titleLabel.MouseEnter:Connect(function()
+    if not dragging then
+        TweenService:Create(
+            titleLabel,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+            {BackgroundColor3 = Color3.fromRGB(15, 30, 50)}
+        ):Play()
+    end
+end)
+
+titleLabel.MouseLeave:Connect(function()
+    if not dragging then
+        TweenService:Create(
+            titleLabel,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+            {BackgroundColor3 = Color3.fromRGB(10, 20, 40)}
+        ):Play()
+    end
+end)
+
+-- Add close button hover effect
+closeButton.MouseEnter:Connect(function()
+    TweenService:Create(
+        closeButton,
+        TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+        {BackgroundColor3 = Color3.fromRGB(255, 70, 70)}
+    ):Play()
+end)
+
+closeButton.MouseLeave:Connect(function()
+    TweenService:Create(
+        closeButton,
+        TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+        {BackgroundColor3 = Color3.fromRGB(200, 50, 50)}
+    ):Play()
+end)
+
+print("Multi Hub Enjoy! loaded successfully!")
+print("Auto-execute enabled - click any script button to run immediately")
+print("Drag the title bar to move the GUI around!")
