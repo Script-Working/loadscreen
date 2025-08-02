@@ -1,0 +1,477 @@
+-- Trade Freeze GUI Script for Roblox
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TradeFreezeGui"
+screenGui.Parent = playerGui
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 250, 0, 200)
+mainFrame.Position = UDim2.new(0, 50, 0, 50)
+mainFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+-- Corner rounding
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 8)
+corner.Parent = mainFrame
+
+-- Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Size = UDim2.new(1, 0, 0, 25)
+titleLabel.Position = UDim2.new(0, 0, 0, 5)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Scam Trade"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextScaled = true
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextXAlignment = Enum.TextXAlignment.Center
+titleLabel.Parent = mainFrame
+
+-- User Input Frame
+local userFrame = Instance.new("Frame")
+userFrame.Name = "UserFrame"
+userFrame.Size = UDim2.new(1, -20, 0, 25)
+userFrame.Position = UDim2.new(0, 10, 0, 35)
+userFrame.BackgroundTransparency = 1
+userFrame.Parent = mainFrame
+
+-- User Label
+local userLabel = Instance.new("TextLabel")
+userLabel.Name = "UserLabel"
+userLabel.Size = UDim2.new(0, 40, 1, 0)
+userLabel.Position = UDim2.new(0, 0, 0, 0)
+userLabel.BackgroundTransparency = 1
+userLabel.Text = "User ="
+userLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+userLabel.TextScaled = true
+userLabel.Font = Enum.Font.SourceSans
+userLabel.TextXAlignment = Enum.TextXAlignment.Left
+userLabel.Parent = userFrame
+
+-- Username TextBox
+local usernameTextBox = Instance.new("TextBox")
+usernameTextBox.Name = "UsernameTextBox"
+usernameTextBox.Size = UDim2.new(0, 120, 1, 0)
+usernameTextBox.Position = UDim2.new(0, 45, 0, 0)
+usernameTextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+usernameTextBox.BorderSizePixel = 1
+usernameTextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+usernameTextBox.Text = ""
+usernameTextBox.PlaceholderText = "Enter username..."
+usernameTextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+usernameTextBox.TextScaled = true
+usernameTextBox.Font = Enum.Font.SourceSans
+usernameTextBox.ClearTextOnFocus = false
+usernameTextBox.Parent = userFrame
+
+-- Corner for textbox
+local textboxCorner = Instance.new("UICorner")
+textboxCorner.CornerRadius = UDim.new(0, 4)
+textboxCorner.Parent = usernameTextBox
+
+-- View Profile Button
+local profileButton = Instance.new("TextButton")
+profileButton.Name = "ProfileButton"
+profileButton.Size = UDim2.new(0, 60, 1, 0)
+profileButton.Position = UDim2.new(0, 170, 0, 0)
+profileButton.BackgroundColor3 = Color3.fromRGB(0, 162, 255)
+profileButton.BorderSizePixel = 1
+profileButton.BorderColor3 = Color3.fromRGB(0, 120, 200)
+profileButton.Text = "Profile"
+profileButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+profileButton.TextScaled = true
+profileButton.Font = Enum.Font.SourceSansBold
+profileButton.Parent = userFrame
+
+-- Corner for profile button
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 4)
+buttonCorner.Parent = profileButton
+
+-- Freeze Trade Checkbox Frame
+local freezeFrame = Instance.new("Frame")
+freezeFrame.Name = "FreezeFrame"
+freezeFrame.Size = UDim2.new(1, 0, 0, 20)
+freezeFrame.Position = UDim2.new(0, 0, 0, 75)
+freezeFrame.BackgroundTransparency = 1
+freezeFrame.Parent = mainFrame
+
+-- Freeze Trade Label
+local freezeLabel = Instance.new("TextLabel")
+freezeLabel.Name = "FreezeLabel"
+freezeLabel.Size = UDim2.new(0, 100, 1, 0)
+freezeLabel.Position = UDim2.new(0, 10, 0, 0)
+freezeLabel.BackgroundTransparency = 1
+freezeLabel.Text = "Freeze Trade"
+freezeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+freezeLabel.TextScaled = true
+freezeLabel.Font = Enum.Font.SourceSans
+freezeLabel.TextXAlignment = Enum.TextXAlignment.Left
+freezeLabel.Parent = freezeFrame
+
+-- Freeze Trade Checkbox
+local freezeCheckbox = Instance.new("TextButton")
+freezeCheckbox.Name = "FreezeCheckbox"
+freezeCheckbox.Size = UDim2.new(0, 20, 0, 20)
+freezeCheckbox.Position = UDim2.new(1, -30, 0, 0)
+freezeCheckbox.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+freezeCheckbox.BorderSizePixel = 1
+freezeCheckbox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+freezeCheckbox.Text = ""
+freezeCheckbox.TextColor3 = Color3.fromRGB(0, 150, 0)
+freezeCheckbox.TextScaled = true
+freezeCheckbox.Font = Enum.Font.SourceSansBold
+freezeCheckbox.Parent = freezeFrame
+
+-- Credit Label
+local creditLabel = Instance.new("TextLabel")
+creditLabel.Name = "CreditLabel"
+creditLabel.Size = UDim2.new(1, -20, 0, 25)
+creditLabel.Position = UDim2.new(0, 10, 0, 160)
+creditLabel.BackgroundTransparency = 1
+creditLabel.Text = "Made by DragonScripter and Skids"
+creditLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+creditLabel.TextScaled = true
+creditLabel.Font = Enum.Font.SourceSansBold
+creditLabel.TextXAlignment = Enum.TextXAlignment.Center
+creditLabel.Parent = mainFrame
+
+-- Auto Accept Checkbox Frame
+local autoFrame = Instance.new("Frame")
+autoFrame.Name = "AutoFrame"
+autoFrame.Size = UDim2.new(1, 0, 0, 20)
+autoFrame.Position = UDim2.new(0, 0, 0, 130)
+autoFrame.BackgroundTransparency = 1
+autoFrame.Parent = mainFrame
+
+-- Auto Accept Label
+local autoLabel = Instance.new("TextLabel")
+autoLabel.Name = "AutoLabel"
+autoLabel.Size = UDim2.new(0, 100, 1, 0)
+autoLabel.Position = UDim2.new(0, 10, 0, 0)
+autoLabel.BackgroundTransparency = 1
+autoLabel.Text = "Auto Accept"
+autoLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoLabel.TextScaled = true
+autoLabel.Font = Enum.Font.SourceSans
+autoLabel.TextXAlignment = Enum.TextXAlignment.Left
+autoLabel.Parent = autoFrame
+
+-- Auto Accept Checkbox
+local autoCheckbox = Instance.new("TextButton")
+autoCheckbox.Name = "AutoCheckbox"
+autoCheckbox.Size = UDim2.new(0, 20, 0, 20)
+autoCheckbox.Position = UDim2.new(1, -30, 0, 0)
+autoCheckbox.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+autoCheckbox.BorderSizePixel = 1
+autoCheckbox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+autoCheckbox.Text = ""
+autoCheckbox.TextColor3 = Color3.fromRGB(0, 150, 0)
+autoCheckbox.TextScaled = true
+autoCheckbox.Font = Enum.Font.SourceSansBold
+autoCheckbox.Parent = autoFrame
+
+-- Variables to track checkbox states (start as false/unchecked)
+local freezeTradeEnabled = false
+local autoAcceptEnabled = false
+
+-- Function to show warning popup
+local function showWarning(message)
+    local warningGui = Instance.new("ScreenGui")
+    warningGui.Name = "WarningPopup"
+    warningGui.Parent = playerGui
+    
+    local warningFrame = Instance.new("Frame")
+    warningFrame.Size = UDim2.new(0, 300, 0, 150)
+    warningFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
+    warningFrame.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+    warningFrame.BorderSizePixel = 3
+    warningFrame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+    warningFrame.Active = true
+    warningFrame.Draggable = true
+    warningFrame.Parent = warningGui
+    
+    local warningCorner = Instance.new("UICorner")
+    warningCorner.CornerRadius = UDim.new(0, 10)
+    warningCorner.Parent = warningFrame
+    
+    local warningTitle = Instance.new("TextLabel")
+    warningTitle.Size = UDim2.new(1, 0, 0, 30)
+    warningTitle.Position = UDim2.new(0, 0, 0, 5)
+    warningTitle.BackgroundTransparency = 1
+    warningTitle.Text = "⚠️ WARNING ⚠️"
+    warningTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    warningTitle.TextScaled = true
+    warningTitle.Font = Enum.Font.SourceSansBold
+    warningTitle.TextXAlignment = Enum.TextXAlignment.Center
+    warningTitle.Parent = warningFrame
+    
+    local warningMessage = Instance.new("TextLabel")
+    warningMessage.Size = UDim2.new(1, -20, 0, 60)
+    warningMessage.Position = UDim2.new(0, 10, 0, 40)
+    warningMessage.BackgroundTransparency = 1
+    warningMessage.Text = message
+    warningMessage.TextColor3 = Color3.fromRGB(255, 255, 255)
+    warningMessage.TextScaled = true
+    warningMessage.Font = Enum.Font.SourceSans
+    warningMessage.TextXAlignment = Enum.TextXAlignment.Center
+    warningMessage.TextWrapped = true
+    warningMessage.Parent = warningFrame
+    
+    local okButton = Instance.new("TextButton")
+    okButton.Size = UDim2.new(0, 80, 0, 30)
+    okButton.Position = UDim2.new(0.5, -40, 1, -40)
+    okButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    okButton.BorderSizePixel = 2
+    okButton.BorderColor3 = Color3.fromRGB(200, 200, 200)
+    okButton.Text = "OK"
+    okButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    okButton.TextScaled = true
+    okButton.Font = Enum.Font.SourceSansBold
+    okButton.Parent = warningFrame
+    
+    local okCorner = Instance.new("UICorner")
+    okCorner.CornerRadius = UDim.new(0, 6)
+    okCorner.Parent = okButton
+    
+    okButton.MouseButton1Click:Connect(function()
+        warningGui:Destroy()
+    end)
+    
+    -- Rainbow animation for warning popup
+    local warningRainbowConnection
+    warningRainbowConnection = RunService.Heartbeat:Connect(function()
+        if not warningFrame.Parent then
+            warningRainbowConnection:Disconnect()
+            return
+        end
+        
+        local time = tick() * 3
+        local r = math.sin(time) * 0.3 + 0.7
+        local g = math.sin(time + 2) * 0.3 + 0.3
+        local b = math.sin(time + 4) * 0.3 + 0.3
+        
+        warningFrame.BackgroundColor3 = Color3.new(r, g, b)
+    end)
+end
+
+-- Function to update checkbox appearance
+local function updateCheckbox(checkbox, enabled)
+    if enabled then
+        checkbox.Text = "✓"
+        checkbox.TextColor3 = Color3.fromRGB(0, 150, 0)
+        checkbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    else
+        checkbox.Text = ""
+        checkbox.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+    end
+end
+local function viewPlayerProfile(username)
+    if username and username ~= "" then
+        local success, userId = pcall(function()
+            return Players:GetUserIdFromNameAsync(username)
+        end)
+        
+        if success and userId then
+            -- Create profile viewing GUI
+            local profileGui = Instance.new("ScreenGui")
+            profileGui.Name = "ProfileViewer"
+            profileGui.Parent = playerGui
+            
+            local profileFrame = Instance.new("Frame")
+            profileFrame.Size = UDim2.new(0, 350, 0, 280)
+            profileFrame.Position = UDim2.new(0.5, -175, 0.5, -140)
+            profileFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            profileFrame.BorderSizePixel = 2
+            profileFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+            profileFrame.Active = true
+            profileFrame.Draggable = true
+            profileFrame.Parent = profileGui
+            
+            local profileCorner = Instance.new("UICorner")
+            profileCorner.CornerRadius = UDim.new(0, 8)
+            profileCorner.Parent = profileFrame
+            
+            local profileTitle = Instance.new("TextLabel")
+            profileTitle.Size = UDim2.new(1, 0, 0, 30)
+            profileTitle.Position = UDim2.new(0, 0, 0, 5)
+            profileTitle.BackgroundTransparency = 1
+            profileTitle.Text = username .. "'s Profile"
+            profileTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+            profileTitle.TextScaled = true
+            profileTitle.Font = Enum.Font.SourceSansBold
+            profileTitle.Parent = profileFrame
+            
+            -- Avatar Image
+            local avatarImage = Instance.new("ImageLabel")
+            avatarImage.Size = UDim2.new(0, 150, 0, 150)
+            avatarImage.Position = UDim2.new(0.5, -75, 0, 45)
+            avatarImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            avatarImage.BorderSizePixel = 2
+            avatarImage.BorderColor3 = Color3.fromRGB(200, 200, 200)
+            avatarImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. userId .. "&width=150&height=150&format=png"
+            avatarImage.Parent = profileFrame
+            
+            local avatarCorner = Instance.new("UICorner")
+            avatarCorner.CornerRadius = UDim.new(0, 8)
+            avatarCorner.Parent = avatarImage
+            
+            -- Username Label
+            local usernameLabel = Instance.new("TextLabel")
+            usernameLabel.Size = UDim2.new(1, -20, 0, 25)
+            usernameLabel.Position = UDim2.new(0, 10, 0, 205)
+            usernameLabel.BackgroundTransparency = 1
+            usernameLabel.Text = "Username: " .. username
+            usernameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            usernameLabel.TextScaled = true
+            usernameLabel.Font = Enum.Font.SourceSans
+            usernameLabel.TextXAlignment = Enum.TextXAlignment.Center
+            usernameLabel.Parent = profileFrame
+            
+            -- User ID Label
+            local userIdLabel = Instance.new("TextLabel")
+            userIdLabel.Size = UDim2.new(1, -20, 0, 25)
+            userIdLabel.Position = UDim2.new(0, 10, 0, 225)
+            userIdLabel.BackgroundTransparency = 1
+            userIdLabel.Text = "User ID: " .. userId
+            userIdLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            userIdLabel.TextScaled = true
+            userIdLabel.Font = Enum.Font.SourceSans
+            userIdLabel.TextXAlignment = Enum.TextXAlignment.Center
+            userIdLabel.Parent = profileFrame
+            
+            local closeButton = Instance.new("TextButton")
+            closeButton.Size = UDim2.new(0, 60, 0, 25)
+            closeButton.Position = UDim2.new(0.5, -30, 1, -35)
+            closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            closeButton.BorderSizePixel = 1
+            closeButton.BorderColor3 = Color3.fromRGB(200, 0, 0)
+            closeButton.Text = "Close"
+            closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            closeButton.TextScaled = true
+            closeButton.Font = Enum.Font.SourceSansBold
+            closeButton.Parent = profileFrame
+            
+            local closeCorner = Instance.new("UICorner")
+            closeCorner.CornerRadius = UDim.new(0, 4)
+            closeCorner.Parent = closeButton
+            
+            closeButton.MouseButton1Click:Connect(function()
+                profileGui:Destroy()
+            end)
+            
+            -- Rainbow animation for profile GUI
+            local profileRainbowConnection
+            profileRainbowConnection = RunService.Heartbeat:Connect(function()
+                if not profileFrame.Parent then
+                    profileRainbowConnection:Disconnect()
+                    return
+                end
+                
+                local time = tick() * 2
+                local r = math.sin(time) * 0.5 + 0.5
+                local g = math.sin(time + 2) * 0.5 + 0.5
+                local b = math.sin(time + 4) * 0.5 + 0.5
+                
+                profileFrame.BackgroundColor3 = Color3.new(r, g, b)
+            end)
+            
+            print("Viewing profile for: " .. username .. " (ID: " .. userId .. ")")
+        else
+            print("User not found: " .. username)
+        end
+    else
+        print("Please enter a username")
+    end
+end
+
+-- Profile button functionality
+profileButton.MouseButton1Click:Connect(function()
+    local username = usernameTextBox.Text:gsub("^%s*(.-)%s*$", "%1") -- Trim whitespace
+    viewPlayerProfile(username)
+end)
+
+-- Enter key functionality for textbox
+usernameTextBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local username = usernameTextBox.Text:gsub("^%s*(.-)%s*$", "%1") -- Trim whitespace
+        viewPlayerProfile(username)
+    end
+end)
+
+-- Freeze Trade checkbox functionality
+freezeCheckbox.MouseButton1Click:Connect(function()
+    freezeTradeEnabled = not freezeTradeEnabled
+    updateCheckbox(freezeCheckbox, freezeTradeEnabled)
+    
+    -- Add your freeze trade logic here
+    if freezeTradeEnabled then
+        print("Freeze Trade: ENABLED")
+    else
+        print("Freeze Trade: DISABLED")
+    end
+end)
+
+-- Auto Accept checkbox functionality
+autoCheckbox.MouseButton1Click:Connect(function()
+    -- Check if freeze trade is disabled
+    if not freezeTradeEnabled then
+        showWarning("You can't turn on Auto Accept if the Freeze Trade is disabled!")
+        return
+    end
+    
+    autoAcceptEnabled = not autoAcceptEnabled
+    updateCheckbox(autoCheckbox, autoAcceptEnabled)
+    
+    -- Add your auto accept logic here
+    if autoAcceptEnabled then
+        print("Auto Accept: ENABLED")
+    else
+        print("Auto Accept: DISABLED")
+    end
+end)
+
+-- Rainbow animation for main GUI
+local mainRainbowConnection = RunService.Heartbeat:Connect(function()
+    local time = tick() * 2
+    local r = math.sin(time) * 0.5 + 0.5
+    local g = math.sin(time + 2) * 0.5 + 0.5
+    local b = math.sin(time + 4) * 0.5 + 0.5
+    
+    mainFrame.BackgroundColor3 = Color3.new(r, g, b)
+end)
+
+-- Hover effects for buttons and checkboxes
+local function addHoverEffect(element, normalColor, hoverColor)
+    element.MouseEnter:Connect(function()
+        local tween = TweenService:Create(element, TweenInfo.new(0.2), {BackgroundColor3 = hoverColor})
+        tween:Play()
+    end)
+    
+    element.MouseLeave:Connect(function()
+        local tween = TweenService:Create(element, TweenInfo.new(0.2), {BackgroundColor3 = normalColor})
+        tween:Play()
+    end)
+end
+
+-- Add hover effects
+addHoverEffect(profileButton, Color3.fromRGB(0, 162, 255), Color3.fromRGB(0, 140, 220))
+addHoverEffect(freezeCheckbox, Color3.fromRGB(200, 200, 200), Color3.fromRGB(230, 230, 230))
+addHoverEffect(autoCheckbox, Color3.fromRGB(200, 200, 200), Color3.fromRGB(230, 230, 230))
+
+print("Trade Freeze GUI loaded successfully!")
