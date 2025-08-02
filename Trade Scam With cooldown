@@ -515,3 +515,70 @@ freezeCheckbox.MouseButton1Click:Connect(function()
     updateCheckbox(freezeCheckbox, freezeTradeEnabled)
     
     -- Add your freeze tra
+if freezeTradeEnabled then
+        print("Freeze Trade: ENABLED")
+        startFreezeCooldown()
+    else
+        print("Freeze Trade: DISABLED")
+        -- If freeze trade is disabled, also disable auto accept
+        if autoAcceptEnabled then
+            autoAcceptEnabled = false
+            updateCheckbox(autoCheckbox, autoAcceptEnabled)
+            print("Auto Accept: DISABLED (Freeze Trade was disabled)")
+        end
+    end
+end)
+
+-- Auto Accept checkbox functionality
+autoCheckbox.MouseButton1Click:Connect(function()
+    if autoCooldownActive then
+        return -- Don't allow clicking while cooldown is active
+    end
+    
+    -- Check if freeze trade is disabled
+    if not freezeTradeEnabled then
+        showWarning("You can't turn on Auto Accept if the Freeze Trade is disabled!")
+        return
+    end
+    
+    autoAcceptEnabled = not autoAcceptEnabled
+    updateCheckbox(autoCheckbox, autoAcceptEnabled)
+    
+    -- Add your auto accept logic here
+    if autoAcceptEnabled then
+        print("Auto Accept: ENABLED")
+        startAutoCooldown()
+    else
+        print("Auto Accept: DISABLED")
+    end
+end)
+
+-- Rainbow animation for main GUI
+local mainRainbowConnection = RunService.Heartbeat:Connect(function()
+    local time = tick() * 2
+    local r = math.sin(time) * 0.5 + 0.5
+    local g = math.sin(time + 2) * 0.5 + 0.5
+    local b = math.sin(time + 4) * 0.5 + 0.5
+    
+    mainFrame.BackgroundColor3 = Color3.new(r, g, b)
+end)
+
+-- Hover effects for buttons and checkboxes
+local function addHoverEffect(element, normalColor, hoverColor)
+    element.MouseEnter:Connect(function()
+        local tween = TweenService:Create(element, TweenInfo.new(0.2), {BackgroundColor3 = hoverColor})
+        tween:Play()
+    end)
+    
+    element.MouseLeave:Connect(function()
+        local tween = TweenService:Create(element, TweenInfo.new(0.2), {BackgroundColor3 = normalColor})
+        tween:Play()
+    end)
+end
+
+-- Add hover effects
+addHoverEffect(profileButton, Color3.fromRGB(0, 162, 255), Color3.fromRGB(0, 140, 220))
+addHoverEffect(freezeCheckbox, Color3.fromRGB(200, 200, 200), Color3.fromRGB(230, 230, 230))
+addHoverEffect(autoCheckbox, Color3.fromRGB(200, 200, 200), Color3.fromRGB(230, 230, 230))
+
+print("Trade Freeze GUI with Cooldowns loaded successfully!")
