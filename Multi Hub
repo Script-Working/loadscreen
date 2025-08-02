@@ -88,16 +88,14 @@ local scriptUrls = {
     "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/cooldown",
     "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/level",
     "https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/GaG/Main.lua", -- Replace with your third script
-    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/lvl2.",
-    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/Trade%20Scam%20With%20cooldown"-- Replace with your fourth script
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/lvl2."
 }
 
 local scriptNames = {
     "Instant Cooldown",
     "Egg Randomizer", 
     "Auto Middle Cat",
-    "Instant Level 50",
-    "Scam Trade"
+    "Instant Level 50"
 }
 
 -- Create script buttons
@@ -395,4 +393,3 @@ end)
 print("Multi Hub Enjoy! loaded successfully!")
 print("Auto-execute enabled - click any script button to run immediately")
 print("Drag the title bar to move the GUI around!")
-
