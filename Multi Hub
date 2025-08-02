@@ -14,11 +14,11 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "GitHubLinksGui"
 screenGui.Parent = playerGui
 
--- Main Frame (Smaller size)
+-- Main Frame (Increased size for 8 scripts)
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 280, 0, 220)
-mainFrame.Position = UDim2.new(0.5, -140, 0.5, -110)
+mainFrame.Size = UDim2.new(0, 320, 0, 320)
+mainFrame.Position = UDim2.new(0.5, -160, 0.5, -160)
 mainFrame.BackgroundColor3 = Color3.fromRGB(15, 25, 45)
 mainFrame.BorderSizePixel = 0
 mainFrame.Parent = screenGui
@@ -75,42 +75,48 @@ statusLabel.TextScaled = true
 statusLabel.Font = Enum.Font.Gotham
 statusLabel.Parent = mainFrame
 
--- Scripts Frame
+-- Scripts Frame (Increased size for 8 scripts)
 local scriptsFrame = Instance.new("Frame")
 scriptsFrame.Name = "ScriptsFrame"
-scriptsFrame.Size = UDim2.new(1, -20, 0, 120)
+scriptsFrame.Size = UDim2.new(1, -20, 0, 220)
 scriptsFrame.Position = UDim2.new(0, 10, 0, 75)
 scriptsFrame.BackgroundTransparency = 1
 scriptsFrame.Parent = mainFrame
 
--- Script URLs
+-- Script URLs (8 scripts)
 local scriptUrls = {
     "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/cooldown",
     "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/level",
-    "https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/GaG/Main.lua", -- Replace with your third script
-    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/lvl2."
+    "https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/GaG/Main.lua",
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/lvl2.",
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/Trade%20Scam%20With%20cooldown", -- Replace with your fifth script
+    "https://raw.githubusercontent.com/your-repo/script6/main.lua", -- Replace with your sixth script
+    "https://raw.githubusercontent.com/your-repo/script7/main.lua", -- Replace with your seventh script
+    "https://raw.githubusercontent.com/your-repo/script8/main.lua"  -- Replace with your eighth script
 }
 
 local scriptNames = {
     "Instant Cooldown",
     "Egg Randomizer", 
     "Auto Middle Cat",
-    "Instant Level 50"
+    "Instant Level 50",
+    "Scam Trade", -- Replace with your fifth script name
+    "SOON", -- Replace with your sixth script name
+    "SOON", -- Replace with your seventh script name
+    "SOON"  -- Replace with your eighth script name
 }
 
--- Create script buttons
+-- Create script buttons (8 buttons in 4x2 grid)
 local scriptButtons = {}
-for i = 1, 4 do
+for i = 1, 8 do
     local button = Instance.new("TextButton")
     button.Name = "ScriptButton" .. i
     button.Size = UDim2.new(0.48, 0, 0, 25)
     
-    -- Position buttons in 2x2 grid
-    if i <= 2 then
-        button.Position = UDim2.new((i-1) * 0.52, 0, 0, 0)
-    else
-        button.Position = UDim2.new((i-3) * 0.52, 0, 0, 35)
-    end
+    -- Position buttons in 4x2 grid (4 rows, 2 columns)
+    local row = math.ceil(i / 2) - 1
+    local col = (i - 1) % 2
+    button.Position = UDim2.new(col * 0.52, 0, 0, row * 35)
     
     button.BackgroundColor3 = Color3.fromRGB(20, 40, 80)
     button.BorderSizePixel = 0
@@ -273,8 +279,8 @@ local function executeScript(url, scriptName)
     end)()
 end
 
--- Connect script buttons
-for i = 1, 4 do
+-- Connect script buttons (8 buttons)
+for i = 1, 8 do
     scriptButtons[i].MouseButton1Click:Connect(function()
         spawn(function()
             animateButton(scriptButtons[i])
@@ -393,3 +399,4 @@ end)
 print("Multi Hub Enjoy! loaded successfully!")
 print("Auto-execute enabled - click any script button to run immediately")
 print("Drag the title bar to move the GUI around!")
+print("Now supports 8 scripts!")
