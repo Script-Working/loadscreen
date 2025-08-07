@@ -1,4 +1,4 @@
--- Roblox GitHub Links GUI (Auto-Execute Version with Warning)
+-- Roblox GitHub Links GUI (Auto-Execute Version)
 -- Place this script in StarterPlayerScripts (LocalScript)
 
 local Players = game:GetService("Players")
@@ -14,77 +14,13 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "GitHubLinksGui"
 screenGui.Parent = playerGui
 
--- Warning Frame (appears first)
-local warningFrame = Instance.new("Frame")
-warningFrame.Name = "WarningFrame"
-warningFrame.Size = UDim2.new(0, 400, 0, 250)
-warningFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
-warningFrame.BackgroundColor3 = Color3.fromRGB(15, 25, 45)
-warningFrame.BorderSizePixel = 0
-warningFrame.Parent = screenGui
-
--- Warning corner radius
-local warningCorner = Instance.new("UICorner")
-warningCorner.CornerRadius = UDim.new(0, 12)
-warningCorner.Parent = warningFrame
-
--- Warning Title
-local warningTitle = Instance.new("TextLabel")
-warningTitle.Name = "WarningTitle"
-warningTitle.Size = UDim2.new(1, 0, 0, 40)
-warningTitle.Position = UDim2.new(0, 0, 0, 0)
-warningTitle.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
-warningTitle.BorderSizePixel = 0
-warningTitle.Text = "⚠️ IMPORTANT WARNING ⚠️"
-warningTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-warningTitle.TextScaled = true
-warningTitle.Font = Enum.Font.GothamBold
-warningTitle.Parent = warningFrame
-
--- Warning title corner
-local warningTitleCorner = Instance.new("UICorner")
-warningTitleCorner.CornerRadius = UDim.new(0, 12)
-warningTitleCorner.Parent = warningTitle
-
--- Warning Message
-local warningMessage = Instance.new("TextLabel")
-warningMessage.Name = "WarningMessage"
-warningMessage.Size = UDim2.new(1, -20, 0, 140)
-warningMessage.Position = UDim2.new(0, 10, 0, 50)
-warningMessage.BackgroundTransparency = 1
-warningMessage.Text = "PLEASE WAIT IF IT TELEPORTS YOU TO ANOTHER SERVER IT'S FINDING A GOOD SERVER SO THE SCRIPT WILL WORK PERFECTLY PLEASE BE PATIENT. AND IF THE SCRIPT DOESN'T LOAD RE-EXECUTE IT AND ENJOY. CLICK "I UNDERSTAND" SO THE MENU WILL APPEAR"
-warningMessage.TextColor3 = Color3.fromRGB(255, 200, 100)
-warningMessage.TextScaled = true
-warningMessage.TextWrapped = true
-warningMessage.Font = Enum.Font.Gotham
-warningMessage.Parent = warningFrame
-
--- I Understand Button
-local understandButton = Instance.new("TextButton")
-understandButton.Name = "UnderstandButton"
-understandButton.Size = UDim2.new(0, 120, 0, 40)
-understandButton.Position = UDim2.new(0.5, -60, 0, 200)
-understandButton.BackgroundColor3 = Color3.fromRGB(50, 150, 50)
-understandButton.BorderSizePixel = 0
-understandButton.Text = "I UNDERSTAND"
-understandButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-understandButton.TextScaled = true
-understandButton.Font = Enum.Font.GothamBold
-understandButton.Parent = warningFrame
-
--- Understand button corner
-local understandCorner = Instance.new("UICorner")
-understandCorner.CornerRadius = UDim.new(0, 8)
-understandCorner.Parent = understandButton
-
--- Main Frame (Hidden initially)
+-- Main Frame (Increased size for 8 scripts)
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 320, 0, 320)
 mainFrame.Position = UDim2.new(0.5, -160, 0.5, -160)
 mainFrame.BackgroundColor3 = Color3.fromRGB(15, 25, 45)
 mainFrame.BorderSizePixel = 0
-mainFrame.Visible = false
 mainFrame.Parent = screenGui
 
 -- Add corner radius
@@ -209,106 +145,6 @@ creditsLabel.TextColor3 = Color3.fromRGB(80, 100, 150)
 creditsLabel.TextScaled = true
 creditsLabel.Font = Enum.Font.Gotham
 creditsLabel.Parent = mainFrame
-
--- Warning button animations and functionality
-understandButton.MouseEnter:Connect(function()
-    TweenService:Create(
-        understandButton,
-        TweenInfo.new(0.2, Enum.EasingStyle.Quad),
-        {BackgroundColor3 = Color3.fromRGB(70, 180, 70)}
-    ):Play()
-end)
-
-understandButton.MouseLeave:Connect(function()
-    TweenService:Create(
-        understandButton,
-        TweenInfo.new(0.2, Enum.EasingStyle.Quad),
-        {BackgroundColor3 = Color3.fromRGB(50, 150, 50)}
-    ):Play()
-end)
-
-understandButton.MouseButton1Click:Connect(function()
-    -- Animate button press
-    local pressedTween = TweenService:Create(
-        understandButton,
-        TweenInfo.new(0.1, Enum.EasingStyle.Quad),
-        {Size = UDim2.new(0, 115, 0, 38)}
-    )
-    
-    local releaseTween = TweenService:Create(
-        understandButton,
-        TweenInfo.new(0.1, Enum.EasingStyle.Quad),
-        {Size = UDim2.new(0, 120, 0, 40)}
-    )
-    
-    pressedTween:Play()
-    pressedTween.Completed:Connect(function()
-        releaseTween:Play()
-    end)
-    
-    -- Hide warning and show main frame
-    wait(0.2)
-    
-    local fadeOutTween = TweenService:Create(
-        warningFrame,
-        TweenInfo.new(0.5, Enum.EasingStyle.Quad),
-        {BackgroundTransparency = 1}
-    )
-    
-    -- Fade out all warning frame children
-    local childrenToFade = {warningTitle, warningMessage, understandButton}
-    for _, child in pairs(childrenToFade) do
-        TweenService:Create(
-            child,
-            TweenInfo.new(0.5, Enum.EasingStyle.Quad),
-            {BackgroundTransparency = 1, TextTransparency = 1}
-        ):Play()
-    end
-    
-    fadeOutTween:Play()
-    fadeOutTween.Completed:Connect(function()
-        warningFrame:Destroy()
-        mainFrame.Visible = true
-        
-        -- Animate main frame entrance
-        mainFrame.BackgroundTransparency = 1
-        for _, child in pairs(mainFrame:GetChildren()) do
-            if child:IsA("GuiObject") then
-                child.BackgroundTransparency = 1
-                if child:IsA("TextLabel") or child:IsA("TextButton") then
-                    child.TextTransparency = 1
-                end
-            end
-        end
-        
-        -- Fade in main frame
-        TweenService:Create(
-            mainFrame,
-            TweenInfo.new(0.5, Enum.EasingStyle.Quad),
-            {BackgroundTransparency = 0}
-        ):Play()
-        
-        -- Fade in all main frame children
-        for _, child in pairs(mainFrame:GetDescendants()) do
-            if child:IsA("GuiObject") then
-                local targetBgTransparency = 0
-                if child == statusLabel or child == creditsLabel then
-                    targetBgTransparency = 1
-                elseif child == scriptsFrame then
-                    targetBgTransparency = 1
-                elseif child.Name == "TitleLabel" then
-                    targetBgTransparency = 0
-                end
-                
-                TweenService:Create(
-                    child,
-                    TweenInfo.new(0.5, Enum.EasingStyle.Quad),
-                    {BackgroundTransparency = targetBgTransparency, TextTransparency = 0}
-                ):Play()
-            end
-        end
-    end)
-end)
 
 -- Animation function
 local function animateButton(button)
@@ -564,4 +400,3 @@ print("Multi Hub Enjoy! loaded successfully!")
 print("Auto-execute enabled - click any script button to run immediately")
 print("Drag the title bar to move the GUI around!")
 print("Now supports 8 scripts!")
-print("Warning dialog added for server teleportation!")
