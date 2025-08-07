@@ -1,0 +1,100 @@
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "WarningGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false
+
+-- Create main frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "WarningFrame"
+mainFrame.Size = UDim2.new(0, 400, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -100)
+mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+mainFrame.Parent = screenGui
+
+-- Create title bar
+local titleBar = Instance.new("Frame")
+titleBar.Name = "TitleBar"
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.Position = UDim2.new(0, 0, 0, 0)
+titleBar.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+
+-- Create title text
+local titleText = Instance.new("TextLabel")
+titleText.Name = "TitleText"
+titleText.Size = UDim2.new(1, -30, 1, 0)
+titleText.Position = UDim2.new(0, 5, 0, 0)
+titleText.BackgroundTransparency = 1
+titleText.Text = "WARNING"
+titleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleText.TextScaled = true
+titleText.Font = Enum.Font.SourceSansBold
+titleText.Parent = titleBar
+
+-- Create close button
+local closeButton = Instance.new("TextButton")
+closeButton.Name = "CloseButton"
+closeButton.Size = UDim2.new(0, 25, 0, 25)
+closeButton.Position = UDim2.new(1, -28, 0, 2.5)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+closeButton.BorderSizePixel = 0
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.TextScaled = true
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.Parent = titleBar
+
+-- Create warning message
+local warningText = Instance.new("TextLabel")
+warningText.Name = "WarningText"
+warningText.Size = UDim2.new(1, -20, 1, -40)
+warningText.Position = UDim2.new(0, 10, 0, 35)
+warningText.BackgroundTransparency = 1
+warningText.Text = "LET IT TELEPORTS YOU TO ANOTHER SERVER BECAUSE IT'S FINDING A GOOD SERVER SO THE SCRIPT WORKS PERFECTLY, IF THE MENU DOESN'T APPEAR RE-EXECUTE AGAIN"
+warningText.TextColor3 = Color3.fromRGB(255, 255, 0)
+warningText.TextScaled = true
+warningText.TextWrapped = true
+warningText.Font = Enum.Font.SourceSans
+warningText.Parent = mainFrame
+
+-- Make the GUI draggable
+local UserInputService = game:GetService("UserInputService")
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+local function update(input)
+    local delta = input.Position - dragStart
+    mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+titleBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+titleBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging then
+            update(input)
+        end
+    end
+end)
+
+-- Close button functionality
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
