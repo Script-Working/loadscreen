@@ -1,0 +1,336 @@
+-- CatHub Mobile-Friendly GUI Script
+-- Place this as a LocalScript in StarterPlayerScripts or StarterGui
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create main ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CatHub"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = playerGui
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 280, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -140, 0.5, -100)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
+
+-- Add rounded corners
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = mainFrame
+
+-- Add gradient background
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 45, 45)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25))
+}
+gradient.Rotation = 45
+gradient.Parent = mainFrame
+
+-- Add stroke/border
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(70, 70, 70)
+stroke.Thickness = 2
+stroke.Parent = mainFrame
+
+-- Title Bar
+local titleBar = Instance.new("Frame")
+titleBar.Name = "TitleBar"
+titleBar.Size = UDim2.new(1, 0, 0, 40)
+titleBar.Position = UDim2.new(0, 0, 0, 0)
+titleBar.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.Parent = titleBar
+
+-- Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Size = UDim2.new(1, -50, 1, 0)
+titleLabel.Position = UDim2.new(0, 10, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "🐱 CatHub"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextScaled = true
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Parent = titleBar
+
+-- Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Name = "CloseButton"
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(220, 50, 50)
+closeButton.Text = "×"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.TextScaled = true
+closeButton.Font = Enum.Font.GothamBold
+closeButton.BorderSizePixel = 0
+closeButton.Parent = titleBar
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 6)
+closeCorner.Parent = closeButton
+
+-- Content Frame
+local contentFrame = Instance.new("Frame")
+contentFrame.Name = "ContentFrame"
+contentFrame.Size = UDim2.new(1, -20, 1, -60)
+contentFrame.Position = UDim2.new(0, 10, 0, 50)
+contentFrame.BackgroundTransparency = 1
+contentFrame.Parent = mainFrame
+
+-- Inf Battlepass Points Button
+local infBattlepassButton = Instance.new("TextButton")
+infBattlepassButton.Name = "InfBattlepassButton"
+infBattlepassButton.Size = UDim2.new(1, 0, 0, 50)
+infBattlepassButton.Position = UDim2.new(0, 0, 0, 20)
+infBattlepassButton.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+infBattlepassButton.Text = "Inf Battlepass Points"
+infBattlepassButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+infBattlepassButton.TextScaled = true
+infBattlepassButton.Font = Enum.Font.Gotham
+infBattlepassButton.BorderSizePixel = 0
+infBattlepassButton.Parent = contentFrame
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 8)
+buttonCorner.Parent = infBattlepassButton
+
+-- Button hover effect
+local buttonTweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+infBattlepassButton.MouseEnter:Connect(function()
+    local tween = TweenService:Create(infBattlepassButton, buttonTweenInfo, {
+        BackgroundColor3 = Color3.fromRGB(120, 220, 120)
+    })
+    tween:Play()
+end)
+
+infBattlepassButton.MouseLeave:Connect(function()
+    local tween = TweenService:Create(infBattlepassButton, buttonTweenInfo, {
+        BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+    })
+    tween:Play()
+end)
+
+-- Status Label
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Name = "StatusLabel"
+statusLabel.Size = UDim2.new(1, 0, 0, 30)
+statusLabel.Position = UDim2.new(0, 0, 0, 90)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = "Ready to use!"
+statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+statusLabel.TextScaled = true
+statusLabel.Font = Enum.Font.Gotham
+statusLabel.Parent = contentFrame
+
+-- Mobile-friendly dragging system
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+local function updateInput(input)
+    local delta = input.Position - dragStart
+    local newPosition = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    mainFrame.Position = newPosition
+end
+
+-- Touch and mouse support
+titleBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+titleBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging then
+            updateInput(input)
+        end
+    end
+end)
+
+-- Close button functionality
+closeButton.MouseButton1Click:Connect(function()
+    local closeTween = TweenService:Create(mainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {
+        Size = UDim2.new(0, 0, 0, 0),
+        Position = UDim2.new(0.5, 0, 0.5, 0)
+    })
+    closeTween:Play()
+    
+    closeTween.Completed:Connect(function()
+        screenGui:Destroy()
+    end)
+end)
+
+-- Warning popup frame
+local warningFrame = Instance.new("Frame")
+warningFrame.Name = "WarningFrame"
+warningFrame.Size = UDim2.new(0, 250, 0, 120)
+warningFrame.Position = UDim2.new(0.5, -125, 0.5, -60)
+warningFrame.BackgroundColor3 = Color3.fromRGB(220, 50, 50)
+warningFrame.BorderSizePixel = 0
+warningFrame.Visible = false
+warningFrame.Parent = screenGui
+
+local warningCorner = Instance.new("UICorner")
+warningCorner.CornerRadius = UDim.new(0, 10)
+warningCorner.Parent = warningFrame
+
+local warningStroke = Instance.new("UIStroke")
+warningStroke.Color = Color3.fromRGB(255, 100, 100)
+warningStroke.Thickness = 3
+warningStroke.Parent = warningFrame
+
+-- Warning title
+local warningTitle = Instance.new("TextLabel")
+warningTitle.Name = "WarningTitle"
+warningTitle.Size = UDim2.new(1, -20, 0, 30)
+warningTitle.Position = UDim2.new(0, 10, 0, 10)
+warningTitle.BackgroundTransparency = 1
+warningTitle.Text = "⚠️ WARNING"
+warningTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningTitle.TextScaled = true
+warningTitle.Font = Enum.Font.GothamBold
+warningTitle.Parent = warningFrame
+
+-- Warning message
+local warningMessage = Instance.new("TextLabel")
+warningMessage.Name = "WarningMessage"
+warningMessage.Size = UDim2.new(1, -20, 0, 50)
+warningMessage.Position = UDim2.new(0, 10, 0, 40)
+warningMessage.BackgroundTransparency = 1
+warningMessage.Text = "YOU MUST USE 19 YEARS OLD ACCOUNT"
+warningMessage.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningMessage.TextScaled = true
+warningMessage.Font = Enum.Font.Gotham
+warningMessage.TextWrapped = true
+warningMessage.Parent = warningFrame
+
+-- Warning OK button
+local warningOkButton = Instance.new("TextButton")
+warningOkButton.Name = "WarningOkButton"
+warningOkButton.Size = UDim2.new(0, 60, 0, 25)
+warningOkButton.Position = UDim2.new(0.5, -30, 1, -35)
+warningOkButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+warningOkButton.Text = "OK"
+warningOkButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+warningOkButton.TextScaled = true
+warningOkButton.Font = Enum.Font.GothamBold
+warningOkButton.BorderSizePixel = 0
+warningOkButton.Parent = warningFrame
+
+local warningOkCorner = Instance.new("UICorner")
+warningOkCorner.CornerRadius = UDim.new(0, 5)
+warningOkCorner.Parent = warningOkButton
+
+-- Button functionality with loading
+local isLoading = false
+
+infBattlepassButton.MouseButton1Click:Connect(function()
+    if isLoading then return end
+    
+    isLoading = true
+    infBattlepassButton.Text = "Loading... 0%"
+    infBattlepassButton.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+    statusLabel.Text = "Initializing..."
+    statusLabel.TextColor3 = Color3.fromRGB(255, 200, 100)
+    
+    -- Loading progress from 1 to 100
+    for i = 1, 100 do
+        infBattlepassButton.Text = "Loading... " .. i .. "%"
+        
+        -- Update status messages during loading
+        if i == 25 then
+            statusLabel.Text = "Connecting to server..."
+        elseif i == 50 then
+            statusLabel.Text = "Verifying account..."
+        elseif i == 75 then
+            statusLabel.Text = "Processing request..."
+        elseif i == 90 then
+            statusLabel.Text = "Almost done..."
+        end
+        
+        wait(1.2) -- 2 minutes total (120 seconds / 100 steps = 1.2 seconds per step)
+    end
+    
+    -- Complete loading
+    infBattlepassButton.Text = "Complete!"
+    statusLabel.Text = "Checking requirements..."
+    statusLabel.TextColor3 = Color3.fromRGB(255, 255, 100)
+    
+    wait(1)
+    
+    -- Show warning popup
+    warningFrame.Visible = true
+    warningFrame.Size = UDim2.new(0, 0, 0, 0)
+    
+    local warningTween = TweenService:Create(warningFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+        Size = UDim2.new(0, 250, 0, 120)
+    })
+    warningTween:Play()
+    
+    -- Reset button after showing warning
+    infBattlepassButton.Text = "Inf Battlepass Points"
+    infBattlepassButton.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+    statusLabel.Text = "Action required!"
+    statusLabel.TextColor3 = Color3.fromRGB(220, 50, 50)
+    
+    isLoading = false
+end)
+
+-- Warning OK button functionality
+warningOkButton.MouseButton1Click:Connect(function()
+    local closeTween = TweenService:Create(warningFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+        Size = UDim2.new(0, 0, 0, 0)
+    })
+    closeTween:Play()
+    
+    closeTween.Completed:Connect(function()
+        warningFrame.Visible = false
+        statusLabel.Text = "Ready to use!"
+        statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    end)
+end)
+
+-- Mobile scaling adjustments
+local function adjustForMobile()
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+        mainFrame.Size = UDim2.new(0, 300, 0, 220)
+        infBattlepassButton.Size = UDim2.new(1, 0, 0, 60)
+        titleLabel.TextScaled = true
+    end
+end
+
+adjustForMobile()
+
+-- Entrance animation
+mainFrame.Size = UDim2.new(0, 0, 0, 0)
+local entranceTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+    Size = UserInputService.TouchEnabled and UDim2.new(0, 300, 0, 220) or UDim2.new(0, 280, 0, 200)
+})
+entranceTween:Play()
